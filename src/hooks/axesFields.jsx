@@ -3,6 +3,8 @@ import { getFiltered } from '../logic/getFitered'
 
 export function useAxeFields ({ data, axes, filter }) {
   const [fields, setFields] = useState()
+  const [selectedFields, setSelectedFields] = useState()
+
   console.log({ data, fields, filter })
   const filtered = getFiltered({ data, fields, filter })
   if (filtered) {
