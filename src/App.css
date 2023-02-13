@@ -1,0 +1,73 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 2%;
+}
+.flex-horizontal { 
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 15px;
+}
+svg{
+  background-color: white;
+}
+svg text {
+  color:red
+}
+rect{background-color: red;}
+.selector-section
+{
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: fit-content;
+  gap:1%;
+
+ border: 10px solid black;
+ border-radius: 4%;
+
+}
+.main-part{
+  width: 80%;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 100%;
+  gap: 1%;
+  height: fit-content;
+  align-items: center;
+}
+.grafica{
+   grid-column: 1;
+
+  text-align: center;
+  width: 75%;
+}
+.select-space{
+  display: grid;
+  grid-template-columns: 49.5% 49.5%;
+  gap: 1%;
+  height: fit-content;
+  width: auto;
+  margin: 5%;
+  padding: 4%;
+  border: 2px solid black;
+  border-radius: 4%;
+}
+h3{
+  text-align: center;
+}
+.divider-margin{
+  margin: 2%;
+}
+label{
+  
+width: 100%;
+height: 100%;}
+label:hover{
+  background-color: rgba(0, 81, 153, 0.363);
+}
