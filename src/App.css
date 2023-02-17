@@ -4,17 +4,21 @@ main {
   align-items: center;
   align-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   gap: 2%;
 }
 .flex-horizontal { 
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 15px;
+  grid-template-columns: repeat(2, 50%, minmax(200px,1fr));
+  
+  gap: 10%;
+  margin-top: 7%;
+  width: 100%;
+
 }
 svg{
   background-color: white;
+  overflow: scroll;
+  width: 100%;
 }
 svg text {
   color:red
@@ -24,15 +28,17 @@ rect{background-color: red;}
 {
   grid-column: 2;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  /*grid-template-columns: 50% 50%;*/
   height: fit-content;
   gap:1%;
-
+  width: 100%;
  border: 10px solid black;
  border-radius: 4%;
+ margin-top: 7%;
 
 }
-.main-part{
+/*.main-part{
   width: 80%;
   display: grid;
   grid-template-columns: 60% 40%;
@@ -40,16 +46,16 @@ rect{background-color: red;}
   gap: 1%;
   height: fit-content;
   align-items: center;
-}
+}*/
 .grafica{
-   grid-column: 1;
-
   text-align: center;
-  width: 75%;
+  width: 100%;
 }
 .select-space{
   display: grid;
-  grid-template-columns: 49.5% 49.5%;
+  grid-template-columns: repeat(2, 49.5%, minmax(200px,1fr));
+
+  /*grid-template-columns: 49.5% 49.5%;*/
   gap: 1%;
   height: fit-content;
   width: auto;
@@ -65,8 +71,7 @@ h3{
   margin: 2%;
 }
 label{
-  
-width: 100%;
+width: fit-content;
 height: 100%;}
 label:hover{
   background-color: rgba(0, 81, 153, 0.363);
