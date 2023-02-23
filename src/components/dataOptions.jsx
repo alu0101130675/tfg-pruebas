@@ -8,6 +8,7 @@ function getAxes ({ data, field }) {
   )
   const unique = [...new Set(y)]
   const filtres = Object.fromEntries(unique)
+  console.log('FILTRES', filtres)
   return filtres
 }
 
@@ -30,22 +31,24 @@ const setDataStructure = ({ xField, yField, gender, x, y }) => {
 function chartDates ({ data, axes, gender, fields }) {
   const { xField, yField } = axes
   const [x, y] = fields
+  console.log(yField)
   const objectX = setDataStructure({ xField, yField, gender, x, y })
-  let totalVar = 0
 
-  const dataSet = objectX.map((elemetX) => {
+  const aux = objectX.map((elemetX) => {
     const result = data.filter((dataElement) => {
       return elemetX[yField] === dataElement[yField] && elemetX[xField] === dataElement[xField]
     })
     const altura = result.length
     if (altura !== 0) { /// total se usa para calcular el porcentage
-      totalVar++
+      const yKey = result[0][yField]
+
+      return { ...elemetX, [yKey]: altura, xField }
     }
-    return { ...elemetX, altura, xField }
+    return ''
   })
-  const end = [[...dataSet], totalVar]
-  // console.log({ end, objectX })
-  return { end }
+  const dataSet = aux.filter(d => d !== '')
+  console.log(dataSet)
+  return { dataSet }
 }
 
 export function Options ({ data, options }) {
@@ -64,11 +67,12 @@ export function Options ({ data, options }) {
     newFields[vectorAxesPosition][axe][field] = !selectedFields[vectorAxesPosition][axe][field]
     setSelectedFields(newFields)
   }
-  const { end } = chartDates({ data, axes, gender: 'both', fields })
+  const { dataSet } = chartDates({ data, axes, gender: 'both', fields })
+  console.log('YUPEEEEEEEEEEEEEEE', selectedFields[0])
 
   return (
     <>
-      <Chart className='grafica' dataset={end} />
+      {dataSet.length !== 0 ? <Chart className='grafica' dataset={dataSet} keyFields={selectedFields[1]['eje Y']} /> : <p>Seleciona como minimo un campo en cada eje</p>}
       <div className='flex-horizontal'>
         <label>
           Pick a data for x axe:

@@ -1,29 +1,29 @@
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
   align-content: center;
+  align-self: stretch;
   flex-direction: column;
+  margin:auto;
   width: 90%;
   gap: 2%;
 }
 .flex-horizontal { 
-  grid-template-columns: repeat(2, 50%, minmax(200px,1fr));
+  /*display: grid;
+  grid-template-columns: repeat(2, minmax(200px,1fr));
   
   gap: 10%;
   margin-top: 7%;
-  width: 100%;
+  width: 100%;*/
+  display: flex;
+  row-gap: 2px;
+  column-gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+ 
+
 
 }
-svg{
-  background-color: white;
-  overflow: scroll;
-  width: 100%;
-}
-svg text {
-  color:red
-}
-rect{background-color: red;}
 .selector-section
 {
   grid-column: 2;
@@ -49,6 +49,7 @@ rect{background-color: red;}
 }*/
 .grafica{
   text-align: center;
+  margin-bottom: 5%;
   width: 100%;
 }
 .select-space{
