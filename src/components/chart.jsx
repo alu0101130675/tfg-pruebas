@@ -12,7 +12,7 @@ const colors = ['red', 'darkseagreen', 'blue', 'green', 'black',
   'orange', 'grey', 'darkgreen', 'darkblue',
   'greenyellow', 'blanchedalmond', 'blueviolet',
   'brown', 'burlywood', 'chocolate', 'yellow', 'darkolivegreen']
-export const Chart = ({ dataset, keyFields }) => {
+export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
   console.log('ULRIMOSOSOSO', dataset)
   const keys = Object.keys(keyFields)
   console.log(keyFields)
@@ -28,7 +28,7 @@ export const Chart = ({ dataset, keyFields }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        {keys.map((key, i) => <Bar key={key} dataKey={key} fill={colors[i]} />)}
+        {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={colors[i]} />)}
       </BarChart>
     </ResponsiveContainer>
 

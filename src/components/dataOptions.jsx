@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAxeFields } from '../hooks/axesFields'
-import { Chart } from './chart'
+import { ChartSelector } from './ChartSelector'
 
 function getAxes ({ data, field }) {
   const y = data?.map(element =>
@@ -27,6 +27,14 @@ const setDataStructure = ({ xField, yField, gender, x, y }) => {
 
   return objectCreation()
 }
+function mergeObjects (object1, key) {
+  const merged = object1.map(element => {
+    const filtered = object1.filter(d => d[key] === element[key])
+    return Object.assign(...filtered)
+  })
+  const unique = [...new Set(merged)]
+  return unique
+}
 
 function chartDates ({ data, axes, gender, fields }) {
   const { xField, yField } = axes
@@ -46,8 +54,9 @@ function chartDates ({ data, axes, gender, fields }) {
     }
     return ''
   })
-  const dataSet = aux.filter(d => d !== '')
-  console.log(dataSet)
+  const arrayWithoutZero = aux.filter(d => d !== '')
+  console.log(arrayWithoutZero)
+  const dataSet = mergeObjects(arrayWithoutZero, xField)
   return { dataSet }
 }
 
@@ -72,7 +81,7 @@ export function Options ({ data, options }) {
 
   return (
     <>
-      {dataSet.length !== 0 ? <Chart className='grafica' dataset={dataSet} keyFields={selectedFields[1]['eje Y']} /> : <p>Seleciona como minimo un campo en cada eje</p>}
+      <ChartSelector dataSet={dataSet} selectedFields={selectedFields} />
       <div className='flex-horizontal'>
         <label>
           Pick a data for x axe:
