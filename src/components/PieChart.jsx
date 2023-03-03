@@ -7,7 +7,6 @@ const COLORS = ['red', 'darkseagreen', 'blue', 'green', 'black',
 // HACER INTERFAZ PARA LA DE QUESO COMPLETA PORQUE LOS CAMPOS SOLO PUEDEN SER DOS
 export const CircularChart = ({ dataset, keyFields }) => {
   const keys = Object.keys(keyFields)
-  console.log(keyFields)
   /* const data = [
     { otro: 'otro', name: 'Group A', value: 400 },
     { otro: 'otro', name: 'Group B', value: 300 },

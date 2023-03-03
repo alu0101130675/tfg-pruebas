@@ -14,9 +14,7 @@ const colors = ['red', 'darkseagreen', 'blue', 'green', 'black',
   'greenyellow', 'blanchedalmond', 'blueviolet',
   'brown', 'burlywood', 'chocolate', 'yellow', 'darkolivegreen']
 export const StackBars = ({ dataset, keyFields }) => {
-  console.log('ULRIMOSOSOSO', dataset)
   const keys = Object.keys(keyFields)
-  console.log(keyFields)
 
   return (
 

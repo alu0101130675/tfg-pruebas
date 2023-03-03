@@ -13,9 +13,7 @@ const colors = ['red', 'darkseagreen', 'blue', 'green', 'black',
   'greenyellow', 'blanchedalmond', 'blueviolet',
   'brown', 'burlywood', 'chocolate', 'yellow', 'darkolivegreen']
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
-  console.log('ULRIMOSOSOSO', dataset)
   const keys = Object.keys(keyFields)
-  console.log(keyFields)
   return (
     <ResponsiveContainer
       width='100%' aspect={3 / 1}
