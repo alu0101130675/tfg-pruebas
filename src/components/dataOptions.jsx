@@ -4,51 +4,7 @@ import { ChartSelector } from './ChartSelector'
 import { getAxes } from '../logic/getAxes'
 import { AxesSelector } from './AxesSelector'
 import { FieldsSelector } from './FieldsSelector'
-const setDataStructure = ({ xField, yField, gender, x, y }) => {
-  function objectCreation () {
-    const requestedRows = x.map(elementX => {
-      return y.map(elementY => {
-        return (Object.fromEntries([[xField, elementX], [yField, elementY]]))
-      })
-    })
-    const flatRows = requestedRows.flat(1)
-
-    const rowsFiltered = gender === 'both' ? flatRows : flatRows.filter((dataRow) => { return gender === dataRow.Sexo })
-    return rowsFiltered
-  }
-
-  return objectCreation()
-}
-function mergeObjects (object1, key) {
-  const merged = object1.map(element => {
-    const filtered = object1.filter(d => d[key] === element[key])
-    return Object.assign(...filtered)
-  })
-  const unique = [...new Set(merged)]
-  return unique
-}
-
-function chartDates ({ data, axes, gender, fields }) {
-  const { xField, yField } = axes
-  const [x, y] = fields
-  const objectX = setDataStructure({ xField, yField, gender, x, y })
-
-  const aux = objectX.map((elemetX) => {
-    const result = data.filter((dataElement) => {
-      return elemetX[yField] === dataElement[yField] && elemetX[xField] === dataElement[xField]
-    })
-    const altura = result.length
-    if (altura !== 0) { /// total se usa para calcular el porcentage
-      const yKey = result[0][yField]
-
-      return { ...elemetX, [yKey]: altura, xField }
-    }
-    return ''
-  })
-  const arrayWithoutZero = aux.filter(d => d !== '')
-  const dataSet = mergeObjects(arrayWithoutZero, xField)
-  return { dataSet }
-}
+import { chartDate } from '../logic/chartDate'
 
 export function Options ({ data, options }) {
   const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo'/*, gender: 'both' */ })
@@ -82,7 +38,7 @@ export function Options ({ data, options }) {
     }
   }
 
-  const { dataSet } = chartDates({ data, axes, gender: 'both', fields })
+  const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
 
   return (
     <>
