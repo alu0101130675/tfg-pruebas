@@ -7,14 +7,12 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend
+
 } from 'recharts'
 import { COLORS } from '../consts'
 
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
-  console.log(dataset)
-  console.log(dataset[0].xField)
   const keys = Object.keys(keyFields)
-  console.log(keys)
 
   return (
     <ResponsiveContainer

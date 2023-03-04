@@ -6,38 +6,11 @@ main {
   flex-direction: column;
   margin:auto;
   width: 90%;
-  gap: 2%;
-}
-.flex-horizontal { 
-  /*display: grid;
-  grid-template-columns: repeat(2, minmax(200px,1fr));
-  
-  gap: 10%;
-  margin-top: 7%;
-  width: 100%;*/
-  display: flex;
-  row-gap: 2px;
   column-gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
- 
-
-
+  text-align: center;
 }
-.selector-section
-{
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  /*grid-template-columns: 50% 50%;*/
-  height: fit-content;
-  gap:1%;
-  width: 100%;
- border: 10px solid black;
- border-radius: 4%;
- margin-top: 7%;
 
-}
+
 /*.main-part{
   width: 80%;
   display: grid;
@@ -47,30 +20,15 @@ main {
   height: fit-content;
   align-items: center;
 }*/
-.grafica{
-  text-align: center;
-  margin-bottom: 5%;
-  width: 100%;
-}
-.select-space{
-  display: grid;
-  grid-template-columns: repeat(2, 49.5%, minmax(200px,1fr));
 
-  /*grid-template-columns: 49.5% 49.5%;*/
-  gap: 1%;
-  height: fit-content;
-  width: auto;
-  margin: 5%;
-  padding: 4%;
-  border: 2px solid black;
-  border-radius: 4%;
-}
+
 h3{
   text-align: center;
 }
-.divider-margin{
-  margin: 2%;
+h1{
+  text-align: center;
 }
+
 label{
 width: fit-content;
 height: 100%;}

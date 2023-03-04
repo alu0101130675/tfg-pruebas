@@ -1,3 +1,4 @@
+import '../FieldsSelector.css'
 export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelected }) {
   const handleChange = (e) => {
     const axe = e.target.name

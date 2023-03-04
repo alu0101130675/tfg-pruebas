@@ -1,0 +1,30 @@
+.select-space{
+  display: grid;
+  grid-template-columns: repeat(2, 49.5%, minmax(200px,1fr));
+
+  /*grid-template-columns: 49.5% 49.5%;*/
+  gap: 1%;
+  height: fit-content;
+  width: auto;
+  margin: 5%;
+  padding: 4%;
+  border: 2px solid black;
+  border-radius: 4%;
+}
+.selector-section
+{
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  /*grid-template-columns: 50% 50%;*/
+  height: fit-content;
+  gap:1%;
+  width: 100%;
+ border: 10px solid black;
+ border-radius: 4%;
+ margin-top: 7%;
+
+}
+.divider-margin{
+  margin: 2%;
+}

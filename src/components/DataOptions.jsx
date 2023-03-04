@@ -5,6 +5,7 @@ import { getAxes } from '../logic/getAxes'
 import { AxesSelector } from './AxesSelector'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
+import '../DataOptions.css'
 
 export function Options ({ data, options }) {
   const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })
@@ -44,6 +45,7 @@ export function Options ({ data, options }) {
 
   return (
     <>
+      <h2>{axes.xField} - {axes.yField} </h2>
       <div className='flex-horizontal'>
         <ChartSelector
           dataSet={dataSet}
@@ -52,6 +54,7 @@ export function Options ({ data, options }) {
           setChartSelected={setChartSelected}
           chartSelected={chartSelected}
         />
+
         {Object.keys(axes).map(axe =>
           (
             <AxesSelector
@@ -61,11 +64,10 @@ export function Options ({ data, options }) {
               options={options}
               axeFlag={axe}
             />
-
           )
         )}
-
       </div>
+
       <FieldsSelector
         setSelectedFields={setSelectedFields}
         selectedFields={selectedFields}
