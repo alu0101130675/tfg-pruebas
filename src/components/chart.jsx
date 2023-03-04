@@ -8,12 +8,14 @@ import {
   ResponsiveContainer,
   Legend
 } from 'recharts'
-const colors = ['red', 'darkseagreen', 'blue', 'green', 'black',
-  'orange', 'grey', 'darkgreen', 'darkblue',
-  'greenyellow', 'blanchedalmond', 'blueviolet',
-  'brown', 'burlywood', 'chocolate', 'yellow', 'darkolivegreen']
+import { COLORS } from '../consts'
+
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
+  console.log(dataset)
+  console.log(dataset[0].xField)
   const keys = Object.keys(keyFields)
+  console.log(keys)
+
   return (
     <ResponsiveContainer
       width='100%' aspect={3 / 1}
@@ -26,7 +28,7 @@ export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={colors[i]} />)}
+        {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}
       </BarChart>
     </ResponsiveContainer>
 

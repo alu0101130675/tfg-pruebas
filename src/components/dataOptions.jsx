@@ -7,11 +7,13 @@ import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
 
 export function Options ({ data, options }) {
-  const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo'/*, gender: 'both' */ })
+  const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })
   const [selectedFields, setSelectedFields] = useState([{
     'eje X': getAxes({ data, field: axes.xField })
   },
   { 'eje Y': getAxes({ data, field: axes.yField }) }])
+  const [chartSelected, setChartSelected] = useState('Gráfico de barras')
+
   const fields = useAxeFields({ axes, filter: selectedFields })
 
   const handleAxechange = (e, axeFlag) => {
@@ -43,7 +45,13 @@ export function Options ({ data, options }) {
   return (
     <>
       <div className='flex-horizontal'>
-        <ChartSelector dataSet={dataSet} selectedFields={selectedFields} />
+        <ChartSelector
+          dataSet={dataSet}
+          selectedFields={selectedFields}
+          setSelectedFields={setSelectedFields}
+          setChartSelected={setChartSelected}
+          chartSelected={chartSelected}
+        />
         {Object.keys(axes).map(axe =>
           (
             <AxesSelector
@@ -61,6 +69,7 @@ export function Options ({ data, options }) {
       <FieldsSelector
         setSelectedFields={setSelectedFields}
         selectedFields={selectedFields}
+        chartSelected={chartSelected}
       />
     </>
 
