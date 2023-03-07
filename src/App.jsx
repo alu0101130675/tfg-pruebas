@@ -6,11 +6,17 @@ function App () {
   const { data, options } = useDataSet()
 
   return (
-    <main>
-      <div>
-        {data && <Options data={data} options={options} />}
-      </div>
-    </main>
+    <>
+      <header>
+        <h1 className='page-title'>Visualizador de datos</h1>
+      </header>
+      <main>
+        <div>
+          {data && <Options data={data} options={options} />}
+        </div>
+      </main>
+    </>
+
   )
 }
 

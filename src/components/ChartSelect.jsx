@@ -7,7 +7,7 @@ export function ChartSelect ({ chartSelected, setChartSelected, selectedFields, 
         name='grafica' id='grafica' value={chartSelected} onChange={(e) => {
           const newChartSelected = e.target.value
           if (newChartSelected === 'Gráfica circular') {
-            const newSelectedFields = Object.keys(selectedFields[1]['eje Y']).map((key, i) => {
+            const newSelectedFields = Object.keys(selectedFields[1].yField).map((key, i) => {
               if (i === 0) {
                 return [key, true]
               }
@@ -15,7 +15,7 @@ export function ChartSelect ({ chartSelected, setChartSelected, selectedFields, 
             })
             const [xAxe] = selectedFields
             const newFields = Object.fromEntries(newSelectedFields)
-            setSelectedFields([xAxe, { 'eje Y': newFields }])
+            setSelectedFields([xAxe, { yField: newFields }])
           }
           setChartSelected(newChartSelected)
         }}

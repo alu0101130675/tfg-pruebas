@@ -1,19 +1,54 @@
 import '../FieldsSelector.css'
-export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelected }) {
+import { AxesSelector } from './AxesSelector'
+import { getAxes } from '../logic/getAxes'
+export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelected, data, setAxes, axes, options }) {
   const handleChange = (e) => {
     const axe = e.target.name
     const field = e.target.value
-    const vectorAxesPosition = axe === 'eje X' ? 0 : 1
+    const vectorAxesPosition = axe === 'xField' ? 0 : 1
     const newFields = [...selectedFields]
     const newFieldObject = newFields[vectorAxesPosition][axe]
 
-    if (chartSelected === 'Gráfica circular' && axe !== 'eje X') { // PONE TODAS A FALSE Y DEPSUES PONGO A TRUE LA SELECCIONADA SI ES CIRCULAR
+    if (chartSelected === 'Gráfica circular' && axe !== 'xField') { // PONE TODAS A FALSE Y DEPSUES PONGO A TRUE LA SELECCIONADA SI ES CIRCULAR
       for (const key in newFieldObject) {
         newFieldObject[key] = false
       }
     }
     newFieldObject[field] = !selectedFields[vectorAxesPosition][axe][field]
     setSelectedFields(newFields)
+  }
+  const handleAxechange = (e, axeFlag) => {
+    const x = e.target.value
+    const auxObject = {}
+    auxObject[axeFlag] = x
+    const newXField = Object.assign(axes, auxObject)
+    setAxes(newXField)
+    if (axeFlag === 'xField') {
+      const [, selectedY] = selectedFields // CREO QUE LA CONT ESTA Y LA DE ABAJO SE PUEDEN AHORRAR POR [...,{}]
+      const newSelectedFields = [{
+        xField: getAxes({ data, field: newXField.xField })
+      },
+      selectedY]
+      setSelectedFields(newSelectedFields)
+    } else {
+      const [selectedX] = selectedFields
+      const newSelectedFields = [
+        selectedX,
+        {
+          yField: getAxes({ data, field: newXField.yField })
+        }]
+      if (chartSelected === 'Gráfica circular') {
+        const nuevos = Object.keys(newSelectedFields[1].yField).map((key, i) => {
+          if (i === 0) {
+            return [key, true]
+          }
+          return [key, false]
+        })
+        const [xAxe] = selectedFields
+        const newFields = Object.fromEntries(nuevos)
+        setSelectedFields([xAxe, { yField: newFields }])
+      } else { setSelectedFields(newSelectedFields) }
+    }
   }
 
   return (
@@ -23,7 +58,15 @@ export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelect
         const stringKeys = Object.keys(field[axe])
         return (
           <div key={i} className='divider-margin'>
-            <h3>{axe}</h3>
+
+            <AxesSelector
+              key={axe}
+              axes={axes}
+              handleAxechange={handleAxechange}
+              options={options}
+              axeFlag={axe}
+            />
+
             <div className='select-space'>
               {stringKeys.map((key, j) => {
                 const column = j % 2 === 0 ? 1 : 2

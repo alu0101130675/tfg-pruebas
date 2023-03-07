@@ -8,8 +8,7 @@
   width: auto;
   margin: 5%;
   padding: 4%;
-  border: 2px solid black;
-  border-radius: 4%;
+  border-right: 1px solid rgb(181, 181, 181);
 }
 .selector-section
 {
@@ -20,8 +19,8 @@
   height: fit-content;
   gap:1%;
   width: 100%;
- border: 10px solid black;
- border-radius: 4%;
+ border: 2px solid black;
+ background-color: rgb(249, 252, 254);
  margin-top: 7%;
 
 }
