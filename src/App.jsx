@@ -1,5 +1,6 @@
 import './App.css'
 import { Options } from './components/DataOptions'
+import { Navbar } from './components/Navbar'
 import { useDataSet } from './hooks/getData'
 
 function App () {
@@ -7,6 +8,7 @@ function App () {
 
   return (
     <>
+      <Navbar />
       <header>
         <h1 className='page-title'>Visualizador de datos</h1>
       </header>
