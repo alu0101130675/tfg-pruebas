@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Navbar.css'
 export function Navbar () {
+  const data = ['data1 que se va haciendo my grande', 'data2', 'data3']
+  const [showDropdown, setShowDropdown] = useState(false)
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown)
+  }
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -12,8 +17,14 @@ export function Navbar () {
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '20%' }}>
-        <div style={{ marginRight: '1rem' }}>
-          <a href='/grafica' className='nav-link'>Grafica</a>
+        <div style={{ marginRight: '1rem', position: 'relative' }} onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
+          <a href='/grafica' className='nav-dropdown '>Grafica</a>
+          <div className='dropdown'>
+            {showDropdown && data.map(d =>
+              <a key={d} href='#' className='dropdown-item'>{d}</a>
+            )}
+          </div>
+
         </div>
         <div>
           <a href='/iniciativas' className='nav-link'>Iniciativas</a>
