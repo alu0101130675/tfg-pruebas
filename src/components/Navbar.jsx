@@ -1,35 +1,30 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import '../Navbar.css'
+import { DropDown } from './DropDown'
 export function Navbar () {
-  const data = ['data1 que se va haciendo my grande', 'data2', 'data3']
-  const [showDropdown, setShowDropdown] = useState(false)
-  const handleDropdownToggle = () => {
-    setShowDropdown(!showDropdown)
+  const [toogleBar, setToogleBar] = useState(false)
+  const dropdownItems = ['data1 que se va haciendo my grande', 'data2', 'data3']
+  const handleToogle = () => {
+    setToogleBar(!toogleBar)
   }
+
   return (
     <nav className='navbar'>
-      <div className='logo'>
-        <img
-          src='https://www.women-inf.eu/wp-content/uploads/2022/05/cropped-identidad_grafica_WOMEN@INF-isologo.png'
-          alt='ogo'
-          height='27'
-          width={200}
-        />
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '20%' }}>
-        <div style={{ marginRight: '1rem', position: 'relative' }} onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
-          <a href='/grafica' className='nav-dropdown '>Grafica</a>
-          <div className='dropdown'>
-            {showDropdown && data.map(d =>
-              <a key={d} href='#' className='dropdown-item'>{d}</a>
-            )}
+      <div className='navbar-items-logo'>
+        <div className='logo'>
+          <img
+            src='https://www.women-inf.eu/wp-content/uploads/2022/05/cropped-identidad_grafica_WOMEN@INF-isologo.png'
+            alt='logo de women@info'
+          />
+        </div>
+        <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
+          <DropDown dropDownItems={dropdownItems} anchor='/grafica' dropDownName='Grafica' />
+          <div>
+            <a href='/iniciativas' className='nav-link'>Iniciativas</a>
           </div>
-
-        </div>
-        <div>
-          <a href='/iniciativas' className='nav-link'>Iniciativas</a>
         </div>
       </div>
+      <button className='hamburger-icon' onClick={handleToogle}>icon</button>
     </nav>
   )
 }
