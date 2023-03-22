@@ -32,7 +32,7 @@ export function InitiativeMap () {
         <MapContainer
           className='map-container'
           center={position} zoom={4}
-          scrollWheelZoom={false}
+          scrollWheelZoom
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

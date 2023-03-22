@@ -82,8 +82,8 @@ export function InitiativeForm ({ locationName, setLocation }) {
           onChange={handleFormChange}
         />
       </div>
-      <button type='submit' disabled={!isFormValid()}>
-        Submit
+      <button className='submit-button' type='submit' disabled={!isFormValid()}>
+        Publicar iniciativa
       </button>
     </form>
   )

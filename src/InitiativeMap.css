@@ -1,5 +1,6 @@
 .map-container{
   width: 50%;
+  height: 100%;
   }
 .map-form{
   width: 95%;
@@ -7,5 +8,13 @@
   display: flex;
   gap: 20px;
   height: 400px;
-
+}
+@media only screen and (max-width:1060px) {
+  .map-form{
+    flex-direction: column;
+    height: 800px;
+  }
+  .map-container{
+    width: 100%;
+    }
 }
