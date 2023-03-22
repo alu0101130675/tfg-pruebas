@@ -1,26 +1,44 @@
 
-import { MapContainer, TileLayer, Popup, Marker, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaflet'
+import { useState } from 'react'
 import '../InitiativeMap.css'
 import { InitiativeForm } from './InitiativeForm'
 import { Navbar } from './Navbar'
+import { location } from '../services/openStreetMap'
+// const apiOpenStreetMap = 'https://nominatim.openstreetmap.org/ui/search.html?street=tafetana&city=guimar&country=spain&postalcode=38500'
 export function InitiativeMap () {
-  function SetViewOnClick ({ coords }) {
-    const map = useMap()
-    map.setView(coords, map.getZoom())
+  const [position, setPosition] = useState([41.0, -4])
+  const [locationName, setLocation] = useState('selecciona en el mapa la ubicacion')
 
-    return null
+  function LocationMarker () {
+    const map = useMapEvents({
+      async click ({ latlng }) {
+        const { lat, lng } = latlng
+        location(latlng)
+          .then(({ display_name, address }) => {
+            console.log(display_name, address)
+            setLocation(display_name)
+          }).catch(e => console.error(e))
+        setPosition([lat, lng])
+        map.flyTo([lat, lng])
+      }
+    })
   }
-  const position = [41.0, -4]
+
   return (
     <>
       <Navbar />
       <div className='map-form'>
-        <MapContainer className='map-container' center={position} zoom={4} scrollWheelZoom={false}>
+        <MapContainer
+          className='map-container'
+          center={position} zoom={4}
+          scrollWheelZoom={false}
+        >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
-          <SetViewOnClick coords={[30.0, -4]} />
+          <LocationMarker />
 
           <Marker position={position}>
             <Popup>
@@ -28,10 +46,9 @@ export function InitiativeMap () {
             </Popup>
           </Marker>
         </MapContainer>
-        <InitiativeForm className='form' />
+        <InitiativeForm className='form' locationName={locationName} setLocation={setLocation} />
       </div>
 
     </>
-
   )
 }

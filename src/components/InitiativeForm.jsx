@@ -3,10 +3,10 @@ import validator from 'validator'
 import { sendInitiative } from '../services/initiatives'
 import '../InitiativeForm.css'
 
-export function InitiativeForm () {
+export function InitiativeForm ({ locationName, setLocation }) {
   const [formData, setFormData] = useState({
     email: '',
-    location: '',
+    location: locationName,
     validated: 'false',
     link: '',
     expirationDate: ''
@@ -53,13 +53,13 @@ export function InitiativeForm () {
         />
       </div>
       <div className='form-field'>
-        <label htmlFor='location'>Location:</label>
+        <label htmlFor='location'>Location</label>
         <input
           type='text'
           id='location'
           name='location'
-          value={formData.location}
-          onChange={handleFormChange}
+          value={locationName}
+          onChange={({ target }) => setLocation(target.value)}
         />
       </div>
       <div className='form-field'>
