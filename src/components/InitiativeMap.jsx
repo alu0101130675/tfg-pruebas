@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaf
 import { useState } from 'react'
 import '../InitiativeMap.css'
 import { InitiativeForm } from './InitiativeForm'
-import { Navbar } from './Navbar'
 import { location } from '../services/openStreetMap'
 // const apiOpenStreetMap = 'https://nominatim.openstreetmap.org/ui/search.html?street=tafetana&city=guimar&country=spain&postalcode=38500'
 export function InitiativeMap () {
@@ -27,7 +26,6 @@ export function InitiativeMap () {
 
   return (
     <>
-      <Navbar />
       <div className='map-form'>
         <MapContainer
           className='map-container'

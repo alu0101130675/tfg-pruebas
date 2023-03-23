@@ -48,7 +48,19 @@ export function InitiativeForm ({ locationName, setLocation }) {
           type='email'
           id='email'
           name='email'
+          required
           value={formData.email}
+          onChange={handleFormChange}
+        />
+      </div>
+      <div className='form-field'>
+        <label htmlFor='initiative-name'>Nombre de la iniciativa</label>
+        <input
+          type='text'
+          id='initiativeName'
+          name='initiativeName'
+          required
+          value={formData.initiativeName}
           onChange={handleFormChange}
         />
       </div>
@@ -58,6 +70,7 @@ export function InitiativeForm ({ locationName, setLocation }) {
           type='text'
           id='location'
           name='location'
+          required
           value={locationName}
           onChange={({ target }) => setLocation(target.value)}
         />
@@ -65,9 +78,10 @@ export function InitiativeForm ({ locationName, setLocation }) {
       <div className='form-field'>
         <label htmlFor='link'>Link</label>
         <input
-          type='text'
+          type='url'
           id='link'
           name='link'
+          required
           value={formData.link}
           onChange={handleFormChange}
         />
@@ -75,6 +89,7 @@ export function InitiativeForm ({ locationName, setLocation }) {
       <div className='form-field'>
         <label htmlFor='expirationDate'>Expiration Date</label>
         <input
+          required
           type='date'
           id='expirationDate'
           name='expirationDate'

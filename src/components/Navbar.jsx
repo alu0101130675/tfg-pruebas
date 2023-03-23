@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import '../Navbar.css'
+import { Link } from 'react-router-dom'
 import { DropDown } from './DropDown'
 export function Navbar () {
   const [toogleBar, setToogleBar] = useState(false)
@@ -18,9 +19,9 @@ export function Navbar () {
           />
         </div>
         <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
-          <DropDown dropDownItems={dropdownItems} anchor='/grafica' dropDownName='Grafica' />
+          <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' />
           <div>
-            <a href='/iniciativas' className='nav-link'>Iniciativas</a>
+            <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
           </div>
         </div>
       </div>

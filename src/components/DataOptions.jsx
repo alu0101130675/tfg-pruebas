@@ -20,6 +20,8 @@ export function Options ({ data, options }) {
 
   return (
     <>
+      <h1 className='page-title'>Visualizador de datos</h1>
+
       <h2>{axes.xField} - {axes.yField} </h2>
       <div className='flex-horizontal'>
         <ChartSelector

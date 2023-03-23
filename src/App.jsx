@@ -1,24 +1,32 @@
+import { Routes, Route } from 'react-router'
 import './App.css'
 import { Options } from './components/DataOptions'
+import { InitiativeMap } from './components/InitiativeMap'
 import { Navbar } from './components/Navbar'
 import { useDataSet } from './hooks/getData'
 
 function App () {
   const { data, options } = useDataSet()
-
   return (
     <>
-      <Navbar />
       <header>
-        <h1 className='page-title'>Visualizador de datos</h1>
+        <Navbar />
       </header>
       <main>
-        <div>
-          {data && <Options data={data} options={options} />}
-        </div>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                {data && <Options data={data} options={options} />}
+              </>
+              }
+          />
+          <Route path='/InitiativeMap' element={<InitiativeMap />} />
+          <Route path='/postIniciative' element={<InitiativeMap />} />
+        </Routes>
       </main>
     </>
-
   )
 }
 
