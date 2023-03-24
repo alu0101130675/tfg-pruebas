@@ -4,12 +4,13 @@ import { Options } from './components/DataOptions'
 import { InitiativeMap } from './components/InitiativeMap'
 import { Navbar } from './components/Navbar'
 import { useDataSet } from './hooks/getData'
+import { Login } from './components/Login'
 
 function App () {
   const { data, options } = useDataSet()
   return (
     <>
-      <header>
+      <header className='header'>
         <Navbar />
       </header>
       <main>
@@ -24,6 +25,7 @@ function App () {
           />
           <Route path='/InitiativeMap' element={<InitiativeMap />} />
           <Route path='/postIniciative' element={<InitiativeMap />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </main>
     </>

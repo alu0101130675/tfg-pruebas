@@ -4,24 +4,21 @@
   justify-content: space-between;
   text-align: end;
   align-items: end;
-  padding: auto;
-  width: 99%;
-  margin: 1% 1% ;
+  width: auto;
 }
 .navbar-items-logo { 
   display: flex;
   justify-content: flex-start;
   text-align: end;
-  align-items: end;
+  align-items: center;
   padding: auto;
-  margin: 1% 1% ;
+  margin: 1% 1%;
 }
 .logo {
   margin-right: 5%;
 }
 img{
   vertical-align: bottom;
-  width: 100;  
 }
 .navbar-items {
   display: flex;
@@ -58,14 +55,16 @@ img{
   background-color: black;
 }
 .hamburger-icon{
+  background-color: red;
   display: none;
 }
 .navbar-items.show-links{
   display: flex;
 }
+
 @media only screen and (max-width:650px) {
   .hamburger-icon{
-    display: inline-block;
+    display: block;
   }
   .navbar-items-logo{
     flex-direction: column;

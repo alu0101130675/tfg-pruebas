@@ -5,7 +5,7 @@ import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
 export function Navbar () {
   const [toogleBar, setToogleBar] = useState(false)
-  const dropdownItems = ['data1 que se va haciendo my grande', 'data2', 'data3']
+  const dropdownItems = ['eliminar cuenta de una vez por todas', 'logout']
   const handleToogle = () => {
     setToogleBar(!toogleBar)
   }
@@ -26,7 +26,8 @@ export function Navbar () {
           </div>
         </div>
       </div>
-      <HamburgerButton />
+      <HamburgerButton className='hamburger-icon' />
+      <DropDown dropDownItems={dropdownItems} anchor='/login' dropDownName='Mi cuenta' side='right' />
 
     </nav>
   )

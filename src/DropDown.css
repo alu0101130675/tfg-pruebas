@@ -14,6 +14,10 @@
   width: max-content;
   text-align: left;
 }
+.dropdown.right{
+  left: auto;
+  right: 0; 
+}
 .dropdown-item{
   position: relative;
   display: block;

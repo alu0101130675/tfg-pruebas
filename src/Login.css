@@ -1,0 +1,45 @@
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+  justify-content: center;
+}
+.link-creta-account{
+  color:blue;
+}
+
+.form-container > input{
+  width: 25%;
+  height: 50px;
+  border: 4px solid black;
+  border-radius: 5px;
+  flex: unset;
+  padding-left: 2%;
+}
+.form-container> input :focus{
+  background-color: brown;
+}
+.login-button{
+  width: 27.5%;
+  height: 50px;
+  background-color: black;
+  border: 4px solid black;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.login-button:hover{
+  transition: transform .2s;
+ transform: translateY(4px);
+ background-color: blue;
+ border-color: blue;
+}
+h1{
+  font-size: 32px;
+line-height: 38px;
+font-weight: 800;
+text-align: center;
+margin-bottom: 60px;
+}

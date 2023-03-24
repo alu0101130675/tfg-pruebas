@@ -3,7 +3,7 @@
   top: 10%;
   bottom: 0;
   right: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -17,4 +17,10 @@
   width: 40%;
   margin-bottom: 7%;
   background-color: black;
+}
+@media only screen and (max-width:650px) {
+  .hamburger-button{
+    display: flex;
+  }
+
 }

@@ -10,18 +10,6 @@ main {
   text-align: center;
 }
 
-
-/*.main-part{
-  width: 80%;
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 100%;
-  gap: 1%;
-  height: fit-content;
-  align-items: center;
-}*/
-
-
 h3{
   text-align: center;
 }
