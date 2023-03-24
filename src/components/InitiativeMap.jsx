@@ -4,10 +4,12 @@ import { useState } from 'react'
 import '../InitiativeMap.css'
 import { InitiativeForm } from './InitiativeForm'
 import { location } from '../services/openStreetMap'
+import { Link } from 'react-router-dom'
 // const apiOpenStreetMap = 'https://nominatim.openstreetmap.org/ui/search.html?street=tafetana&city=guimar&country=spain&postalcode=38500'
 export function InitiativeMap () {
   const [position, setPosition] = useState([41.0, -4])
   const [locationName, setLocation] = useState('selecciona en el mapa la ubicacion')
+  const [formFlag, setformFlag] = useState(false)
 
   function LocationMarker () {
     const map = useMapEvents({
@@ -28,7 +30,7 @@ export function InitiativeMap () {
     <>
       <div className='map-form'>
         <MapContainer
-          className='map-container'
+          className={`map-container ${formFlag ? '' : 'max-width'}`}
           center={position} zoom={4}
           scrollWheelZoom
         >
@@ -44,8 +46,13 @@ export function InitiativeMap () {
             </Popup>
           </Marker>
         </MapContainer>
-        <InitiativeForm className='form' locationName={locationName} setLocation={setLocation} />
+        {formFlag && <InitiativeForm className='form' locationName={locationName} setLocation={setLocation} />}
       </div>
+      <Link onClick={() => setformFlag(!formFlag)}>
+        {formFlag
+          ? 'Publica tu iniciativa'
+          : 'Volver a mapa completo'}
+      </Link>
 
     </>
   )

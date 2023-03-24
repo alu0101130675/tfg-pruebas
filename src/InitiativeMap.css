@@ -2,6 +2,9 @@
   width: 50%;
   height: 100%;
   }
+.map-container.max-width{
+    width: 100%;
+    }
 .map-form{
   width: 95%;
   margin: auto;

@@ -86,7 +86,7 @@ export function InitiativeForm ({ locationName, setLocation }) {
           onChange={handleFormChange}
         />
       </div>
-      <div className='form-field'>
+      {/* <div className='form-field'> ACTIVA Y SOLO AL ADMIN SE LE MUESTRA ESTE CAMPO
         <label htmlFor='expirationDate'>Expiration Date</label>
         <input
           required
@@ -96,7 +96,7 @@ export function InitiativeForm ({ locationName, setLocation }) {
           value={formData.expirationDate}
           onChange={handleFormChange}
         />
-      </div>
+      </div> */}
       <button className='submit-button' type='submit' disabled={!isFormValid()}>
         Publicar iniciativa
       </button>
