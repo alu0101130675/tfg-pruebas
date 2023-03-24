@@ -2,6 +2,7 @@ import { useState } from 'react'
 import '../Navbar.css'
 import { Link } from 'react-router-dom'
 import { DropDown } from './DropDown'
+import { HamburgerButton } from './HamburgerButton'
 export function Navbar () {
   const [toogleBar, setToogleBar] = useState(false)
   const dropdownItems = ['data1 que se va haciendo my grande', 'data2', 'data3']
@@ -25,7 +26,8 @@ export function Navbar () {
           </div>
         </div>
       </div>
-      <button className='hamburger-icon' onClick={handleToogle}>icon</button>
+      <HamburgerButton />
+
     </nav>
   )
 }
