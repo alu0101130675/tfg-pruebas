@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 // const apiOpenStreetMap = 'https://nominatim.openstreetmap.org/ui/search.html?street=tafetana&city=guimar&country=spain&postalcode=38500'
 export function InitiativeMap () {
   const [position, setPosition] = useState([41.0, -4])
-  const [locationName, setLocation] = useState('selecciona en el mapa la ubicacion')
+  const [LocationData, setLocationData] = useState({ location: 'Seleccione en el mapa la ubicacion' })
   const [formFlag, setformFlag] = useState(false)
 
   function LocationMarker () {
@@ -16,10 +16,18 @@ export function InitiativeMap () {
       async click ({ latlng }) {
         const { lat, lng } = latlng
         location(latlng)
-          .then(({ display_name, address }) => {
-            console.log(display_name, address)
-            setLocation(display_name)
-          }).catch(e => console.error(e))
+          .then(
+            ({ display_name, address, city, postcode, state }) => {
+              setLocationData({
+                location: display_name,
+                // address,
+                city,
+                postcode,
+                state,
+                latitude: lat,
+                longitude: lng
+              })
+            }).catch(e => console.error(e))
         setPosition([lat, lng])
         map.flyTo([lat, lng])
       }
@@ -46,12 +54,12 @@ export function InitiativeMap () {
             </Popup>
           </Marker>
         </MapContainer>
-        {formFlag && <InitiativeForm className='form' locationName={locationName} setLocation={setLocation} />}
+        {formFlag && <InitiativeForm className='form' LocationData={LocationData} />}
       </div>
       <Link onClick={() => setformFlag(!formFlag)}>
         {formFlag
-          ? 'Publica tu iniciativa'
-          : 'Volver a mapa completo'}
+          ? 'Volver a mapa completo'
+          : 'Publica tu iniciativa'}
       </Link>
 
     </>
