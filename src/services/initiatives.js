@@ -7,6 +7,7 @@ export async function sendInitiative (initiative, { token }) {
       Authorization: `Bearer ${token}`
     }
   }
-  const { response } = await axios.post(basicUrl, initiative, config)
+  const response = await axios.post(basicUrl, initiative, config)
+  console.log({ response })
   return response
 }

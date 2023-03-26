@@ -10,6 +10,7 @@ export function InitiativeMap () {
   const [position, setPosition] = useState([41.0, -4])
   const [LocationData, setLocationData] = useState({ location: 'Seleccione en el mapa la ubicacion' })
   const [formFlag, setformFlag] = useState(false)
+  const [initiativeAdded, setInitiativeAdded] = useState(false)
 
   function LocationMarker () {
     const map = useMapEvents({
@@ -17,13 +18,14 @@ export function InitiativeMap () {
         const { lat, lng } = latlng
         location(latlng)
           .then(
-            ({ display_name, address, city, postcode, state }) => {
+            ({ display_name, address }) => {
+              const { road, city, postcode, state } = address
               setLocationData({
                 location: display_name,
-                // address,
+                road,
                 city,
-                postcode,
-                state,
+                postCode: postcode,
+                ComunidadAutonoma: state,
                 latitude: lat,
                 longitude: lng
               })
@@ -54,14 +56,14 @@ export function InitiativeMap () {
             </Popup>
           </Marker>
         </MapContainer>
-        {formFlag && <InitiativeForm className='form' LocationData={LocationData} />}
+        {formFlag && <InitiativeForm className='form' LocationData={LocationData} setInitiativeAdded={setInitiativeAdded} setLocationData={setLocationData} />}
       </div>
       <Link onClick={() => setformFlag(!formFlag)}>
         {formFlag
           ? 'Volver a mapa completo'
           : 'Publica tu iniciativa'}
       </Link>
-
+      {initiativeAdded && <h1>¡Iniciativa añadida!</h1>}
     </>
   )
 }

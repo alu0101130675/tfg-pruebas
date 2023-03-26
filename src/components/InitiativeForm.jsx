@@ -1,17 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import validator from 'validator'
 import { sendInitiative } from '../services/initiatives'
 import '../InitiativeForm.css'
+import { useNavigate } from 'react-router-dom'
 
-export function InitiativeForm ({ locationName, LocationData }) {
-  const [formData, setFormData] = useState({
-    contacto: '',
-    validated: false,
-    initiativeName: '',
-    link: '',
-    active: false,
-    ComunidadAutonoma: ''
-  })
+export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData }) {
+  const navigate = useNavigate()
+  const [token, SetToken] = useState(window.sessionStorage.getItem('token'))
+  const [formData, setFormData] = useState(
+    {
+      contacto: '',
+      validated: false,
+      initiativeName: '',
+      link: '',
+      active: false,
+      ComunidadAutonoma: ''
+    })
+  useEffect(() => {
+    console.log('entra')
+    const initiativeForm = window.localStorage.getItem('formData')
+    const LocationDataForm = window.localStorage.getItem('locationData')
+
+    if (initiativeForm != null && LocationDataForm != null) {
+      const initiativeJson = JSON.parse(initiativeForm)
+      const locationJson = JSON.parse(LocationDataForm)
+      console.log({ initiativeJson })
+      console.log({ locationJson })
+      setFormData(initiativeJson)
+      setLocationData(locationJson)
+    }
+  }, [])
 
   const handleFormChange = e => {
     setFormData({
@@ -22,13 +40,31 @@ export function InitiativeForm ({ locationName, LocationData }) {
 
   const handleFormSubmit = async e => {
     e.preventDefault()
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im51ZXZvVXN1YXJpb0hhc2hAZ21haWwuY29tIiwiaWQiOiI2NDExZTQ5OTYyMGRmYjI2NTg2NGFjMGIiLCJpYXQiOjE2NzkwNTE0MjB9.7IqGy6KG42Izqvq-y-Qpg0JbbM-QW--Tff_zNMVxWEc'
     try {
       const objectTosend = { ...formData, ...LocationData }
+      const formDataString = JSON.stringify(formData)
+      const locationDataString = JSON.stringify(LocationData)
+      window.localStorage.setItem('formData', formDataString)
+      window.localStorage.setItem('locationData', locationDataString)
       const response = await sendInitiative(objectTosend, { token })
-      console.log('LA REPSUESTA', response)
+
+      if (response.status === 200) {
+        setInitiativeAdded(true)
+        window.localStorage.removeItem('formData')
+        window.localStorage.removeItem('locationData')
+      } else {
+        setInitiativeAdded(false)
+      }
     } catch (error) {
-      console.log(error)
+      const messageError = error.response.data.message
+      if (messageError) {
+        if (messageError === 'token is missing or invalid') {
+          const currentPath = window.location.pathname
+          navigate('/login', { state: { from: currentPath } })
+        } else {
+          console.log('problemas con el servidor')
+        }
+      }
     }
   }
 
@@ -87,19 +123,20 @@ export function InitiativeForm ({ locationName, LocationData }) {
         />
       </div>
       {/* <div className='form-field'> ACTIVA Y SOLO AL ADMIN SE LE MUESTRA ESTE CAMPO
-        <label htmlFor='expirationDate'>Expiration Date</label>
-        <input
-          required
-          type='date'
-          id='expirationDate'
-          name='expirationDate'
-          value={formData.expirationDate}
-          onChange={handleFormChange}
-        />
-      </div> */}
+    <label htmlFor='expirationDate'>Expiration Date</label>
+    <input
+      required
+      type='date'
+      id='expirationDate'
+      name='expirationDate'
+      value={formData.expirationDate}
+      onChange={handleFormChange}
+    />
+  </div> */}
       <button className='submit-button' type='submit' disabled={!isFormValid()}>
         Publicar iniciativa
       </button>
     </form>
+
   )
 }

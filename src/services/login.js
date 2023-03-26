@@ -5,5 +5,6 @@ export async function login (credentials) {
 }
 export async function signup (credentials) {
   const { data } = await axios.post('http://localhost:3001/user', credentials)
+  console.log('sign up response', { data })
   return data
 }
