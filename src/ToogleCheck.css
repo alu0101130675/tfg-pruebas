@@ -38,6 +38,11 @@ display: none;
 input:checked + .slider {
   background-color: red;
 }
+.toogle{
+  display: flex;
+  align-items: center;
+  gap:5px;
+}
 
 input:checked + .slider:before {
   -webkit-transform: translateX(36px);

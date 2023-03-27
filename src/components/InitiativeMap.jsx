@@ -39,7 +39,7 @@ export function InitiativeMap () {
       setInitiatives(response.data)
     }).catch(error => console.log('error1', { error })
     )
-  }, [filters])
+  }, [filters, formFlag])
 
   function LocationMarker () {
     const map = useMapEvents({
@@ -67,8 +67,11 @@ export function InitiativeMap () {
 
   return (
     <>
-      <MapFilter options={COMUNIDADES_AUTONOMAS} setFilter={setFilters} />
-      <ToogleCheck setFilter={setFilters} />
+      <div className='filters'>
+        <MapFilter options={COMUNIDADES_AUTONOMAS} setFilter={setFilters} />
+        <ToogleCheck setFilter={setFilters} />
+      </div>
+
       <div className='map-form'>
         <MapContainer
           className={`map-container ${formFlag ? '' : 'max-width'}`}
@@ -81,7 +84,7 @@ export function InitiativeMap () {
           />
           <LocationMarker />
 
-          {initiatives.map(({ latitude, id, longitude, initiativeName, active }) => {
+          {formFlag || initiatives.map(({ latitude, id, longitude, initiativeName, active }) => {
             console.log(latitude, longitude)
             return (
               <Marker key={id} position={[latitude, longitude]} icon={active ? blueIcon : redIcon}>
@@ -95,11 +98,12 @@ export function InitiativeMap () {
         </MapContainer>
         {formFlag && <InitiativeForm className='form' LocationData={LocationData} setInitiativeAdded={setInitiativeAdded} setLocationData={setLocationData} />}
       </div>
-      <Link onClick={() => setformFlag(!formFlag)}>
+      <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
         {formFlag
           ? 'Volver a mapa completo'
           : 'Publica tu iniciativa'}
       </Link>
+
       {initiativeAdded && <h1>¡Iniciativa añadida!</h1>}
     </>
   )

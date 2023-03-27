@@ -6,14 +6,22 @@
     width: 100%;
     }
 .map-form{
+  margin: 1.5% auto ;
   width: 95%;
-  margin: auto;
   display: flex;
   gap: 20px;
   height: 400px;
 }
 .red-icon {
   filter: hue-rotate(150deg);
+}
+.filters{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.map-link:hover{
+  font-size: 1.2em;
 }
 @media only screen and (max-width:1060px) {
   .map-form{
