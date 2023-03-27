@@ -12,6 +12,9 @@
   gap: 20px;
   height: 400px;
 }
+.red-icon {
+  filter: hue-rotate(150deg);
+}
 @media only screen and (max-width:1060px) {
   .map-form{
     flex-direction: column;

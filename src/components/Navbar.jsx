@@ -3,6 +3,7 @@ import '../Navbar.css'
 import { Link } from 'react-router-dom'
 import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
+import { LOGGED_OPTIONS } from '../consts'
 export function Navbar () {
   const [toogleBar, setToogleBar] = useState(false)
   const dropdownItems = ['eliminar cuenta de una vez por todas', 'logout']
@@ -27,7 +28,7 @@ export function Navbar () {
         </div>
       </div>
       <HamburgerButton className='hamburger-icon' />
-      <DropDown dropDownItems={dropdownItems} anchor='/login' dropDownName='Mi cuenta' side='right' />
+      <DropDown dropDownItems={window.sessionStorage.getItem('token') != null ? LOGGED_OPTIONS : []} anchor='/login' dropDownName='Mi cuenta' side='right' />
 
     </nav>
   )
