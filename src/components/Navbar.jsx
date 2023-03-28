@@ -1,35 +1,59 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import '../Navbar.css'
 import { Link } from 'react-router-dom'
 import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
-import { LOGGED_OPTIONS } from '../consts'
+// import { LOGGED_OPTIONS } from '../consts'
+import { UserContext } from '../context/UserContext'
+import { ConfirmMessage } from './DeleteAccountMessage'
+import { useTrigger } from '../hooks/useTrigger'
 export function Navbar () {
+  const { token, setToken } = useContext(UserContext)
+  console.log(token)
   const [toogleBar, setToogleBar] = useState(false)
+  const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   const dropdownItems = ['eliminar cuenta de una vez por todas', 'logout']
-  const handleToogle = () => {
-    setToogleBar(!toogleBar)
+  const logOut = () => {
+    setToken({ token: null })
+    window.sessionStorage.removeItem('token')
   }
+  const LOGGED_OPTIONS = [
+    {
+      visual: 'Eliminar Cuenta',
+      action: setShowDeleteMessage
+    },
+    {
+      visual: 'Cerrar Sesión',
+      action: logOut
+    }]
 
   return (
-    <nav className='navbar'>
-      <div className='navbar-items-logo'>
-        <div className='logo'>
-          <img
-            src='https://www.women-inf.eu/wp-content/uploads/2022/05/cropped-identidad_grafica_WOMEN@INF-isologo.png'
-            alt='logo de women@info'
-          />
-        </div>
-        <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
-          <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' />
-          <div>
-            <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
+    <>
+      <nav className='navbar'>
+        <div className='navbar-items-logo'>
+          <div className='logo'>
+            <img
+              src='https://www.women-inf.eu/wp-content/uploads/2022/05/cropped-identidad_grafica_WOMEN@INF-isologo.png'
+              alt='logo de women@info'
+            />
+          </div>
+          <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
+            {/* <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' /> */}
+            <div>
+              <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
+            </div>
           </div>
         </div>
-      </div>
-      <HamburgerButton className='hamburger-icon' />
-      <DropDown dropDownItems={window.sessionStorage.getItem('token') != null ? LOGGED_OPTIONS : []} anchor='/login' dropDownName='Mi cuenta' side='right' />
+        <HamburgerButton className='hamburger-icon' />
+        <DropDown
+          dropDownItems={token.token != null ? LOGGED_OPTIONS : []}
+          anchor='/login'
+          dropDownName='Mi cuenta'
+          side='right'
+        />
+      </nav>
+      {showDeleteMessage && <ConfirmMessage message='¿Seguro que deseas eliminar la cuenta?' showMessage={setShowDeleteMessage} />}
+    </>
 
-    </nav>
   )
 }

@@ -1,0 +1,39 @@
+.flex-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.yes-button{
+  background-color: green;
+  width: 30%;
+  border-radius: 5.5%;
+  border: 5px green solid;
+  cursor: pointer;
+}
+.no-button{
+  background-color: red;
+  border: 5px red solid;
+  border-radius: 5.5%;
+  width: 30%;
+  cursor: pointer;
+}
+.message-box{
+  position: absolute;
+  z-index: 9999999999999999999999999999;
+  top: 9%;
+  left: 60%;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+  padding: 2%;
+  margin-bottom: 43px;
+}
+.message{
+  margin-bottom:8%;
+  font-size: 1.3rem;
+}
+@media only screen and (max-width:900px) {
+  .message-box{
+    left:30%;
+  }
+}

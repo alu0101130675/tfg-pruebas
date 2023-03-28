@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { login, signup } from '../services/login'
 import '../Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import { useTrigger } from '../hooks/useTrigger'
 export function Login () {
   const navigate = useNavigate()
-  const [loginFlag, setLoginFlag] = useState(true)
+  const [loginFlag, setLoginFlag] = useTrigger(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
+  // const [user, setToken] = useState(null)
+  const { _, setToken } = useContext(UserContext)
   const [error, setError] = useState(null)
   const location = useLocation()
   const { state } = location
@@ -24,11 +27,11 @@ export function Login () {
         setPassword('')
       } else {
         response.token && window.sessionStorage.setItem('token', response.token)
-        setUser(response)
+        setToken(response)
         navigate(fromPath)
       }
     } catch (error) {
-      const errorStatus = error.response.status
+      const errorStatus = error?.response?.status
       if (errorStatus === 409) {
         setError('Usuario no valido')
       }
