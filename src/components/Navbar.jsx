@@ -20,6 +20,7 @@ export function Navbar () {
     window.sessionStorage.removeItem('role')
     navigate('/login')
   }
+
   const LOGGED_OPTIONS = [
     {
       visual: 'Eliminar Cuenta',

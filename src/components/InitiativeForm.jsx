@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import validator from 'validator'
-import { sendInitiative } from '../services/initiatives'
+import { sendInitiative, deleteIniciative } from '../services/initiatives'
 import '../InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
@@ -56,6 +56,11 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
         }
       }
     }
+  }
+  const handledDeleteIniciative = () => {
+    const { id, initiativeName } = LocationData
+    console.log(id, initiativeName)
+    deleteIniciative({ id, token: user.token }).then((response) => console.log(response)).catch((err) => console.log({ err }))
   }
 
   const isFormValid = () => {
@@ -137,10 +142,10 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
       {updateFlag
         ? (
           <div className='pararel-buttons'>
-            <button className='submit-button' type='submit' disabled={!isFormValid()}>
+            <button className='submit-button' disabled={!isFormValid()}>
               Actualizar
             </button>
-            <button className='delete-button' type='submit' disabled={!isFormValid()}>
+            <button className='delete-button' disabled={!isFormValid()} onClick={handledDeleteIniciative}>
               Eliminar
             </button>
           </div>)

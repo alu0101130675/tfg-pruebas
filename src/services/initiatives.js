@@ -22,3 +22,18 @@ export async function getFilteredIniciatives ({ filters }) {
   console.log({ response })
   return response
 }
+export async function deleteIniciative ({ id, token }) {
+  console.log('deletes')
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    data: {
+      id
+    }
+  }
+  console.log(config)
+  const response = await axios.delete('http://localhost:3001/initiative', config)
+  console.log('LA PUTA RESPUESTA: ', config)
+  return response
+}

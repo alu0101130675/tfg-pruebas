@@ -35,6 +35,7 @@ export function InitiativeMap () {
   const [initiatives, setInitiatives] = useState([])
   const [LocationData, setLocationData] = useState({
     location: 'Seleccione en el mapa la ubicacion',
+    id: '',
     contacto: '',
     validated: false,
     initiativeName: '',
@@ -115,7 +116,7 @@ export function InitiativeMap () {
                         setLocationData(prevState => ({
                           ...prevState,
                           latitude,
-                          _id,
+                          id: _id,
                           longitude,
                           initiativeName,
                           contacto,
