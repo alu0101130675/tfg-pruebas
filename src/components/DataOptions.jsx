@@ -4,7 +4,7 @@ import { ChartSelector } from './ChartSelector'
 import { getAxes } from '../logic/getAxes'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
-import '../DataOptions.css'
+import './css/DataOptions.css'
 
 export function Options ({ data, options }) {
   const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })

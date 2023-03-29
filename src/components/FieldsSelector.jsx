@@ -1,4 +1,4 @@
-import '../FieldsSelector.css'
+import './css/FieldsSelector.css'
 import { AxesSelector } from './AxesSelector'
 import { getAxes } from '../logic/getAxes'
 export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelected, data, setAxes, axes, options }) {

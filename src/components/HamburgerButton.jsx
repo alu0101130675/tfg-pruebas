@@ -1,4 +1,4 @@
-import '../HamburgerButton.css'
+import './css/HamburgerButton.css'
 export function HamburgerButton () {
   return (
     <button className='hamburger-button' aria-label='Open menu'>

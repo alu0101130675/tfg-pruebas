@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'
-import '../Navbar.css'
+import './css/Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
 // import { LOGGED_OPTIONS } from '../consts'
 import { UserContext } from '../context/UserContext'
-import { ConfirmMessage } from './DeleteAccountMessage'
+import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
 export function Navbar () {
   const navigate = useNavigate()

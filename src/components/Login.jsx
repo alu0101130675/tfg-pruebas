@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { login, signup } from '../services/login'
-import '../Login.css'
+import './css/Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { useTrigger } from '../hooks/useTrigger'

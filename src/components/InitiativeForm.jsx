@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import validator from 'validator'
 import { sendInitiative, deleteIniciative } from '../services/initiatives'
-import '../InitiativeForm.css'
+import './css/InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { ConfirmMessage } from './ConfirmMessage'
+import { useTrigger } from '../hooks/useTrigger'
 
 export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag }) {
+  const [confirmDelete, setConfirmDelete] = useTrigger(false)
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
   useEffect(() => {
@@ -145,9 +148,19 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
             <button className='submit-button' disabled={!isFormValid()}>
               Actualizar
             </button>
-            <button className='delete-button' disabled={!isFormValid()} onClick={handledDeleteIniciative}>
+            <button
+              className='delete-button'
+              disabled={!isFormValid()}
+              onClick={setConfirmDelete}
+            >
               Eliminar
             </button>
+            {confirmDelete &&
+              <ConfirmMessage
+                message='Seguro que quieres eliminar esta iniciativa'
+                showMessage={setConfirmDelete}
+                action={handledDeleteIniciative}
+              />}
           </div>)
         : (
           <button className='submit-button' type='submit' disabled={!isFormValid()}>

@@ -1,7 +1,7 @@
 import { Chart } from './Chart'
 import { ChartSelect } from './ChartSelect'
 import { CircularChart } from './PieChart'
-import '../ChartSelector.css'
+import './css/ChartSelector.css'
 import { HorizontalBarChart } from './HorizontalBarChart'
 export function ChartSelector ({
   dataSet, selectedFields, setSelectedFields, setChartSelected, chartSelected

@@ -1,5 +1,5 @@
 import { Label } from 'recharts'
-import '../ToogleCheck.css'
+import './css/ToogleCheck.css'
 export function ToogleCheck ({ setFilter, toogleLabel }) {
   return (
     <div className='toogle'>

@@ -1,7 +1,7 @@
 
 import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaflet'
 import { useContext, useEffect, useState } from 'react'
-import '../InitiativeMap.css'
+import './css/InitiativeMap.css'
 import L from 'leaflet'
 import { InitiativeForm } from './InitiativeForm'
 import { location } from '../services/openStreetMap'

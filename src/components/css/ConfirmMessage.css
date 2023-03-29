@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 .message-box{
-  position: absolute;
+  position: fixed;
   z-index: 9999999999999999999999999999;
   top: 9%;
   left: 60%;

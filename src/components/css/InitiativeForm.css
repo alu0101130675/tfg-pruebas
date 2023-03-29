@@ -65,10 +65,7 @@ input{
     align-items: flex-start;
     width: 100%;
   }
-  .form-field{
-    width: 100%;
-  }
-  .pararel-buttons{
+  .pararel-buttons, .submit-button,.form-field{
     width: 100%;
   }
 
