@@ -1,6 +1,6 @@
 
 import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaflet'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../InitiativeMap.css'
 import L from 'leaflet'
 import { InitiativeForm } from './InitiativeForm'
@@ -10,6 +10,7 @@ import { getFilteredIniciatives } from '../services/initiatives'
 import { MapFilter } from './MapFilter'
 import { COMUNIDADES_AUTONOMAS } from '../consts'
 import { ToogleCheck } from './ToogleCheck'
+import { UserContext } from '../context/UserContext'
 const icon = {
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   iconSize: [25, 41],
@@ -19,8 +20,8 @@ const icon = {
   shadowSize: [41, 41],
   shadowAnchor: [12, 41]
 }
-// const apiOpenStreetMap = 'https://nominatim.openstreetmap.org/ui/search.html?street=tafetana&city=guimar&country=spain&postalcode=38500'
 export function InitiativeMap () {
+  const { user } = useContext(UserContext)
   const redIcon = L.icon({
     ...icon,
     className: 'red-icon'
@@ -30,8 +31,16 @@ export function InitiativeMap () {
   })
   const [filters, setFilters] = useState({ comunidadAutonoma: 'Todas', active: true })
   const [position, setPosition] = useState([41.0, -4])
+  const [updateFlag, setUpdateFlag] = useState(false)
   const [initiatives, setInitiatives] = useState([])
-  const [LocationData, setLocationData] = useState({ location: 'Seleccione en el mapa la ubicacion' })
+  const [LocationData, setLocationData] = useState({
+    location: 'Seleccione en el mapa la ubicacion',
+    contacto: '',
+    validated: false,
+    initiativeName: '',
+    link: '',
+    active: false
+  })
   const [formFlag, setformFlag] = useState(false)
   const [initiativeAdded, setInitiativeAdded] = useState(false)
   useEffect(() => {
@@ -49,7 +58,8 @@ export function InitiativeMap () {
           .then(
             ({ display_name, address }) => {
               const { road, city, postcode, state, archipelago } = address
-              setLocationData({
+              setLocationData(prevState => ({
+                ...prevState,
                 location: display_name,
                 road,
                 city,
@@ -57,7 +67,7 @@ export function InitiativeMap () {
                 ComunidadAutonoma: state || archipelago,
                 latitude: lat,
                 longitude: lng
-              })
+              }))
             }).catch(e => console.error(e))
         setPosition([lat, lng])
         map.flyTo([lat, lng])
@@ -84,19 +94,61 @@ export function InitiativeMap () {
           />
           <LocationMarker />
 
-          {formFlag || initiatives.map(({ latitude, id, longitude, initiativeName, active }) => {
-            console.log(latitude, longitude)
-            return (
-              <Marker key={id} position={[latitude, longitude]} icon={active ? blueIcon : redIcon}>
-                <Popup>
-                  Nombre{initiativeName}. <br /> Contacto:.
-                </Popup>
-              </Marker>
-            )
-          })}
+          {(formFlag && user.role !== 'admin') ||
+            initiatives.map(({
+              latitude, _id, longitude, initiativeName, contacto,
+              validated,
+              link,
+              active
+            }) => {
+              console.log(latitude, longitude, _id)
+              return (
+                <Marker
+                  key={_id}
+                  position={[latitude, longitude]}
+                  icon={active ? blueIcon : redIcon}
+                  eventHandlers={{
+                    popupclose: () => { setUpdateFlag(false) },
+                    popupopen: () => {
+                      if (user.role === 'admin') {
+                        setUpdateFlag(true)
+                        setLocationData(prevState => ({
+                          ...prevState,
+                          latitude,
+                          _id,
+                          longitude,
+                          initiativeName,
+                          contacto,
+                          validated,
+                          link,
+                          active
+                        }))
+                      }
+                    }
+                  }}
+                >
+                  <Popup>
+                    Nombre{initiativeName}. <br /> Contacto:.
+                  </Popup>
+                </Marker>
+              )
+            })}
+          {formFlag &&
+            <Marker position={position}>
+              <Popup>
+                Ubicacion seleccionada
+              </Popup>
+            </Marker>}
 
         </MapContainer>
-        {formFlag && <InitiativeForm className='form' LocationData={LocationData} setInitiativeAdded={setInitiativeAdded} setLocationData={setLocationData} />}
+        {formFlag &&
+          <InitiativeForm
+            className='form'
+            LocationData={LocationData}
+            setInitiativeAdded={setInitiativeAdded}
+            setLocationData={setLocationData}
+            updateFlag={updateFlag}
+          />}
       </div>
       <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
         {formFlag

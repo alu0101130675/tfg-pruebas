@@ -26,8 +26,10 @@ export function Login () {
         setEmail('')
         setPassword('')
       } else {
-        response.token && window.sessionStorage.setItem('token', response.token)
-        setToken(response)
+        if (response.token) {
+          window.sessionStorage.setItem('token', response.token)
+          window.sessionStorage.setItem('role', response.role)
+        } setToken(response)
         navigate(fromPath)
       }
     } catch (error) {

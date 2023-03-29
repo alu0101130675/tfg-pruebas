@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import '../Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
 // import { LOGGED_OPTIONS } from '../consts'
@@ -8,14 +8,17 @@ import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './DeleteAccountMessage'
 import { useTrigger } from '../hooks/useTrigger'
 export function Navbar () {
-  const { token, setToken } = useContext(UserContext)
-  console.log(token)
+  const navigate = useNavigate()
+  const { user, setToken } = useContext(UserContext)
+  console.log(user)
   const [toogleBar, setToogleBar] = useState(false)
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
-  const dropdownItems = ['eliminar cuenta de una vez por todas', 'logout']
+  const dropdownItems = [{ visual: 'graficas' }, { visual: 'van con un usefect' }]
   const logOut = () => {
     setToken({ token: null })
     window.sessionStorage.removeItem('token')
+    window.sessionStorage.removeItem('role')
+    navigate('/login')
   }
   const LOGGED_OPTIONS = [
     {
@@ -38,7 +41,7 @@ export function Navbar () {
             />
           </div>
           <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
-            {/* <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' /> */}
+            <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' />
             <div>
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>
@@ -46,7 +49,7 @@ export function Navbar () {
         </div>
         <HamburgerButton className='hamburger-icon' />
         <DropDown
-          dropDownItems={token.token != null ? LOGGED_OPTIONS : []}
+          dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
           anchor='/login'
           dropDownName='Mi cuenta'
           side='right'

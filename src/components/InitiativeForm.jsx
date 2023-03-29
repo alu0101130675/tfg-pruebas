@@ -1,52 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import validator from 'validator'
 import { sendInitiative } from '../services/initiatives'
 import '../InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
-export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData }) {
+export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag }) {
   const navigate = useNavigate()
-  const [token, SetToken] = useState(window.sessionStorage.getItem('token'))
-  const [formData, setFormData] = useState(
-    {
-      contacto: '',
-      validated: false,
-      initiativeName: '',
-      link: '',
-      active: false,
-      ComunidadAutonoma: ''
-    })
+  const { user } = useContext(UserContext)
   useEffect(() => {
-    console.log('entra')
-    const initiativeForm = window.localStorage.getItem('formData')
     const LocationDataForm = window.localStorage.getItem('locationData')
-
-    if (initiativeForm != null && LocationDataForm != null) {
-      const initiativeJson = JSON.parse(initiativeForm)
+    if (LocationDataForm != null) {
       const locationJson = JSON.parse(LocationDataForm)
-      console.log({ initiativeJson })
-      console.log({ locationJson })
-      setFormData(initiativeJson)
       setLocationData(locationJson)
     }
   }, [])
 
   const handleFormChange = e => {
-    setFormData({
-      ...formData,
+    setLocationData({
+      ...LocationData,
       [e.target.name]: e.target.value
     })
   }
-
+  const handleFormCheck = e => {
+    const targetName = e.target.name
+    const prevValue = LocationData[targetName]
+    console.log(prevValue)
+    setLocationData({
+      ...LocationData,
+      [targetName]: !prevValue
+    })
+  }
   const handleFormSubmit = async e => {
     e.preventDefault()
     try {
-      const objectTosend = { ...formData, ...LocationData }
-      const formDataString = JSON.stringify(formData)
       const locationDataString = JSON.stringify(LocationData)
-      window.localStorage.setItem('formData', formDataString)
       window.localStorage.setItem('locationData', locationDataString)
-      const response = await sendInitiative(objectTosend, { token })
+      const response = await sendInitiative(LocationData, { token: user.token })
 
       if (response.status === 200) {
         setInitiativeAdded(true)
@@ -86,8 +76,9 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
           type='email'
           id='contacto'
           name='contacto'
-          value={formData.contacto}
+          value={LocationData.contacto}
           onChange={handleFormChange}
+
         />
       </div>
       <div className='form-field'>
@@ -97,7 +88,7 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
           id='initiativeName'
           name='initiativeName'
           required
-          value={formData.initiativeName}
+          value={LocationData.initiativeName}
           onChange={handleFormChange}
         />
       </div>
@@ -118,24 +109,45 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
           type='url'
           id='link'
           name='link'
-          value={formData.link}
+          value={LocationData.link}
           onChange={handleFormChange}
         />
       </div>
-      {/* <div className='form-field'> ACTIVA Y SOLO AL ADMIN SE LE MUESTRA ESTE CAMPO
-    <label htmlFor='expirationDate'>Expiration Date</label>
-    <input
-      required
-      type='date'
-      id='expirationDate'
-      name='expirationDate'
-      value={formData.expirationDate}
-      onChange={handleFormChange}
-    />
-  </div> */}
-      <button className='submit-button' type='submit' disabled={!isFormValid()}>
-        Publicar iniciativa
-      </button>
+      {updateFlag &&
+        <div className='pararel-buttons'>
+          <label htmlFor='validated'>Validado</label>
+          <input
+            required
+            type='checkbox'
+            id='validated'
+            name='validated'
+            onChange={handleFormCheck}
+            checked={LocationData.validated}
+          />
+          <label htmlFor='active'>active</label>
+          <input
+            required
+            type='checkbox'
+            id='active'
+            name='active'
+            onChange={handleFormCheck}
+            checked={LocationData.active}
+          />
+        </div>}
+      {updateFlag
+        ? (
+          <div className='pararel-buttons'>
+            <button className='submit-button' type='submit' disabled={!isFormValid()}>
+              Actualizar
+            </button>
+            <button className='delete-button' type='submit' disabled={!isFormValid()}>
+              Eliminar
+            </button>
+          </div>)
+        : (
+          <button className='submit-button' type='submit' disabled={!isFormValid()}>
+            Publicar iniciativa
+          </button>)}
     </form>
 
   )

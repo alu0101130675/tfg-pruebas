@@ -8,3 +8,12 @@ export async function signup (credentials) {
   console.log('sign up response', { data })
   return data
 }
+export async function checkRole (token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.get('http://localhost:3001/user/role', config)
+  return data
+}

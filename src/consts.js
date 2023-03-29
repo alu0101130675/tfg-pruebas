@@ -3,7 +3,6 @@ export const COLORS = ['red', 'darkseagreen', 'blue', 'green', 'black',
   'greenyellow', 'blanchedalmond', 'blueviolet',
   'brown', 'burlywood', 'chocolate', 'yellow', 'darkolivegreen']
 export const CHARTOPTIONS = ['Gráfico de barras', 'Gráfico de barras apiladas', 'Gráfica circular', 'Gráfico de barras horizontal']
-// export const LOGGED_OPTIONS = ['Eliminar Cuenta', 'Cerrar Sesión']
 export const COMUNIDADES_AUTONOMAS = [
   'Todas',
   'Andalucía',
