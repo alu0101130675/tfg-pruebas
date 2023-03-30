@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import validator from 'validator'
-import { sendInitiative, deleteIniciative } from '../services/initiatives'
+import { sendInitiative, deleteIniciative, updateIniciative } from '../services/initiatives'
 import './css/InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
 
-export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag }) {
+export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag, setUpdateFlag }) {
   const [confirmDelete, setConfirmDelete] = useTrigger(false)
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
@@ -65,6 +65,11 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
     console.log(id, initiativeName)
     deleteIniciative({ id, token: user.token }).then((response) => console.log(response)).catch((err) => console.log({ err }))
   }
+  const handleUpdateIniciative = () => {
+    const { id, initiativeName, validated, active, link, contacto } = LocationData
+    console.log(id, initiativeName)
+    updateIniciative({ id, active, validated, initiativeName, token: user.token, link, contacto }).then((response) => console.log(response)).catch((err) => console.log({ err }))
+  }
 
   const isFormValid = () => {
     // if (!formData.contacto || !formData.location) {
@@ -79,7 +84,7 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
   return (
     <form onSubmit={handleFormSubmit} className='form'>
       <div className='form-field'>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor='contacto'>Email</label>
         <input
           type='email'
           id='contacto'
@@ -145,12 +150,21 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
       {updateFlag
         ? (
           <div className='pararel-buttons'>
-            <button className='submit-button' disabled={!isFormValid()}>
+            <button
+              className='submit-button'
+              disabled={!isFormValid()}
+              type='button'
+              onClick={() => {
+                handleUpdateIniciative()
+                setUpdateFlag()
+              }}
+            >
               Actualizar
             </button>
             <button
               className='delete-button'
               disabled={!isFormValid()}
+              type='button'
               onClick={setConfirmDelete}
             >
               Eliminar
@@ -159,7 +173,10 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
               <ConfirmMessage
                 message='Seguro que quieres eliminar esta iniciativa'
                 showMessage={setConfirmDelete}
-                action={handledDeleteIniciative}
+                action={() => {
+                  handledDeleteIniciative()
+                  setUpdateFlag()
+                }}
               />}
           </div>)
         : (

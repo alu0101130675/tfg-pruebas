@@ -1,11 +1,17 @@
-import { Label } from 'recharts'
 import './css/ToogleCheck.css'
-export function ToogleCheck ({ setFilter, toogleLabel }) {
+export function ToogleCheck ({ setFilter, toogleLabel, check, filter }) {
   return (
     <div className='toogle'>
-      <div>Iniciativas activas</div>
+      <div>{toogleLabel}</div>
       <label className='switch'>
-        <input type='checkbox' defaultValue id='toggle' onChange={() => setFilter(prevState => ({ ...prevState, active: !prevState.active }))} />
+        <input
+          type='checkbox'
+          id={filter}
+          defaultChecked={check}
+          onClick={() => setFilter(prevState => ({
+            ...prevState, [filter]: !prevState[filter]
+          }))}
+        />
         <span className='slider' />
       </label>
     </div>

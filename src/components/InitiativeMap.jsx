@@ -27,9 +27,9 @@ export function InitiativeMap () {
     className: 'red-icon'
   })
   const blueIcon = L.icon({
-    icon
+    ...icon
   })
-  const [filters, setFilters] = useState({ comunidadAutonoma: 'Todas', active: true })
+  const [filters, setFilters] = useState({ comunidadAutonoma: 'Todas', active: true, validated: false })
   const [position, setPosition] = useState([41.0, -4])
   const [updateFlag, setUpdateFlag] = useState(false)
   const [initiatives, setInitiatives] = useState([])
@@ -49,7 +49,7 @@ export function InitiativeMap () {
       setInitiatives(response.data)
     }).catch(error => console.log('error1', { error })
     )
-  }, [filters, formFlag])
+  }, [filters, formFlag, updateFlag])
 
   function LocationMarker () {
     const map = useMapEvents({
@@ -80,7 +80,10 @@ export function InitiativeMap () {
     <>
       <div className='filters'>
         <MapFilter options={COMUNIDADES_AUTONOMAS} setFilter={setFilters} />
-        <ToogleCheck setFilter={setFilters} />
+        <ToogleCheck toogleLabel='Iniciativas activas' setFilter={setFilters} check={filters.active} filter='active' />
+        {user.role === 'admin' &&
+          <ToogleCheck toogleLabel='Iniciativas validadas' setFilter={setFilters} check={filters.validated} filter='validated' />}
+
       </div>
 
       <div className='map-form'>
@@ -102,7 +105,6 @@ export function InitiativeMap () {
               link,
               active
             }) => {
-              console.log(latitude, longitude, _id)
               return (
                 <Marker
                   key={_id}
@@ -149,6 +151,7 @@ export function InitiativeMap () {
             setInitiativeAdded={setInitiativeAdded}
             setLocationData={setLocationData}
             updateFlag={updateFlag}
+            setUpdateFlag={setUpdateFlag}
           />}
       </div>
       <Link onClick={() => setformFlag(!formFlag)} className='map-link'>

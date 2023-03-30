@@ -17,8 +17,8 @@ export async function getAllIniciatives () {
   return response
 }
 export async function getFilteredIniciatives ({ filters }) {
-  const { comunidadAutonoma, active } = filters
-  const response = await axios.get(`http://localhost:3001/initiative/${comunidadAutonoma}/${active}`)
+  const { comunidadAutonoma, active, validated } = filters
+  const response = await axios.get(`http://localhost:3001/initiative/${comunidadAutonoma}/${active}/${validated}`)
   console.log({ response })
   return response
 }
@@ -32,8 +32,15 @@ export async function deleteIniciative ({ id, token }) {
       id
     }
   }
-  console.log(config)
   const response = await axios.delete('http://localhost:3001/initiative', config)
-  console.log('LA PUTA RESPUESTA: ', config)
   return response
+}
+export async function updateIniciative ({ id, token, validated, initiativeName, active, link, contacto }) {
+  axios.patch('http://localhost:3001/initiative', { id, validated, active, initiativeName, link, contacto }, { headers: { Authorization: 'Bearer ' + token } })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
