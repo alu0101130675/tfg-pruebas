@@ -1,0 +1,23 @@
+.post-form {
+  display: flex;
+  gap:5%;
+  width: 100%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.post-form > button{
+  background-color: black;
+  flex: 1;
+  border-radius: 2.5%;
+  border: 10px black solid;
+  cursor: pointer;
+  color:white;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.post-form > button:hover{
+  transition: transform .2s;
+  transform: translateY(4px);
+  background-color: blue;
+  border-color: blue;
+}

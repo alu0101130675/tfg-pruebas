@@ -5,6 +5,7 @@ import { getAxes } from '../logic/getAxes'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
 import './css/DataOptions.css'
+import { AddFileForm } from './AddFileForm'
 
 export function Options ({ data, options }) {
   const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })
@@ -13,7 +14,6 @@ export function Options ({ data, options }) {
   },
   { yField: getAxes({ data, field: axes.yField }) }])
   const [chartSelected, setChartSelected] = useState('Gráfico de barras')
-
   const fields = useAxeFields({ axes, filter: selectedFields })
   console.log(fields)
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
@@ -21,7 +21,6 @@ export function Options ({ data, options }) {
   return (
     <>
       <h1 className='page-title'>Visualizador de datos</h1>
-
       <h2>{axes.xField} - {axes.yField} </h2>
       <div className='flex-horizontal'>
         <ChartSelector
@@ -31,7 +30,6 @@ export function Options ({ data, options }) {
           setChartSelected={setChartSelected}
           chartSelected={chartSelected}
         />
-
       </div>
 
       <FieldsSelector
@@ -42,9 +40,8 @@ export function Options ({ data, options }) {
         axes={axes}
         setAxes={setAxes}
         data={data}
-
       />
+      <AddFileForm />
     </>
-
   )
 }

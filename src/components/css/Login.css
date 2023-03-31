@@ -31,7 +31,7 @@
   border-radius: 5px;
 }
 .login-button:hover{
-  transition: transform .2s;
+ transition: transform .2s;
  transform: translateY(4px);
  background-color: blue;
  border-color: blue;
