@@ -1,19 +1,29 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './css/Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { DropDown } from './DropDown'
 import { HamburgerButton } from './HamburgerButton'
-// import { LOGGED_OPTIONS } from '../consts'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
+import { getFileNames } from '../services/data'
 export function Navbar () {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
-  console.log(user)
   const [toogleBar, setToogleBar] = useState(false)
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
-  const dropdownItems = [{ visual: 'graficas' }, { visual: 'van con un usefect' }]
+  const [files, setFiles] = useState([{ visual: 'Estamos subiendo los ficheros' }])
+  useEffect(() => {
+    getFileNames()
+      .then(d => {
+        const fileList = d.map(({ collectionName }) => {
+          return { visual: collectionName }
+        }
+        )
+        setFiles(fileList)
+      })
+      .catch(err => console.log(err))
+  }, [])
   const logOut = () => {
     setToken({ token: null })
     window.sessionStorage.removeItem('token')
@@ -42,7 +52,7 @@ export function Navbar () {
             />
           </div>
           <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
-            <DropDown dropDownItems={dropdownItems} anchor='/' dropDownName='Grafica' />
+            <DropDown dropDownItems={files} anchor='/' dropDownName='Grafica' />
             <div>
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>

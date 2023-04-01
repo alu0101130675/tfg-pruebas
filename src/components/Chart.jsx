@@ -13,7 +13,6 @@ import { COLORS } from '../consts'
 
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
   const keys = Object.keys(keyFields)
-
   return (
     <ResponsiveContainer
       width='100%' aspect={3 / 1}

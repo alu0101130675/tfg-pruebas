@@ -1,21 +1,22 @@
 import { useState } from 'react'
-import { useAxeFields } from '../hooks/axesFields'
+import { axeFields } from '../hooks/axesFields'
 import { ChartSelector } from './ChartSelector'
 import { getAxes } from '../logic/getAxes'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
 import './css/DataOptions.css'
-import { AddFileForm } from './AddFileForm'
+import { AdminFiles } from './AdminFiles'
 
 export function Options ({ data, options }) {
+  // const { pathname } = useLocation()
+  // const { data, options, selectedFields, setAxes, setSelectedFields, axes } = useDataSet({ pathname })
   const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })
   const [selectedFields, setSelectedFields] = useState([{
     xField: getAxes({ data, field: axes.xField })
   },
   { yField: getAxes({ data, field: axes.yField }) }])
   const [chartSelected, setChartSelected] = useState('Gráfico de barras')
-  const fields = useAxeFields({ axes, filter: selectedFields })
-  console.log(fields)
+  const fields = axeFields({ axes, filter: selectedFields })
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
 
   return (
@@ -41,7 +42,7 @@ export function Options ({ data, options }) {
         setAxes={setAxes}
         data={data}
       />
-      <AddFileForm />
+      <AdminFiles />
     </>
   )
 }

@@ -11,8 +11,8 @@ export function DropDown ({ dropDownItems, anchor, dropDownName, side = 'left' }
       <div className={`dropdown ${side === 'right' ? 'right' : ''}`}>
         {showDropdown && dropDownItems.map(({ visual, action }) =>
           action
-            ? <a key={visual} href='#' className='dropdown-item' onClick={action}>{visual}</a>
-            : <a key={visual} href='#' className='dropdown-item'>{visual}</a>
+            ? <Link key={visual} to={visual} className='dropdown-item' onClick={action}>{visual}</Link>
+            : <Link key={visual} to={visual} className='dropdown-item'>{visual}</Link>
         )}
       </div>
     </div>

@@ -28,7 +28,6 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
   const handleFormCheck = e => {
     const targetName = e.target.name
     const prevValue = LocationData[targetName]
-    console.log(prevValue)
     setLocationData({
       ...LocationData,
       [targetName]: !prevValue
@@ -62,12 +61,10 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
   }
   const handledDeleteIniciative = () => {
     const { id, initiativeName } = LocationData
-    console.log(id, initiativeName)
     deleteIniciative({ id, token: user.token }).then((response) => console.log(response)).catch((err) => console.log({ err }))
   }
   const handleUpdateIniciative = () => {
     const { id, initiativeName, validated, active, link, contacto } = LocationData
-    console.log(id, initiativeName)
     updateIniciative({ id, active, validated, initiativeName, token: user.token, link, contacto }).then((response) => console.log(response)).catch((err) => console.log({ err }))
   }
 

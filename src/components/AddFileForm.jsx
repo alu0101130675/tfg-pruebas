@@ -1,21 +1,20 @@
-import { postFile } from '../services/data'
-import { UserContext } from '../context/UserContext'
-import { useContext } from 'react'
+
 import './css/AddFileForm.css'
-export function AddFileForm () {
-  const { user } = useContext(UserContext)
+import { allPairCombination } from '../logic/allPairCombination'
+export function AddFileForm ({ setConfig, setFile }) {
   const reader = new FileReader()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const file = e.target.elements.fileInput.files[0]
     const name = e.target.elements.fileName.value
-    console.log(name)
     reader.onload = () => {
       const contents = reader.result
       const rows = contents.split('\n')
         .filter(row => row.trim().length > 0)
-      const headers = rows.shift().split(',') // elimina el priimer elemento y lo retorna
+      const headers = rows.shift().split(',')
+      const config = allPairCombination(headers)
+      setConfig(config)
       const documentData = rows.map(row => {
         const values = row.split(',')
         return values.reduce((obj, val, i) => {
@@ -23,28 +22,24 @@ export function AddFileForm () {
           return obj
         }, {})
       })
-      console.log(documentData)
-      postFile({ name, token: user.token, documentData })
+      setFile({ name, documentData })
     }
     reader.readAsText(file)
   }
 
   return (
-    <>
-      {user.role === 'admin' &&
-        <form className='post-form' onSubmit={handleSubmit}>
-          <input
-            type='text'
-            placeholder='Nombre del documento en base de datos'
-            name='fileName'
-          />
-          <input
-            type='file'
-            accept='.csv'
-            name='fileInput'
-          />
-          <button type='submit'>Enviar</button>
-        </form>}
-    </>
+    <form className='post-form' onSubmit={handleSubmit}>
+      <input
+        type='text'
+        placeholder='Nombre del documento en base de datos'
+        name='fileName'
+      />
+      <input
+        type='file'
+        accept='.csv'
+        name='fileInput'
+      />
+      <button type='submit'>Enviar</button>
+    </form>
   )
 }

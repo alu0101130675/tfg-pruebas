@@ -16,7 +16,7 @@ function App () {
       <main>
         <Routes>
           <Route
-            path='/'
+            path='/*'
             element={
               <>
                 {data && <Options data={data} options={options} />}
