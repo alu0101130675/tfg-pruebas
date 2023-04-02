@@ -40,7 +40,6 @@ export function Options () {
         setAxes={setAxes}
         data={data}
       />
-      <AdminFiles />
     </>
   )
 }

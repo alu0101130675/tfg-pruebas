@@ -19,6 +19,6 @@ export async function getConfigFile ({ fileName }) {
 }
 export async function getDataByFileName ({ fileName }) {
   // const { data } = await axios.get(`http://localhost:3001/data/dataFile${fileName}`)
-  const { data } = await axios.get('http://localhost:3001/data/dataFile/probando')
+  const { data } = await axios.get(`http://localhost:3001/data/dataFile${fileName}`)
   return data
 }

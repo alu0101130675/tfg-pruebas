@@ -6,7 +6,7 @@ export function DropDown ({ dropDownItems, anchor, dropDownName, side = 'left' }
   const [showDropdown, setShowDropdown] = useTrigger(false)
 
   return (
-    <div style={{ marginRight: '1rem', position: 'relative', alignSelf: 'center' }} onMouseEnter={setShowDropdown} onMouseLeave={setShowDropdown}>
+    <div className='dropdown-container' onMouseEnter={setShowDropdown} onMouseLeave={setShowDropdown}>
       <Link to={anchor} className='nav-dropdown'>{dropDownName}</Link>
       <div className={`dropdown ${side === 'right' ? 'right' : ''}`}>
         {showDropdown && dropDownItems.map(({ visual, action }) =>

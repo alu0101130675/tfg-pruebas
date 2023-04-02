@@ -2,9 +2,8 @@
 import './css/AddFileForm.css'
 import { allPairCombination } from '../logic/allPairCombination'
 export function AddFileForm ({ setConfig, setFile }) {
-  const reader = new FileReader()
-
   const handleSubmit = (e) => {
+    const reader = new FileReader()
     e.preventDefault()
     const file = e.target.elements.fileInput.files[0]
     const name = e.target.elements.fileName.value
@@ -39,7 +38,7 @@ export function AddFileForm ({ setConfig, setFile }) {
         accept='.csv'
         name='fileInput'
       />
-      <button type='submit'>Enviar</button>
+      <button type='submit'>Generar fichero de configuración</button>
     </form>
   )
 }

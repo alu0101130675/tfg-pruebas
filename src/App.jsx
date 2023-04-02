@@ -4,6 +4,7 @@ import { Options } from './components/DataOptions'
 import { InitiativeMap } from './components/InitiativeMap'
 import { Navbar } from './components/Navbar'
 import { Login } from './components/Login'
+import { AdminFiles } from './components/AdminFiles'
 
 function App () {
   return (
@@ -17,6 +18,7 @@ function App () {
           <Route path='/InitiativeMap' element={<InitiativeMap />} />
           <Route path='/postIniciative' element={<InitiativeMap />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/administrador' element={<AdminFiles />} />
         </Routes>
       </main>
     </>

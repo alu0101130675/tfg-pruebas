@@ -56,6 +56,10 @@ export function Navbar () {
             <div>
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>
+            {user.role === 'admin' &&
+              <div>
+                <Link to='/Administrador' className='nav-link'>Administrador</Link>
+              </div>}
           </div>
         </div>
         <HamburgerButton className='hamburger-icon' />
