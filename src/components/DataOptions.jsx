@@ -1,21 +1,19 @@
 import { useState } from 'react'
 import { axeFields } from '../hooks/axesFields'
 import { ChartSelector } from './ChartSelector'
-import { getAxes } from '../logic/getAxes'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
 import './css/DataOptions.css'
 import { AdminFiles } from './AdminFiles'
+import { useDataSet } from '../hooks/getData'
+import { useLocation } from 'react-router'
 
-export function Options ({ data, options }) {
-  // const { pathname } = useLocation()
-  // const { data, options, selectedFields, setAxes, setSelectedFields, axes } = useDataSet({ pathname })
-  const [axes, setAxes] = useState({ xField: 'Comunidad Autónoma', yField: 'Sexo' })
-  const [selectedFields, setSelectedFields] = useState([{
-    xField: getAxes({ data, field: axes.xField })
-  },
-  { yField: getAxes({ data, field: axes.yField }) }])
+export function Options () {
+  const { pathname } = useLocation()
+  const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
   const [chartSelected, setChartSelected] = useState('Gráfico de barras')
+
+  if (!data) return
   const fields = axeFields({ axes, filter: selectedFields })
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
 
