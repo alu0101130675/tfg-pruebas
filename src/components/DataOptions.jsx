@@ -13,7 +13,7 @@ export function Options () {
   const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
   const [chartSelected, setChartSelected] = useState('Gráfico de barras')
 
-  if (!data) return
+  if (!data) return <></>
   const fields = axeFields({ axes, filter: selectedFields })
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
 
