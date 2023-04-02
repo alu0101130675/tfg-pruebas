@@ -21,38 +21,42 @@ export function AdminFiles () {
   return (
     <>
       <AddFileForm setConfig={setConfig} setFile={setFile} />
-      <table onChange={(event) => handleTableSelects(event)}>
-        <thead className='thead-config'>
-          <tr>
-            <th>Campo 1</th>
-            <th>Campo 2</th>
-            <th>Grafica Recomendada</th>
-          </tr>
-        </thead>
-        <tbody>
-          {config?.map(([field1, field2], i) => {
-            return (
-              <tr className='tr-config' key={i}>
-                <th>{field1}</th>
-                <th>{field2}</th>
-                <th className='th-select'>
-                  <select id={i} className='chart-selector'>
-                    {CHARTOPTIONS.map(Chartoption => <option key={Chartoption}>{Chartoption}</option>)}
-                  </select>
-                </th>
+      {/* añadir lo de borrar ficheros que ya tenemos y eso */}
+      {file &&
+        <>
+          <table onChange={(event) => handleTableSelects(event)}>
+            <thead className='thead-config'>
+              <tr>
+                <th>Campo 1</th>
+                <th>Campo 2</th>
+                <th>Grafica Recomendada</th>
               </tr>
-            )
-          })}
-        </tbody>
+            </thead>
+            <tbody>
+              {config?.map(([field1, field2], i) => {
+                return (
+                  <tr className='tr-config' key={i}>
+                    <th>{field1}</th>
+                    <th>{field2}</th>
+                    <th className='th-select'>
+                      <select id={i} className='chart-selector'>
+                        {CHARTOPTIONS.map(Chartoption => <option key={Chartoption}>{Chartoption}</option>)}
+                      </select>
+                    </th>
+                  </tr>
+                )
+              })}
+            </tbody>
 
-      </table>
-      <button
-        type='button'
-        onClick={() => {
-          postFile({ name: file.name, token: user.token, documentData: file.documentData, config })
-        }}
-      >Enviar
-      </button>
+          </table>
+          <button
+            type='button'
+            onClick={() => {
+              postFile({ name: file.name, token: user.token, documentData: file.documentData, config })
+            }}
+          >Enviar
+          </button>
+        </>}
     </>
   )
 }

@@ -32,11 +32,13 @@ export function AddFileForm ({ setConfig, setFile }) {
         type='text'
         placeholder='Nombre del documento en base de datos'
         name='fileName'
+        required
       />
       <input
         type='file'
         accept='.csv'
         name='fileInput'
+        required
       />
       <button type='submit'>Generar fichero de configuración</button>
     </form>
