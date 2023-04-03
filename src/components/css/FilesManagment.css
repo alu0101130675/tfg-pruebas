@@ -1,5 +1,38 @@
-.li-file-list{
+.file-list{
   display: flex;
   justify-content: space-between;
   text-decoration: none;
+  margin-top: .3%;
+}
+.config-buttons{
+  display: flex;
+  gap:5%;
+}
+.files-list div:nth-of-type(even) {
+  background-color: aliceblue;
+}
+.delete-button{
+  background-color: rgb(178, 31, 31);
+  color:white;
+  font-size: 1.1rem;
+  border: 5px red solid;
+  border-radius: 8%;
+  cursor: pointer;
+}
+
+.update-button{
+  background-color: rgb(25, 78, 193);
+  color:white;
+  font-size: 1.1rem;
+  border: 5px rgb(25, 78, 193) solid;
+  border-radius: 8%;
+  cursor: pointer;
+}
+.update-button:hover{
+  transform: translateY(5px);
+  transition: .2s;
+  background-color: rgb(49, 140, 176);
+  border-color: rgb(49, 140, 176);
+
+
 }

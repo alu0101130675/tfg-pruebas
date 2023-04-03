@@ -15,6 +15,7 @@
  tr:nth-of-type(even),tr:nth-of-type(even) > th > select {
   background-color: rgb(231, 230, 230);
  }
+
  th{
   font-size: 1.01rem;
   padding: 0.5%;

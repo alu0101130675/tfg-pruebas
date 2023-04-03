@@ -7,7 +7,7 @@ export function ConfirmMessage ({ message, showMessage, action = null }) {
       </div>
       <div className='flex-buttons'>
         <button
-          className='yes-button'
+          className='accept-button'
           onClick={() => {
             action()
             showMessage()
@@ -16,7 +16,7 @@ export function ConfirmMessage ({ message, showMessage, action = null }) {
           Si
         </button>
         <button
-          className='no-button'
+          className='delete-button button-confirm'
           onClick={showMessage}
         >
           No

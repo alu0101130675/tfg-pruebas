@@ -13,19 +13,24 @@ export function FilesManagment () {
     })
   }, [])
   return (
-    <div>
+    <div className='files-list'>
       {files?.map(({ collectionName, _id }) => {
         return (
-          <div className='li-file-list' key={_id}>
+          <div className='file-list' key={_id}>
             <span>{collectionName}
             </span>
-            <button onClick={setShowDeleteMessage}>Eliminar</button>
-            {showDeleteMessage &&
-              <ConfirmMessage
-                message='¿Seguro que deseas eliminar los datos?'
-                showMessage={setShowDeleteMessage}
-                action={() => deleteFile({ id: _id, name: collectionName })}
-              />}
+            <div className='config-buttons'>
+              <button className='update-button' onClick={setShowDeleteMessage}>Actualizar</button>
+              <button className='delete-button' onClick={setShowDeleteMessage}>Eliminar</button>
+              {showDeleteMessage &&
+                <ConfirmMessage
+                  message='¿Seguro que deseas eliminar los datos?'
+                  showMessage={setShowDeleteMessage}
+                  action={() => deleteFile({ id: _id, name: collectionName })}
+                />}
+
+            </div>
+
           </div>
         )
       })}
