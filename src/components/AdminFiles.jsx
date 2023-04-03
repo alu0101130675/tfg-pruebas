@@ -4,11 +4,14 @@ import { CHARTOPTIONS } from '../consts'
 import { UserContext } from '../context/UserContext'
 import { postFile } from '../services/data'
 import './css/AdminFiles.css'
+import { FilesManagment } from './FilesManagment'
+import { useTrigger } from '../hooks/useTrigger'
 
 export function AdminFiles () {
   const [config, setConfig] = useState()
   const [file, setFile] = useState()
   const { user } = useContext(UserContext)
+  const [showPostMessage, setShowPostMessage] = useTrigger(false)
 
   const handleTableSelects = (event) => {
     const { id, value } = event.target
@@ -21,9 +24,9 @@ export function AdminFiles () {
   return (
     <>
       <AddFileForm setConfig={setConfig} setFile={setFile} />
-      {/* añadir lo de borrar ficheros que ya tenemos y eso */}
-      {file &&
-        <>
+      {showPostMessage && <h1>Fichero añadido</h1>}
+      {file
+        ? <>
           <table onChange={(event) => handleTableSelects(event)}>
             <thead className='thead-config'>
               <tr>
@@ -53,10 +56,14 @@ export function AdminFiles () {
             type='button'
             onClick={() => {
               postFile({ name: file.name, token: user.token, documentData: file.documentData, config })
+              setFile()
+              setConfig()
+              setShowPostMessage()
             }}
           >Enviar
           </button>
-        </>}
+          </>
+        : <FilesManagment />}
     </>
   )
 }

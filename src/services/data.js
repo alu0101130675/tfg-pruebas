@@ -9,7 +9,7 @@ export async function postFile ({ token, name, documentData, config }) {
     .post(`http://localhost:3001/data/${name}`, { documentData, config }, authentication)
   return data
 }
-export async function getFileNames () {
+export async function getFileNameWithoutId () {
   const { data } = await axios.get('http://localhost:3001/data/fileNames')
   return data
 }
@@ -18,7 +18,16 @@ export async function getConfigFile ({ fileName }) {
   return data
 }
 export async function getDataByFileName ({ fileName }) {
-  // const { data } = await axios.get(`http://localhost:3001/data/dataFile${fileName}`)
   const { data } = await axios.get(`http://localhost:3001/data/dataFile${fileName}`)
+  return data
+}
+export async function getFilesNames () {
+  const { data } = await axios.get('http://localhost:3001/data/configFiles')
+  console.log('que esta pasando', data)
+  return data
+}
+export async function deleteFile ({ id, name }) {
+  console.log('BORRANDO')
+  const { data } = await axios.delete(`http://localhost:3001/data/dataFile/${name}/${id}`)
   return data
 }

@@ -20,7 +20,6 @@ export function Login () {
     event.preventDefault()
     try {
       const response = loginFlag ? await login({ email, password }) : await signup({ email, password })
-      console.log(response)
       if (response.message) {
         setError(response.message)
         setEmail('')

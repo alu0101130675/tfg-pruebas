@@ -6,7 +6,7 @@ import { HamburgerButton } from './HamburgerButton'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
-import { getFileNames } from '../services/data'
+import { getFileNameWithoutId } from '../services/data'
 export function Navbar () {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
@@ -14,7 +14,7 @@ export function Navbar () {
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   const [files, setFiles] = useState([{ visual: 'Estamos subiendo los ficheros' }])
   useEffect(() => {
-    getFileNames()
+    getFileNameWithoutId()
       .then(d => {
         const fileList = d.map(({ collectionName }) => {
           return { visual: collectionName }
