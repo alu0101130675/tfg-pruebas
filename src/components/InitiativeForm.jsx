@@ -125,7 +125,7 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
       </div>
       {updateFlag &&
         <div className='pararel-buttons'>
-          <label htmlFor='validated'>Validado</label>
+          <label className='intiative-labels' htmlFor='validated'>Validada</label>
           <input
             required
             type='checkbox'
@@ -134,7 +134,7 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
             onChange={handleFormCheck}
             checked={LocationData.validated}
           />
-          <label htmlFor='active'>active</label>
+          <label htmlFor='active' className='intiative-labels'>Activa</label>
           <input
             required
             type='checkbox'

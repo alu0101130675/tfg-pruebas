@@ -13,15 +13,19 @@ export function AdminFiles () {
   const [file, setFile] = useState()
   const { user } = useContext(UserContext)
   const [showPostMessage, setShowPostMessage] = useTrigger(false)
-  // const [updateConfigFile, setUpdateConfigFile] = useTrigger(false)
   const [updateFileId, setUpdatefileId] = useState()
-  const handleOnClick = () => {
+  const handleOnClickSend = () => {
     if (file && config) {
       postFile({ name: file.name, token: user.token, documentData: file.documentData, config })
     } else {
-      // updateConfigFile({ id: updateFileId, body: config })
       updateConfigFile({ id: updateFileId, body: config })
     }
+    setFile()
+    setUpdatefileId()
+    setConfig()
+    setShowPostMessage()
+  }
+  const handleOnClickCancel = () => {
     setFile()
     setUpdatefileId()
     setConfig()
@@ -34,11 +38,20 @@ export function AdminFiles () {
       {config
         ? <>
           <ConfigTable config={config} setConfig={setConfig} />
-          <button
-            type='button'
-            onClick={handleOnClick}
-          >Enviar
-          </button>
+          <div className='pararel-buttons'>
+            <button
+              className='update-button'
+              type='button'
+              onClick={handleOnClickSend}
+            >Enviar
+            </button>
+            <button
+              type='button'
+              onClick={handleOnClickCancel}
+              className='delete-button'
+            >Cancelar
+            </button>
+          </div>
         </>
         : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} />}
     </>
