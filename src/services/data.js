@@ -13,8 +13,8 @@ export async function getFileNameWithoutId () {
   const { data } = await axios.get('http://localhost:3001/data/fileNames')
   return data
 }
-export async function getConfigFile ({ fileName }) {
-  const { data } = await axios.get(`http://localhost:3001/data/configField/${fileName}`)
+export async function getConfigFile ({ fileName, idFlag }) {
+  const { data } = await axios.get(`http://localhost:3001/data/configField/${fileName}/${idFlag}`)
   return data
 }
 export async function getDataByFileName ({ fileName }) {
@@ -23,11 +23,13 @@ export async function getDataByFileName ({ fileName }) {
 }
 export async function getFilesNames () {
   const { data } = await axios.get('http://localhost:3001/data/configFiles')
-  console.log('que esta pasando', data)
   return data
 }
 export async function deleteFile ({ id, name }) {
-  console.log('BORRANDO')
   const { data } = await axios.delete(`http://localhost:3001/data/dataFile/${name}/${id}`)
+  return data
+}
+export async function updateConfigFile ({ id, body }) {
+  const { data } = await axios.put(`http://localhost:3001/data/configFiles/${id}`, body)
   return data
 }

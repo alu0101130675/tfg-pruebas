@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { deleteFile, getFilesNames } from '../services/data'
+import { deleteFile, getConfigFile, getFilesNames } from '../services/data'
 import './css/FilesManagment.css'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
 
-export function FilesManagment () {
+export function FilesManagment ({ setConfig, setUpdatefileId }) {
   const [files, setFiles] = useState()
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   useEffect(() => {
@@ -12,6 +12,15 @@ export function FilesManagment () {
       setFiles(data)
     })
   }, [])
+  const handleUpdate = ({ collectionName }) => {
+    getConfigFile({ fileName: collectionName, idFlag: true })
+      .then(({ config, _id }) => {
+        setUpdatefileId(_id)
+        console.log('la idddddddddddddd:', _id)
+        setConfig(config)
+      })
+      .catch(e => console.log(e))
+  }
   return (
     <div className='files-list'>
       {files?.map(({ collectionName, _id }) => {
@@ -20,7 +29,7 @@ export function FilesManagment () {
             <span>{collectionName}
             </span>
             <div className='config-buttons'>
-              <button className='update-button' onClick={setShowDeleteMessage}>Actualizar</button>
+              <button className='update-button' onClick={() => handleUpdate({ collectionName })}>Actualizar</button>
               <button className='delete-button' onClick={setShowDeleteMessage}>Eliminar</button>
               {showDeleteMessage &&
                 <ConfirmMessage
