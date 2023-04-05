@@ -12,7 +12,6 @@ export function useDataSet ({ pathname }) {
         setData(data)
         const options = data[0] ? Object.getOwnPropertyNames(data[0]) : null
         setOptions(options)
-        console.log('axesProblem', getAxes({ data, field: options[0] }))
         setAxes({ xField: options[0], yField: options[1] })
         setSelectedFields([{
           xField: getAxes({ data, field: options[0] })

@@ -13,7 +13,7 @@ function App () {
   useEffect(() => {
     getFileNameWithoutId()
       .then((data) => {
-        data.lenght === 0 && setDefaultFiles(data)
+        data.lenght !== 0 && setDefaultFiles(data)
       })
   }, [])
   return (

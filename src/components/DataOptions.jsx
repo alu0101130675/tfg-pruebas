@@ -4,16 +4,17 @@ import { ChartSelector } from './ChartSelector'
 import { FieldsSelector } from './FieldsSelector'
 import { chartDate } from '../logic/chartDate'
 import './css/DataOptions.css'
-import { AdminFiles } from './AdminFiles'
 import { useDataSet } from '../hooks/getData'
 import { useLocation } from 'react-router'
+import { Loader } from './Loader'
+import { useChart } from '../hooks/useChart'
 
 export function Options () {
   const { pathname } = useLocation()
   const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
-  const [chartSelected, setChartSelected] = useState('Gráfico de barras')
+  const { chartSelected, setChartSelected } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
 
-  if (!data) return <></>
+  if (!data) return <Loader />
   const fields = axeFields({ axes, filter: selectedFields })
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
 

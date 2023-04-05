@@ -19,9 +19,12 @@ export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelect
   }
   const handleAxechange = (e, axeFlag) => {
     const x = e.target.value
+    if (x === axes.xField || x === axes.yField) {
+      return
+    }
     const auxObject = {}
     auxObject[axeFlag] = x
-    const newXField = Object.assign(axes, auxObject)
+    const newXField = Object.assign({}, axes, auxObject)
     setAxes(newXField)
     if (axeFlag === 'xField') {
       const [, selectedY] = selectedFields // CREO QUE LA CONT ESTA Y LA DE ABAJO SE PUEDEN AHORRAR POR [...,{}]

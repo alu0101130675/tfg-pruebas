@@ -16,7 +16,6 @@ export function FilesManagment ({ setConfig, setUpdatefileId }) {
     getConfigFile({ fileName: collectionName, idFlag: true })
       .then(({ config, _id }) => {
         setUpdatefileId(_id)
-        console.log('la idddddddddddddd:', _id)
         setConfig(config)
       })
       .catch(e => console.log(e))
@@ -37,9 +36,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId }) {
                   showMessage={setShowDeleteMessage}
                   action={() => deleteFile({ id: _id, name: collectionName })}
                 />}
-
             </div>
-
           </div>
         )
       })}
