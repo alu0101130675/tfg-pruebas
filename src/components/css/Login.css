@@ -17,8 +17,8 @@
   flex: unset;
   padding-left: 2%;
 }
-.form-container> input :focus{
-  background-color: brown;
+.form-container > input:focus{
+  border-color: blue;
 }
 .login-button{
   width: 27.5%;
@@ -45,4 +45,10 @@ margin-bottom: 60px;
 }
 .error{
   color:red;
+}
+@media only screen and (max-width:650px) {
+  .form-container > input{
+    width: 80%;
+  }
+  
 }

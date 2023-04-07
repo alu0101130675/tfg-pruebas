@@ -14,7 +14,7 @@ export function HorizontalBarChart ({ dataset, keyFields, stackFlag = undefined 
   const keys = Object.keys(keyFields)
   return (
     <ResponsiveContainer
-      width='100%' aspect={3 / 1}
+      width='100%' aspect={2 / 1}
     >
       <BarChart
         data={dataset}
@@ -22,7 +22,7 @@ export function HorizontalBarChart ({ dataset, keyFields, stackFlag = undefined 
       >
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis type='number' />
-        <YAxis type='category' dataKey={dataset[0].xField} />
+        <YAxis type='category' dataKey={dataset[0].xField} tickFormatter={(valie) => valie.substring(0, 5) + '...'} />
         <Tooltip />
         <Legend />
         {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}

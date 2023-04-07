@@ -10,7 +10,7 @@ import { getFileNameWithoutId } from '../services/data'
 export function Navbar () {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
-  const [toogleBar, setToogleBar] = useState(false)
+  const [toogleBar, setToogleBar] = useTrigger(false)
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   const [files, setFiles] = useState([{ visual: 'Estamos subiendo los ficheros' }])
   useEffect(() => {
@@ -52,7 +52,12 @@ export function Navbar () {
             />
           </div>
           <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
-            <DropDown dropDownItems={files} anchor='/' dropDownName='Grafica' />
+            <DropDown dropDownItems={files} anchor={window.outerWidth < 600 ? '#' : '/'} dropDownName='Grafica' />
+            {window.outerWidth < 600 && <DropDown
+              dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
+              anchor={user.token != null ? '#' : '/login'}
+              dropDownName='Mi cuenta'
+                                        />}
             <div>
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>
@@ -62,13 +67,13 @@ export function Navbar () {
               </div>}
           </div>
         </div>
-        <HamburgerButton className='hamburger-icon' />
-        <DropDown
+        <HamburgerButton setToogleBar={setToogleBar} className='hamburger-icon' />
+        {window.outerWidth > 600 && <DropDown
           dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
           anchor='/login'
           dropDownName='Mi cuenta'
           side='right'
-        />
+                                    />}
       </nav>
       {showDeleteMessage && <ConfirmMessage message='¿Seguro que deseas eliminar la cuenta?' showMessage={setShowDeleteMessage} />}
     </>

@@ -1,5 +1,4 @@
-import { ToolTips } from 'rechart'
-import { ResponsiveContainer, PieChart, Pie, Legend, Cell, LabelList } from 'recharts'
+import { ResponsiveContainer, PieChart, Pie, Legend, Cell, LabelList, Tooltip } from 'recharts'
 import { COLORS } from '../consts'
 // HACER INTERFAZ PARA LA DE QUESO COMPLETA PORQUE LOS CAMPOS SOLO PUEDEN SER DOS
 export const CircularChart = ({ dataset, keyFields }) => {
@@ -13,10 +12,9 @@ export const CircularChart = ({ dataset, keyFields }) => {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
             <LabelList dataKey={value[0]} position='insideTop' />
-
           </Pie>
           <Legend />
-          <ToolTips />
+          <Tooltip />
         </PieChart>
       </ResponsiveContainer>
     </div>
