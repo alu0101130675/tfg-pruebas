@@ -131,7 +131,11 @@ export function InitiativeMap () {
                   }}
                 >
                   <Popup>
-                    Nombre{initiativeName}. <br /> Contacto:.
+                    <label>Nombre: {initiativeName}</label>
+                    <br />
+                    <label>Contacto: {contacto}</label>
+                    <br />
+                    Link:<a href={link}>{link}</a>
                   </Popup>
                 </Marker>
               )
