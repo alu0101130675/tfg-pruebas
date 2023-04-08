@@ -6,24 +6,19 @@ import { HamburgerButton } from './HamburgerButton'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
-import { getFileNameWithoutId } from '../services/data'
-export function Navbar () {
+export function Navbar ({ defaultFiles }) {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
   const [toogleBar, setToogleBar] = useTrigger(false)
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   const [files, setFiles] = useState([{ visual: 'Estamos subiendo los ficheros' }])
   useEffect(() => {
-    getFileNameWithoutId()
-      .then(d => {
-        const fileList = d.map(({ collectionName }) => {
-          return { visual: collectionName }
-        }
-        )
-        setFiles(fileList)
-      })
-      .catch(err => console.log(err))
-  }, [])
+    const fileList = defaultFiles?.map(({ collectionName }) => {
+      return { visual: collectionName }
+    })
+    console.log('fileList', fileList)
+    fileList && setFiles(fileList)
+  }, [defaultFiles])
   const logOut = () => {
     setToken({ token: null })
     window.sessionStorage.removeItem('token')

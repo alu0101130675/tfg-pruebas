@@ -5,6 +5,7 @@
   text-align: end;
   align-items: end;
   width: auto;
+  margin-bottom: 2%;
 }
 .navbar-items-logo { 
   display: flex;

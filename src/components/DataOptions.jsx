@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { axeFields } from '../hooks/axesFields'
 import { ChartSelector } from './ChartSelector'
 import { FieldsSelector } from './FieldsSelector'
@@ -20,7 +19,7 @@ export function Options () {
 
   return (
     <>
-      <h1 className='page-title'>Visualizador de datos</h1>
+      <h1 className='page-title'>{pathname}</h1>
       <h2>{axes.xField} - {axes.yField} </h2>
       <div className='flex-horizontal'>
         <ChartSelector

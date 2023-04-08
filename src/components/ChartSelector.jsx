@@ -14,6 +14,7 @@ export function ChartSelector ({
       {chartSelected === 'Gráfico de barras apiladas' && <Chart dataset={dataSet} stackFlag='a' keyFields={selectedFields[1].yField} />}
       {chartSelected === 'Gráfica circular' && <CircularChart dataset={dataSet} keyFields={selectedFields[1].yField} />}
       {chartSelected === 'Gráfico de barras horizontal' && <HorizontalBarChart dataset={dataSet} keyFields={selectedFields[1].yField} />}
+      {chartSelected === 'Gráfico de barras horizontal apiladas' && <HorizontalBarChart stackFlag='a' dataset={dataSet} keyFields={selectedFields[1].yField} />}
 
       <ChartSelect
         chartSelected={chartSelected}

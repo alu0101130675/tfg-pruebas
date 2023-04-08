@@ -19,7 +19,7 @@ function App () {
   return (
     <>
       <header className='header'>
-        <Navbar />
+        <Navbar defaultFiles={defaultFiles} />
       </header>
       <main>
         <Routes>
