@@ -75,7 +75,7 @@ export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelect
                 const column = j % 2 === 0 ? 1 : 2
                 const selectField = field[axe][key] // valor si es true o false
                 return (
-                  <label key={key} style={{ gridColumn: column }}>
+                  <label className='field' key={key} style={{ gridColumn: column }}>
                     <input name={axe} type='checkbox' checked={selectField} value={key} onChange={handleChange} />
                     {key}
                   </label>

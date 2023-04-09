@@ -4,7 +4,11 @@
   column-gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
- 
-
-
+}
+.title-chart{
+margin-bottom: 0;
+}
+.field-selector{
+  display: none;
+  background-color: red;
 }

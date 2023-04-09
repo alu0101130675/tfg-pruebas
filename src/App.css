@@ -20,10 +20,3 @@ text-align: left ;
 font-weight: 100;
 padding: 2%
 }
-
-label{
-width: fit-content;
-height: 100%;}
-label:hover{
-  background-color: rgba(0, 81, 153, 0.363);
-}

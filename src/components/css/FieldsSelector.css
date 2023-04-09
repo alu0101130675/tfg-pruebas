@@ -1,29 +1,28 @@
 .select-space{
   display: grid;
   grid-template-columns: repeat(2, 49.5%, minmax(200px,1fr));
-
-  /*grid-template-columns: 49.5% 49.5%;*/
   gap: 1%;
   height: fit-content;
   width: auto;
   margin: 5%;
   padding: 4%;
-  border-right: 1px solid rgb(181, 181, 181);
+  z-index: 2;
 }
 .selector-section
 {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  /*grid-template-columns: 50% 50%;*/
-  height: fit-content;
-  gap:1%;
-  width: 100%;
- border: 2px solid black;
-
- margin-top: 7%;
-
+  position: absolute;
+  top: 5;
+  left: 0;
+  width: 500%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 7%;
+  z-index: 2;
 }
-.divider-margin{
-  margin: 2%;
+.field{
+width: fit-content;
+height: 100%;}
+.field:hover{
+  background-color: rgba(0, 81, 153, 0.363);
 }
