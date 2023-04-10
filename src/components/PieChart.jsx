@@ -1,6 +1,5 @@
 import { ResponsiveContainer, PieChart, Pie, Legend, Cell, LabelList, Tooltip } from 'recharts'
 import { COLORS } from '../consts'
-// HACER INTERFAZ PARA LA DE QUESO COMPLETA PORQUE LOS CAMPOS SOLO PUEDEN SER DOS
 export const CircularChart = ({ dataset, keyFields }) => {
   const value = Object.entries(keyFields).find(([key, value]) => value) // devuelve [clave,true]
   return (

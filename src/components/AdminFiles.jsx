@@ -6,7 +6,7 @@ import './css/AdminFiles.css'
 import { FilesManagment } from './FilesManagment'
 import { ConfigTable } from './ConfigTable'
 
-export function AdminFiles () {
+function AdminFiles () {
   const [config, setConfig] = useState()
   const [file, setFile] = useState()
   const { user } = useContext(UserContext)
@@ -61,3 +61,4 @@ export function AdminFiles () {
     </>
   )
 }
+export default AdminFiles

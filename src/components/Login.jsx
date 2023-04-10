@@ -4,7 +4,7 @@ import './css/Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { useTrigger } from '../hooks/useTrigger'
-export function Login () {
+function Login () {
   const navigate = useNavigate()
   const [loginFlag, setLoginFlag] = useTrigger(true)
   const [email, setEmail] = useState('')
@@ -65,3 +65,4 @@ export function Login () {
 
   )
 }
+export default Login

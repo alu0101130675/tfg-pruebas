@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import validator from 'validator'
+// import validator from 'validator'
 import { sendInitiative, deleteIniciative, updateIniciative } from '../services/initiatives'
 import './css/InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
 
-export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag, setUpdateFlag }) {
+function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag, setUpdateFlag }) {
   const [confirmDelete, setConfirmDelete] = useTrigger(false)
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
@@ -184,3 +184,4 @@ export function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationD
 
   )
 }
+export default InitiativeForm

@@ -1,6 +1,5 @@
 import axios from 'axios'
-const basicUrl = 'http://localhost:3001/initiative'
-
+const basicUrl = 'https://women-info-backend.onrender.com/initiative'
 export async function sendInitiative (initiative, { token }) {
   const config = {
     headers: {
@@ -16,7 +15,7 @@ export async function getAllIniciatives () {
 }
 export async function getFilteredIniciatives ({ filters }) {
   const { comunidadAutonoma, active, validated } = filters
-  const response = await axios.get(`http://localhost:3001/initiative/${comunidadAutonoma}/${active}/${validated}`)
+  const response = await axios.get(`https://women-info-backend.onrender.com/initiative/${comunidadAutonoma}/${active}/${validated}`)
   return response
 }
 export async function deleteIniciative ({ id, token }) {
@@ -28,11 +27,11 @@ export async function deleteIniciative ({ id, token }) {
       id
     }
   }
-  const response = await axios.delete('http://localhost:3001/initiative', config)
+  const response = await axios.delete('https://women-info-backend.onrender.com/initiative', config)
   return response
 }
 export async function updateIniciative ({ id, token, validated, initiativeName, active, link, contacto }) {
-  axios.patch('http://localhost:3001/initiative', { id, validated, active, initiativeName, link, contacto }, { headers: { Authorization: 'Bearer ' + token } })
+  axios.patch('https://women-info-backend.onrender.com/initiative', { id, validated, active, initiativeName, link, contacto }, { headers: { Authorization: 'Bearer ' + token } })
     .then(response => {
     })
     .catch(error => {

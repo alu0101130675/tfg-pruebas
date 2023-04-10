@@ -21,7 +21,7 @@ export function Options () {
 
   return (
     <>
-      <h1 className='page-title'>{pathname}</h1>
+      <h1 className='page-title'>{pathname.substring(1, pathname.length)}</h1>
       <h2 className='title-chart'>{axes.xField} - {axes.yField} </h2>
       <GearButton setShowFieldSelector={setShowFieldSelector}>
         {showFieldSelector && <FieldsSelector

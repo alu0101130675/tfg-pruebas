@@ -6,30 +6,30 @@ export async function postFile ({ token, name, documentData, config }) {
     }
   }
   const { data } = await axios
-    .post(`http://localhost:3001/data/${name}`, { documentData, config }, authentication)
+    .post(`https://women-info-backend.onrender.com/data/${name}`, { documentData, config }, authentication)
   return data
 }
 export async function getFileNameWithoutId () {
-  const { data } = await axios.get('http://localhost:3001/data/fileNames')
+  const { data } = await axios.get('https://women-info-backend.onrender.com/data/fileNames')
   return data
 }
 export async function getConfigFile ({ fileName, idFlag }) {
-  const { data } = await axios.get(`http://localhost:3001/data/configField/${fileName}/${idFlag}`)
+  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/configField/${fileName}/${idFlag}`)
   return data
 }
 export async function getDataByFileName ({ fileName }) {
-  const { data } = await axios.get(`http://localhost:3001/data/dataFile${fileName}`)
+  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/dataFile${fileName}`)
   return data
 }
 export async function getFilesNames () {
-  const { data } = await axios.get('http://localhost:3001/data/configFiles')
+  const { data } = await axios.get('https://women-info-backend.onrender.com/data/configFiles')
   return data
 }
 export async function deleteFile ({ id, name }) {
-  const { data } = await axios.delete(`http://localhost:3001/data/dataFile/${name}/${id}`)
+  const { data } = await axios.delete(`https://women-info-backend.onrender.com/data/dataFile/${name}/${id}`)
   return data
 }
 export async function updateConfigFile ({ id, body }) {
-  const { data } = await axios.put(`http://localhost:3001/data/configFiles/${id}`, body)
+  const { data } = await axios.put(`https://women-info-backend.onrender.com/data/configFiles/${id}`, body)
   return data
 }

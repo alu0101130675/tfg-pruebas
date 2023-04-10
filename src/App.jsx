@@ -1,13 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router'
 import './App.css'
 import { Options } from './components/DataOptions'
-import { InitiativeMap } from './components/InitiativeMap'
 import { Navbar } from './components/Navbar'
-import { Login } from './components/Login'
-import { AdminFiles } from './components/AdminFiles'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { getFileNameWithoutId } from './services/data'
-
+const AdminFiles = lazy(() => import('./components/AdminFiles'))
+const Login = lazy(() => import('./components/Login'))
+const InitiativeMap = lazy(() => import('./components/InitiativeMap'))
 function App () {
   const [defaultFiles, setDefaultFiles] = useState()
   useEffect(() => {
@@ -27,11 +26,29 @@ function App () {
           defaultFiles.map(({ collectionName }) =>
             <Route key={collectionName} path={`/${collectionName}`} element={<Options />} />
           )}
-          <Route path='/InitiativeMap' element={<InitiativeMap />} />
+          <Route
+            path='/InitiativeMap' element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <InitiativeMap />
+              </Suspense>
+          }
+          />
           <Route path='/' element={defaultFiles && <Navigate to={defaultFiles[0].collectionName} replace />} />
           <Route path='/postIniciative' element={<InitiativeMap />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/administrador' element={<AdminFiles />} />
+          <Route
+            path='/login' element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Login />
+              </Suspense>
+          }
+          />
+          <Route
+            path='/administrador' element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <AdminFiles />
+              </Suspense>
+              }
+          />
         </Routes>
       </main>
     </>

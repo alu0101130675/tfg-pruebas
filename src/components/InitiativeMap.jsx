@@ -1,9 +1,8 @@
 
 import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from 'react-leaflet'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, lazy, Suspense } from 'react'
 import './css/InitiativeMap.css'
 import L from 'leaflet'
-import { InitiativeForm } from './InitiativeForm'
 import { location } from '../services/openStreetMap'
 import { Link } from 'react-router-dom'
 import { getFilteredIniciatives } from '../services/initiatives'
@@ -11,6 +10,7 @@ import { MapFilter } from './MapFilter'
 import { COMUNIDADES_AUTONOMAS } from '../consts'
 import { ToogleCheck } from './ToogleCheck'
 import { UserContext } from '../context/UserContext'
+const InitiativeForm = lazy(() => import('./InitiativeForm'))
 const icon = {
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   iconSize: [25, 41],
@@ -20,7 +20,7 @@ const icon = {
   shadowSize: [41, 41],
   shadowAnchor: [12, 41]
 }
-export function InitiativeMap () {
+function InitiativeMap () {
   const { user } = useContext(UserContext)
   const redIcon = L.icon({
     ...icon,
@@ -149,14 +149,17 @@ export function InitiativeMap () {
 
         </MapContainer>
         {formFlag &&
-          <InitiativeForm
-            className='form'
-            LocationData={LocationData}
-            setInitiativeAdded={setInitiativeAdded}
-            setLocationData={setLocationData}
-            updateFlag={updateFlag}
-            setUpdateFlag={setUpdateFlag}
-          />}
+          <Suspense fallback={<div>Loading...</div>}>
+            <InitiativeForm
+              className='form'
+              LocationData={LocationData}
+              setInitiativeAdded={setInitiativeAdded}
+              setLocationData={setLocationData}
+              updateFlag={updateFlag}
+              setUpdateFlag={setUpdateFlag}
+            />
+          </Suspense>}
+
       </div>
       <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
         {formFlag
@@ -168,3 +171,4 @@ export function InitiativeMap () {
     </>
   )
 }
+export default InitiativeMap
