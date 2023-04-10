@@ -14,7 +14,7 @@ export function HorizontalBarChart ({ dataset, keyFields, stackFlag = undefined 
   const keys = Object.keys(keyFields)
   return (
     <ResponsiveContainer
-      width='100%' aspect={2 / 1}
+      width='100%' aspect={window.outerWidth < 600 ? 1 / 1 : 2 / 1}
     >
       <BarChart
         data={dataset}

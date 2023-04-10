@@ -26,3 +26,10 @@ height: 100%;}
 .field:hover{
   background-color: rgba(0, 81, 153, 0.363);
 }
+@media only screen and (max-width:650px){
+  .selector-section
+  {
+    width: 1700%;
+  }
+  
+}

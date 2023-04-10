@@ -15,7 +15,7 @@ export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
   const keys = Object.keys(keyFields)
   return (
     <ResponsiveContainer
-      width='100%' aspect={3 / 1}
+      width='100%' aspect={window.outerWidth < 600 ? 1 / 1 : 3 / 1}
     >
       <BarChart
         data={dataset}
