@@ -47,8 +47,7 @@ margin-bottom: 60px;
   color:red;
 }
 @media only screen and (max-width:650px) {
-  .form-container > input{
+  .login-button,.form-container > input{
     width: 80%;
-  }
-  
+  } 
 }

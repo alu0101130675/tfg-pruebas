@@ -12,14 +12,19 @@
   background-color: aliceblue;
 }
 .delete-button{
-  background-color: rgb(178, 31, 31);
-  color:white;
-  font-size: 1.1rem;
-  border: 5px red solid;
-  border-radius: 8%;
+  color: white;
   cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  border: 5px solid red;
+  border-radius: 8%;
 }
-
+.delete-button:hover{
+  transition: transform .2s;
+  transform: translateY(4px);
+  background-color: rgb(97, 2, 2);
+  border: 4px solid rgb(97, 2, 2);
+}
 .update-button{
   background-color: rgb(25, 78, 193);
   color:white;

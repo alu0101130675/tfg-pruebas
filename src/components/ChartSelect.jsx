@@ -1,9 +1,10 @@
 import { CHARTOPTIONS } from '../consts'
+import './css/ChartSelect.css'
 export function ChartSelect ({ chartSelected, setChartSelected, selectedFields, setSelectedFields }) {
   return (
     <label>
-      Seleccione tipo de grafica:
       <select
+        className='chart-select'
         name='grafica' id='grafica' value={chartSelected} onChange={(e) => {
           const newChartSelected = e.target.value
           if (newChartSelected === 'Gráfica circular') {
