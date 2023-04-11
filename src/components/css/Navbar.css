@@ -30,7 +30,8 @@ img{
 
 .nav-link {
   position: relative;
-  text-decoration: none;
+  text-decoration: none; 
+  color:black
 }
 
 .nav-link::after {

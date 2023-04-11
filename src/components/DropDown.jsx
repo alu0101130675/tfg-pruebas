@@ -9,10 +9,10 @@ export function DropDown ({ dropDownItems, anchor, dropDownName, side = 'left' }
     <div className='dropdown-container' onMouseEnter={setShowDropdown} onMouseLeave={setShowDropdown}>
       <Link to={anchor} className='nav-dropdown'>{dropDownName}</Link>
       <div className={`dropdown ${side === 'right' ? 'right' : ''}`}>
-        {showDropdown && dropDownItems.map(({ visual, action }) =>
+        {showDropdown && dropDownItems.map(({ visual, action, navigation }) =>
           action
-            ? <Link key={visual} to={visual} className='dropdown-item' onClick={action}>{visual}</Link>
-            : <Link key={visual} to={visual} className='dropdown-item'>{visual}</Link>
+            ? <Link key={visual} to={navigation} className='dropdown-item' onClick={action}>{visual}</Link>
+            : <Link key={visual} to={navigation} className='dropdown-item'>{visual}</Link>
         )}
       </div>
     </div>

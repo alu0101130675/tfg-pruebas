@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  width: 100%;
 }
 .map-link:hover{
   font-size: 1.2em;

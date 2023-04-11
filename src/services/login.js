@@ -17,3 +17,13 @@ export async function checkRole (token) {
   const { data } = await axios.get('https://women-info-backend.onrender.com/user/role', config)
   return data
 }
+export async function deleteAccount (credentials) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${credentials}`
+    }
+  }
+  const { data } = await axios.delete('https://women-info-backend.onrender.com/user', config)
+  console.log('erspuesa', data)
+  return data
+}

@@ -29,7 +29,7 @@ function InitiativeMap () {
   const blueIcon = L.icon({
     ...icon
   })
-  const [filters, setFilters] = useState({ comunidadAutonoma: 'Todas', active: true, validated: false })
+  const [filters, setFilters] = useState({ comunidadAutonoma: 'Todas', active: true, validated: true })
   const [position, setPosition] = useState([41.0, -4])
   const [updateFlag, setUpdateFlag] = useState(false)
   const [initiatives, setInitiatives] = useState([])

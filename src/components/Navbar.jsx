@@ -6,6 +6,7 @@ import { HamburgerButton } from './HamburgerButton'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
+import { deleteAccount } from '../services/login'
 export function Navbar ({ defaultFiles }) {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
@@ -14,7 +15,10 @@ export function Navbar ({ defaultFiles }) {
   const [files, setFiles] = useState([{ visual: 'Estamos subiendo los ficheros' }])
   useEffect(() => {
     const fileList = defaultFiles?.map(({ collectionName }) => {
-      return { visual: collectionName }
+      return {
+        visual: collectionName,
+        navigation: collectionName
+      }
     })
     console.log('fileList', fileList)
     fileList && setFiles(fileList)
@@ -29,11 +33,13 @@ export function Navbar ({ defaultFiles }) {
   const LOGGED_OPTIONS = [
     {
       visual: 'Eliminar Cuenta',
-      action: setShowDeleteMessage
+      action: setShowDeleteMessage,
+      navigation: '#'
     },
     {
       visual: 'Cerrar Sesión',
-      action: logOut
+      action: logOut,
+      navigation: '#'
     }]
 
   return (
@@ -70,7 +76,12 @@ export function Navbar ({ defaultFiles }) {
           side='right'
                                     />}
       </nav>
-      {showDeleteMessage && <ConfirmMessage message='¿Seguro que deseas eliminar la cuenta?' showMessage={setShowDeleteMessage} />}
+      {showDeleteMessage &&
+        <ConfirmMessage
+          message='¿Seguro que deseas eliminar la cuenta?'
+          showMessage={setShowDeleteMessage}
+          action={() => { deleteAccount(user.token).then(res => console.log(res)).catch(e => console.log(e)) }}
+        />}
     </>
 
   )

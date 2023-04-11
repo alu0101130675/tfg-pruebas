@@ -4,6 +4,20 @@
   align-items: center;
   background-color: white;
 }
+.delete-button{
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  border: 5px solid red;
+  border-radius: 8%;
+}
+.delete-button:hover{
+  transition: transform .2s;
+  transform: translateY(4px);
+  background-color: rgb(97, 2, 2);
+  border: 4px solid rgb(97, 2, 2);
+}
 .accept-button{
   background-color: green;
   color:white;
@@ -11,6 +25,12 @@
   width: 30%;
   border: 5px green solid;
   border-radius: 8%;
+}
+.accept-button:hover{
+  background-color: rgb(28, 99, 28);
+  border-color: rgb(28, 99, 28);
+  transform: translateY(4px);
+  transition: transform .2s ;
 }
 .button-confirm{
   width: 30%;
