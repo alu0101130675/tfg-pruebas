@@ -13,9 +13,6 @@ import { useTrigger } from '../hooks/useTrigger'
 export function Options () {
   const { pathname } = useLocation()
   const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
-  console.log('opciones', options)
-  console.log('selectedFields', selectedFields)
-
   const { chartSelected, setChartSelected } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
   const [showFieldSelector, setShowFieldSelector] = useTrigger(false)
   if (!data) return <Loader />

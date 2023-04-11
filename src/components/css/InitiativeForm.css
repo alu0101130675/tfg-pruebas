@@ -7,7 +7,7 @@
   height: 100%;
   gap:8%;
 }
-input{
+.form-input{
   border: none;
   border-bottom: 1px solid black;
   outline: none; /* remove the default focus outline */
@@ -20,7 +20,7 @@ input{
     flex-direction: column;
     height: 100%;
   }
-  
+
 .submit-button{
   width: 80%;
   height: 50%;

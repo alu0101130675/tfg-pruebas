@@ -20,7 +20,6 @@ export function Navbar ({ defaultFiles }) {
         navigation: collectionName
       }
     })
-    console.log('fileList', fileList)
     fileList && setFiles(fileList)
   }, [defaultFiles])
   const logOut = () => {
