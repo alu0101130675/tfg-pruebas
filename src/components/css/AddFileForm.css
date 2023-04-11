@@ -1,11 +1,13 @@
 .post-form {
   display: flex;
+  flex-wrap: wrap;
   gap:5%;
   width: 100%;
   margin-top: 5%;
   margin-bottom: 5%;
 }
 .post-form > button{
+  margin-top: 2%;
   background-color: black;
   flex: 1;
   border-radius: 2.5%;
@@ -22,6 +24,7 @@
   border-color: blue;
 }
 .form-input{
+  margin-bottom: 2% ;
   border: none;
   border-bottom: 1px solid black;
   outline: none; /* remove the default focus outline */

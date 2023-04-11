@@ -3,6 +3,7 @@
   justify-content: space-between;
   text-decoration: none;
   margin-top: .3%;
+  gap: 3%;
   width: 100%;
 }
 .config-buttons{
