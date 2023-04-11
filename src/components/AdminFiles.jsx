@@ -36,7 +36,7 @@ function AdminFiles () {
     setShowPostMessage()
   }
   return (
-    <>
+    <div>
       <AddFileForm setConfig={setConfig} setFile={setFile} />
       {showPostMessage && <h1>{showPostMessage}</h1>}
       {config
@@ -58,7 +58,7 @@ function AdminFiles () {
           </div>
           </>
         : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} />}
-    </>
+    </div>
   )
 }
 export default AdminFiles

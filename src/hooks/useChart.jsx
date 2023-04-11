@@ -4,7 +4,6 @@ import { findDefaultChart } from '../logic/findDefaultChart'
 export function useChart ({ pathname, selectedFields, axes }) {
   const [chartSelected, setChartSelected] = useState('Gráfico de barras')
   const [configFile, setConfigFile] = useState()
-  console.log(axes)
 
   useEffect(() => {
     const fileName = pathname.slice(1, pathname.lenght)
@@ -13,7 +12,6 @@ export function useChart ({ pathname, selectedFields, axes }) {
     }).catch(e => console.log(e))
   }, [pathname])
   useEffect(() => {
-    console.log('yupeeeeeeeeeeeeeeeeeeeeee')
     const chart = findDefaultChart({ configFile, selectedFields })
     chart && setChartSelected(chart)
   }, [axes])

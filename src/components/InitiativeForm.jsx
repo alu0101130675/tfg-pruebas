@@ -83,6 +83,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
       <div className='form-field'>
         <label htmlFor='contacto'>Email</label>
         <input
+          className='form-input'
           type='email'
           id='contacto'
           name='contacto'
@@ -94,6 +95,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
       <div className='form-field'>
         <label htmlFor='initiative-name'>Nombre de la iniciativa</label>
         <input
+          className='form-input'
           type='text'
           id='initiativeName'
           name='initiativeName'
@@ -116,6 +118,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
       <div className='form-field'>
         <label htmlFor='link'>Link</label>
         <input
+          className='form-input'
           type='url'
           id='link'
           name='link'
@@ -127,6 +130,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
         <div className='pararel-buttons'>
           <label className='intiative-labels' htmlFor='validated'>Validada</label>
           <input
+            className='form-input'
             required
             type='checkbox'
             id='validated'
@@ -137,6 +141,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
           <label htmlFor='active' className='intiative-labels'>Activa</label>
           <input
             required
+            className='form-input'
             type='checkbox'
             id='active'
             name='active'

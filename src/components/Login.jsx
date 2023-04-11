@@ -42,8 +42,8 @@ function Login () {
       <h1>{loginFlag ? 'Log in' : 'Sign up'} to Women Info</h1>
       {error && <h3 className='error'>{error}</h3>}
       <form className='form-container' onSubmit={(event) => handleLogin(event)}>
-        <input name='email' placeholder='Email' type='email' value={email} onChange={({ target }) => setEmail(target.value)} />
-        <input autoFocus type='password' placeholder='Password' value={password} onChange={({ target }) => setPassword(target.value)} />
+        <input autoFocus name='email' placeholder='Email' type='email' value={email} onChange={({ target }) => setEmail(target.value)} />
+        <input type='password' placeholder='Password' value={password} onChange={({ target }) => setPassword(target.value)} />
         <button className='login-button'>{loginFlag ? 'Log in' : 'Sign up'}</button>
         <div>
           ¿{loginFlag

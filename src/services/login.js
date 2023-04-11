@@ -5,7 +5,6 @@ export async function login (credentials) {
 }
 export async function signup (credentials) {
   const { data } = await axios.post('https://women-info-backend.onrender.com/user', credentials)
-  console.log('sign up response', { data })
   return data
 }
 export async function checkRole (token) {
@@ -24,6 +23,5 @@ export async function deleteAccount (credentials) {
     }
   }
   const { data } = await axios.delete('https://women-info-backend.onrender.com/user', config)
-  console.log('erspuesa', data)
   return data
 }

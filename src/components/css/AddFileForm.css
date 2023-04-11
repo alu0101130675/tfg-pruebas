@@ -21,3 +21,9 @@
   background-color: blue;
   border-color: blue;
 }
+.form-input{
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none; /* remove the default focus outline */
+  flex:1
+  }

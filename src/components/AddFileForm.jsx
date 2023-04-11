@@ -29,6 +29,7 @@ export function AddFileForm ({ setConfig, setFile }) {
   return (
     <form className='post-form' onSubmit={handleSubmit}>
       <input
+        className='form-input'
         type='text'
         placeholder='Nombre del documento en base de datos'
         name='fileName'
