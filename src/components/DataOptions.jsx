@@ -13,6 +13,9 @@ import { useTrigger } from '../hooks/useTrigger'
 export function Options () {
   const { pathname } = useLocation()
   const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
+  console.log('opciones', options)
+  console.log('selectedFields', selectedFields)
+
   const { chartSelected, setChartSelected } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
   const [showFieldSelector, setShowFieldSelector] = useTrigger(false)
   if (!data) return <Loader />
@@ -35,13 +38,15 @@ export function Options () {
                               />}
       </GearButton>
       <div className='flex-horizontal'>
-        <ChartSelector
-          dataSet={dataSet}
-          selectedFields={selectedFields}
-          setSelectedFields={setSelectedFields}
-          setChartSelected={setChartSelected}
-          chartSelected={chartSelected}
-        />
+        {dataSet.length === 0
+          ? <h1 className='error'> Seleccione como minimo un campo</h1>
+          : <ChartSelector
+              dataSet={dataSet}
+              selectedFields={selectedFields}
+              setSelectedFields={setSelectedFields}
+              setChartSelected={setChartSelected}
+              chartSelected={chartSelected}
+            />}
       </div>
 
     </>

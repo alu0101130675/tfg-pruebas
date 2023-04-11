@@ -9,7 +9,6 @@ function Login () {
   const [loginFlag, setLoginFlag] = useTrigger(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [user, setToken] = useState(null)
   const { _, setToken } = useContext(UserContext)
   const [error, setError] = useState(null)
   const location = useLocation()

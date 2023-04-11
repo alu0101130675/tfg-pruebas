@@ -12,3 +12,6 @@ margin-bottom: 0;
   display: none;
   background-color: red;
 }
+.error{
+  color:red;
+}
