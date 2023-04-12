@@ -9,7 +9,7 @@ export const CircularChart = ({ dataset, keyFields }) => {
           {dataset.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
-          <LabelList dataKey={value[0]} position='insideTop' />
+          <LabelList dataKey={value[0]} position='outside' stroke='black' fill='black' />
         </Pie>
         <Legend />
         <Tooltip />
