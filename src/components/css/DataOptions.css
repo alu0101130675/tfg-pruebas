@@ -15,3 +15,12 @@ margin-bottom: 0;
 .error{
   color:red;
 }
+.page-title{
+  background-color: #163647;
+  color: white;
+  text-align: left ;
+  font-weight: 100;
+  font-size: 1.5rem;
+  padding: 1.5%;
+  text-transform: capitalize;
+  }

@@ -16,3 +16,9 @@ display: block;
 .gear-button:hover{
   width: 4.2%;
 }
+@media only screen and (max-width:600px) {
+  .gear-button{
+    width: 9%;
+  }
+  
+}
