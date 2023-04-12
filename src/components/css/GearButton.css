@@ -20,5 +20,8 @@ display: block;
   .gear-button{
     width: 9%;
   }
+  .gear-button:hover{
+    width: 10%;
+  }
   
 }
