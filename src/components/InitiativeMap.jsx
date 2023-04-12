@@ -148,6 +148,12 @@ function InitiativeMap () {
             </Marker>}
 
         </MapContainer>
+        {window.outerWidth < 1060 &&
+          <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
+            {formFlag
+              ? 'Volver a mapa completo'
+              : 'Publica tu iniciativa'}
+          </Link>}
         {formFlag &&
           <Suspense fallback={<div>Loading...</div>}>
             <InitiativeForm
@@ -161,11 +167,12 @@ function InitiativeMap () {
           </Suspense>}
 
       </div>
-      <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
-        {formFlag
-          ? 'Volver a mapa completo'
-          : 'Publica tu iniciativa'}
-      </Link>
+      {window.outerWidth > 1060 &&
+        <Link onClick={() => setformFlag(!formFlag)} className='map-link'>
+          {formFlag
+            ? 'Volver a mapa completo'
+            : 'Publica tu iniciativa'}
+        </Link>}
 
       {initiativeAdded && <h1>¡Iniciativa añadida!</h1>}
     </>

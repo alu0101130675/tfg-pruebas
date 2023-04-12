@@ -41,7 +41,9 @@ input:checked + .slider {
 }
 
 .toogle{
+  margin-top: 3%;
   display: flex;
+  align-content: flex-start;
   align-items: center;
   gap:5px;
 }

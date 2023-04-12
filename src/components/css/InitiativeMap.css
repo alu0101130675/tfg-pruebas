@@ -1,16 +1,17 @@
 .map-container{
   width: 50%;
-  height: 100%;
+  height: 80vh;
+  margin-top: 2%;
   }
-.map-container.max-width{
+  .map-container.max-width{
     width: 100%;
     }
 .map-form{
   margin: 1.5% auto ;
   width: 95%;
   display: flex;
+  height: auto;
   gap: 20px;
-  height: 400px;
 }
 .red-icon {
   filter: hue-rotate(150deg);
@@ -18,6 +19,7 @@
 .filters{
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   width: 100%;
 }
@@ -30,6 +32,12 @@
 @media only screen and (max-width:1060px) {
   .map-form{
     flex-direction: column;
-    height: 800px;
   }
+  .map-container{
+    height: 400px;
+    }
+    .map-link{
+      color:black;
+      flex: 0.1;
+    }
 }
