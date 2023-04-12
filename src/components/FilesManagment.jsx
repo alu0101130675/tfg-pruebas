@@ -3,8 +3,7 @@ import { deleteFile, getConfigFile, getFilesNames } from '../services/data'
 import './css/FilesManagment.css'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
-
-export function FilesManagment ({ setConfig, setUpdatefileId }) {
+export function FilesManagment ({ setConfig, setUpdatefileId, token }) {
   const [files, setFiles] = useState()
   const [showDeleteMessage, setShowDeleteMessage] = useTrigger(false)
   useEffect(() => {
@@ -34,7 +33,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId }) {
                 <ConfirmMessage
                   message='¿Seguro que deseas eliminar los datos?'
                   showMessage={setShowDeleteMessage}
-                  action={() => deleteFile({ id: _id, name: collectionName })}
+                  action={() => deleteFile({ id: _id, name: collectionName, token })}
                 />}
             </div>
           </div>

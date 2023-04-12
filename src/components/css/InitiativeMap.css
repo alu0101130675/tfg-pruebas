@@ -21,6 +21,9 @@
   justify-content: space-evenly;
   width: 100%;
 }
+.map-link{
+  color:black;
+}
 .map-link:hover{
   font-size: 1.2em;
 }

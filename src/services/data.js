@@ -25,11 +25,21 @@ export async function getFilesNames () {
   const { data } = await axios.get('https://women-info-backend.onrender.com/data/configFiles')
   return data
 }
-export async function deleteFile ({ id, name }) {
-  const { data } = await axios.delete(`https://women-info-backend.onrender.com/data/dataFile/${name}/${id}`)
+export async function deleteFile ({ id, name, token }) {
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.delete(`https://women-info-backend.onrender.com/data/dataFile/${name}/${id}`, authentication)
   return data
 }
-export async function updateConfigFile ({ id, body }) {
-  const { data } = await axios.put(`https://women-info-backend.onrender.com/data/configFiles/${id}`, body)
+export async function updateConfigFile ({ id, body, token }) {
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.put(`https://women-info-backend.onrender.com/data/configFiles/${id}`, body, authentication)
   return data
 }

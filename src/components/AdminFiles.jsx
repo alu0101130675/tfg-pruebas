@@ -20,7 +20,7 @@ function AdminFiles () {
           setShowPostMessage(err.response.data.message)
         })
     } else {
-      updateConfigFile({ id: updateFileId, body: config })
+      updateConfigFile({ id: updateFileId, body: config, token: user.token })
         .then(setShowPostMessage('Actualizado'))
         .catch((e) => setShowPostMessage('Error al actualizar'))
     }
@@ -57,7 +57,7 @@ function AdminFiles () {
             </button>
           </div>
         </>
-        : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} />}
+        : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} token={user.token} />}
     </>
   )
 }

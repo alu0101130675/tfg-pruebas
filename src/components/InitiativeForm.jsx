@@ -107,6 +107,7 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
       <div className='form-field'>
         <label htmlFor='location'>Location</label>
         <input
+          className='form-input'
           type='text'
           id='location'
           name='location'

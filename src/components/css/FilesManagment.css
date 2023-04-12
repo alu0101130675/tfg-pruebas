@@ -30,7 +30,7 @@
 .update-button{
   background-color: rgb(25, 78, 193);
   color:white;
-  font-size: 1.1rem;
+  font-weight: bold;
   border: 5px rgb(25, 78, 193) solid;
   border-radius: 8%;
   cursor: pointer;
