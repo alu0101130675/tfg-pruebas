@@ -34,11 +34,13 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
     })
   }
   const handleFormSubmit = async e => {
+    const initiative = { ...LocationData, active: false, validated: false }
+    setLocationData(initiative)
     e.preventDefault()
     try {
-      const locationDataString = JSON.stringify(LocationData)
+      const locationDataString = JSON.stringify(initiative)
       window.localStorage.setItem('locationData', locationDataString)
-      const response = await sendInitiative(LocationData, { token: user.token })
+      const response = await sendInitiative(initiative, { token: user.token })
 
       if (response.status === 200) {
         setInitiativeAdded(true)
