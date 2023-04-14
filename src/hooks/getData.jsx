@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getAxes } from '../logic/getAxes'
-import { getDataByFileName } from '../services/data'
+import { getDataByFileName, getOptions } from '../services/data'
 export function useDataSet ({ pathname }) {
   const [data, setData] = useState()
   const [options, setOptions] = useState()
@@ -9,14 +9,16 @@ export function useDataSet ({ pathname }) {
   useEffect(() => {
     getDataByFileName({ fileName: pathname })
       .then(data => {
-        setData(data)
-        const options = data[0] ? Object.getOwnPropertyNames(data[0]) : null
-        setOptions(options)
-        setAxes({ xField: options[0], yField: options[1] })
-        setSelectedFields([{
-          xField: getAxes({ data, field: options[0] })
-        },
-        { yField: getAxes({ data, field: options[1] }) }])
+        const fileName = pathname.slice(1, pathname.lenght)
+        getOptions({ fileName }).then(({ axeX, axeY }) => {
+          setData(data)
+          setOptions({ axeX, axeY })
+          setAxes({ xField: axeX[0], yField: axeY[1] })
+          setSelectedFields([{
+            xField: getAxes({ data, field: axeX[0] })
+          },
+          { yField: getAxes({ data, field: axeY[1] }) }])
+        }).catch(e => console.log(e))
       }).catch(err => console.log(err))
   }, [pathname])
   return { data, options, selectedFields, setSelectedFields, setAxes, axes }

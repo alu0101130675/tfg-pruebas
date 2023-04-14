@@ -17,6 +17,10 @@ export async function getConfigFile ({ fileName, idFlag }) {
   const { data } = await axios.get(`https://women-info-backend.onrender.com/data/configField/${fileName}/${idFlag}`)
   return data
 }
+export async function getOptions ({ fileName }) {
+  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/axes/${fileName}`)
+  return data.axes
+}
 export async function getDataByFileName ({ fileName }) {
   const { data } = await axios.get(`https://women-info-backend.onrender.com/data/dataFile${fileName}`)
   return data

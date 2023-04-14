@@ -11,9 +11,7 @@ function App () {
   const [defaultFiles, setDefaultFiles] = useState()
   useEffect(() => {
     getFileNameWithoutId()
-      .then((data) => {
-        data.lenght !== 0 && setDefaultFiles(data)
-      })
+      .then(data => data.length !== 0 && setDefaultFiles(data))
   }, [])
   return (
     <>
@@ -33,7 +31,11 @@ function App () {
               </Suspense>
           }
           />
-          <Route path='/' element={defaultFiles && <Navigate to={defaultFiles[0].collectionName} replace />} />
+          <Route
+            path='/' element={defaultFiles
+              ? <Navigate to={defaultFiles[0].collectionName} replace />
+              : <h1>Ahora mismo no hay datos</h1>}
+          />
           <Route path='/postIniciative' element={<InitiativeMap />} />
           <Route
             path='/login' element={

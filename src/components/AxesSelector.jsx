@@ -1,5 +1,9 @@
 import './css/AxesSelector.css'
 export function AxesSelector ({ options, axes, handleAxechange, axeFlag }) {
+  const fields = axeFlag === 'xField' ? options.axeX : options.axeY
+  const handleMouseOver = () => {
+
+  }
   return (
     <label>
       <select
@@ -7,8 +11,15 @@ export function AxesSelector ({ options, axes, handleAxechange, axeFlag }) {
         name={axeFlag} id={axeFlag} value={axes[axeFlag]}
         onChange={(event) => { handleAxechange(event, axeFlag) }}
       >
-        {options?.map((value) => {
-          return (<option key={value} value={value}>{value}</option>
+        {fields?.map((value) => {
+          return (
+            <option
+              onMouseOver={() => handleMouseOver()}
+              className='axe-options'
+              key={value} value={value}
+            >
+              {value.length > 30 ? `${value.slice(0, 30)}...` : value}
+            </option>
           )
         })}
       </select>
