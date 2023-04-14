@@ -1,12 +1,12 @@
 import axios from 'axios'
-export async function postFile ({ token, name, documentData, config }) {
+export async function postFile ({ token, name, documentData, config, axes }) {
   const authentication = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
   const { data } = await axios
-    .post(`https://women-info-backend.onrender.com/data/${name}`, { documentData, config }, authentication)
+    .post(`https://women-info-backend.onrender.com/data/${name}`, { documentData, config, axes }, authentication)
   return data
 }
 export async function getFileNameWithoutId () {

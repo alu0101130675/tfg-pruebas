@@ -16,7 +16,7 @@ function AdminFiles () {
   const [updateFileId, setUpdatefileId] = useState()
   const handleOnClickSend = () => {
     if (file && config) {
-      postFile({ name: file.name, token: user.token, documentData: file.documentData, config })
+      postFile({ name: file.name, token: user.token, documentData: file.documentData, config, axes })
         .then(() => setShowPostMessage('Fichero Añadido'))
         .catch((err) => {
           setShowPostMessage(err.response.data.message)
