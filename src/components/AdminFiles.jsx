@@ -8,7 +8,9 @@ import { ConfigTable } from './ConfigTable'
 
 function AdminFiles () {
   const [config, setConfig] = useState()
+  const [axesFlag, setAxesFlag] = useState(false)
   const [file, setFile] = useState()
+  const [axes, setAxes] = useState({ axeX: [], axeY: [] })
   const { user } = useContext(UserContext)
   const [showPostMessage, setShowPostMessage] = useState()
   const [updateFileId, setUpdatefileId] = useState()
@@ -27,6 +29,8 @@ function AdminFiles () {
     setFile()
     setUpdatefileId()
     setConfig()
+    setAxesFlag(false)
+    setAxes({ axeX: [], axeY: [] })
     // setShowPostMessage()
   }
   const handleOnClickCancel = () => {
@@ -34,29 +38,32 @@ function AdminFiles () {
     setUpdatefileId()
     setConfig()
     setShowPostMessage()
+    setAxesFlag(false)
+    setAxes({ axeX: [], axeY: [] })
   }
   return (
     <>
-      <AddFileForm setConfig={setConfig} setFile={setFile} />
+      {!updateFileId && <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />}
       {showPostMessage && <h1>{showPostMessage}</h1>}
       {config
-        ? <>
-          <ConfigTable config={config} setConfig={setConfig} />
-          <div className='pararel-buttons'>
-            <button
-              className='update-button'
-              type='button'
-              onClick={handleOnClickSend}
-            >Enviar
-            </button>
-            <button
-              type='button'
-              onClick={handleOnClickCancel}
-              className='delete-button'
-            >Cancelar
-            </button>
-          </div>
-        </>
+        ? (axesFlag || updateFileId) && config &&
+          <>
+            <ConfigTable config={config} setConfig={setConfig} />
+            <div className='pararel-buttons'>
+              <button
+                className='update-button'
+                type='button'
+                onClick={handleOnClickSend}
+              >Enviar
+              </button>
+              <button
+                type='button'
+                onClick={handleOnClickCancel}
+                className='delete-button'
+              >Cancelar
+              </button>
+            </div>
+          </>
         : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} token={user.token} />}
     </>
   )

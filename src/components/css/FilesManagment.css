@@ -19,7 +19,7 @@
   font-weight: bold;
   background-color: red;
   border: 5px solid red;
-  border-radius: 8%;
+  border-radius: 5px;
 }
 .delete-button:hover{
   transition: transform .2s;
@@ -32,7 +32,7 @@
   color:white;
   font-weight: bold;
   border: 5px rgb(25, 78, 193) solid;
-  border-radius: 8%;
+  border-radius: 5px;
   cursor: pointer;
 }
 .update-button:hover{

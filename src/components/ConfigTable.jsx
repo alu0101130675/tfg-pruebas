@@ -17,7 +17,7 @@ export function ConfigTable ({ config, setConfig }) {
         </tr>
       </thead>
       <tbody>
-        {config?.map(([field1, field2, chart], i) => {
+        {config.lenght !== 0 && config.map(([field1, field2, chart], i) => {
           return (
             <tr className='tr-config' key={i}>
               <th>{field1}</th>

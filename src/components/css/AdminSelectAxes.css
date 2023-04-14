@@ -1,0 +1,21 @@
+.axe-list{
+  display: flex;
+  justify-content: space-evenly;
+}
+.x-list, .y-list{
+  flex: 1;
+  list-style: none;
+}
+.x-list li:nth-of-type(2n-1), .y-list li:nth-of-type(2n-1){
+  background-color: rgb(154, 187, 187);
+}
+.axe-element{
+  padding: 2%;
+  font-size: 1.1rem;
+}
+.title-list{
+  padding: 2%;
+  font-size: 1.1rem;
+    background-color: black;
+  color: white;
+}
