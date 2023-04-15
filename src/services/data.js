@@ -30,6 +30,7 @@ export async function getFilesNames () {
   return data
 }
 export async function deleteFile ({ id, name, token }) {
+  console.log('fucking id', id)
   const authentication = {
     headers: {
       Authorization: `Bearer ${token}`

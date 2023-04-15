@@ -9,6 +9,7 @@ export function ConfirmMessage ({ message, showMessage, action = null }) {
         <button
           className='accept-button'
           onClick={() => {
+            console.log('entra en el segundo')
             action()
             showMessage()
           }}
