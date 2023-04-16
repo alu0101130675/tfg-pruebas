@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { deleteFile, getConfigFile, getFilesNames } from '../services/data'
+import { deleteFile, getConfigFile, getFilesNames, getOptions } from '../services/data'
 import './css/FilesManagment.css'
 import { ConfirmMessage } from './ConfirmMessage'
-export function FilesManagment ({ setConfig, setUpdatefileId, token }) {
+export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, setAxesFlag }) {
   const [files, setFiles] = useState()
   const [fileToDelete, setFileToDelete] = useState()
   useEffect(() => {
@@ -10,11 +10,20 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token }) {
       setFiles(data)
     })
   }, [])
-  const handleUpdate = ({ collectionName }) => {
+  const handleUpdate = ({ collectionName, chartsOnly }) => {
     getConfigFile({ fileName: collectionName, idFlag: true })
       .then(({ config, _id }) => {
         setUpdatefileId(_id)
-        setConfig(config)
+        if (chartsOnly) {
+          setConfig(config)
+          setAxesFlag(true)
+        } else {
+          setConfig([])
+        }
+
+        getOptions({ fileName: collectionName })
+          .then(({ axeX, axeY }) => setAxes({ axeX, axeY }))
+          .catch(e => console.log(e))
       })
       .catch(e => console.log(e))
   }
@@ -26,7 +35,8 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token }) {
             <span>{collectionName}
             </span>
             <div className='config-buttons'>
-              <button className='update-button' onClick={() => handleUpdate({ collectionName })}>Actualizar</button>
+              <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: true })}>Actualizar gráficas</button>
+              <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: false })}>Actualizar todo</button>
               <button
                 className='delete-button' onClick={() => {
                   setFileToDelete({ id: _id, name: collectionName })
@@ -39,7 +49,6 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token }) {
                   showMessage={() => setFileToDelete()}
                   action={() => {
                     const { id, name } = fileToDelete
-                    console.log('donde slade mal////:', id)
                     deleteFile({ id, name, token })
                   }}
                 />}

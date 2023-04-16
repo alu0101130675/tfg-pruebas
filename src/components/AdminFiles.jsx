@@ -43,10 +43,10 @@ function AdminFiles () {
   }
   return (
     <>
-      {!updateFileId && <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />}
+      <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />
       {showPostMessage && <h1>{showPostMessage}</h1>}
       {config
-        ? (axesFlag || updateFileId) && config &&
+        ? axesFlag && config &&
           <>
             <ConfigTable config={config} setConfig={setConfig} />
             <div className='pararel-buttons'>
@@ -64,7 +64,13 @@ function AdminFiles () {
               </button>
             </div>
           </>
-        : <FilesManagment setConfig={setConfig} setUpdatefileId={setUpdatefileId} token={user.token} />}
+        : <FilesManagment
+            setConfig={setConfig}
+            setUpdatefileId={setUpdatefileId}
+            token={user.token}
+            setAxes={setAxes}
+            setAxesFlag={setAxesFlag}
+          />}
     </>
   )
 }
