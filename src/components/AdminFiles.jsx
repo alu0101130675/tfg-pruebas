@@ -22,7 +22,7 @@ function AdminFiles () {
           setShowPostMessage(err.response.data.message)
         })
     } else {
-      updateConfigFile({ id: updateFileId, body: config, token: user.token })
+      updateConfigFile({ id: updateFileId, body: { config, axes }, token: user.token })
         .then(setShowPostMessage('Actualizado'))
         .catch((e) => setShowPostMessage('Error al actualizar'))
     }
