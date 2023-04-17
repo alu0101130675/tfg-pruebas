@@ -14,7 +14,7 @@ export function chartDate ({ data, axes, gender, fields }) {
     const length = result.length
     if (length !== 0) {
       const yKey = result[0][yField]
-      const altura = wheighing(result)
+      const altura = Math.trunc(wheighing(result))
 
       return { ...elemetX, [yKey]: altura, xField }
     }
