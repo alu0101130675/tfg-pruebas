@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
-// import validator from 'validator'
 import { sendInitiative, deleteIniciative, updateIniciative } from '../services/initiatives'
 import './css/InitiativeForm.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
+import { toast } from 'react-hot-toast'
 
-function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, updateFlag, setUpdateFlag }) {
+function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateFlag }) {
   const [confirmDelete, setConfirmDelete] = useTrigger(false)
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
@@ -37,47 +37,63 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
     const initiative = { ...LocationData, active: false, validated: false }
     setLocationData(initiative)
     e.preventDefault()
-    try {
-      const locationDataString = JSON.stringify(initiative)
-      window.localStorage.setItem('locationData', locationDataString)
-      const response = await sendInitiative(initiative, { token: user.token })
+    const locationDataString = JSON.stringify(initiative)
+    window.localStorage.setItem('locationData', locationDataString)
+    toast.promise(
+      sendInitiative(initiative, { token: user.token }),
+      {
+        loading: 'Subiendo fichero...',
+        success: () => {
+          window.localStorage.removeItem('formData')
+          window.localStorage.removeItem('locationData')
+          return <b>Se mostrará una vez validada</b>
+        },
+        error: (error) => {
+          const messageError = error.response.data.message
+          console.log(error)
+          if (messageError) {
+            if (messageError === 'token is missing or invalid') {
+              const currentPath = window.location.pathname
+              navigate('/login', { state: { from: currentPath } })
+              return (<b>No se pudo enviar,Inicie sesión</b>)
+            } else {
+              console.log('problemas con el servidor')
+              return (<b>No se pudo enviar</b>)
+            }
+          }
+        }
+      },
+      { success: { duration: 4000 } }
+    )
+  }
 
-      if (response.status === 200) {
-        setInitiativeAdded(true)
-        window.localStorage.removeItem('formData')
-        window.localStorage.removeItem('locationData')
-      } else {
-        setInitiativeAdded(false)
-      }
-    } catch (error) {
-      const messageError = error.response.data.message
-      if (messageError) {
-        if (messageError === 'token is missing or invalid') {
-          const currentPath = window.location.pathname
-          navigate('/login', { state: { from: currentPath } })
-        } else {
-          console.log('problemas con el servidor')
+  const handledDeleteIniciative = () => {
+    const { id } = LocationData
+    toast.promise(
+      deleteIniciative({ id, token: user.token }),
+      {
+        loading: 'eliminando Iniciativa...',
+        success: <b>Iniciativa eliminada</b>,
+        error: (error) => {
+          console.log(error)
+          return (<b>No se pudo eliminar</b>)
         }
       }
-    }
-  }
-  const handledDeleteIniciative = () => {
-    const { id, initiativeName } = LocationData
-    deleteIniciative({ id, token: user.token }).then((response) => console.log(response)).catch((err) => console.log({ err }))
+    )
   }
   const handleUpdateIniciative = () => {
     const { id, initiativeName, validated, active, link, contacto } = LocationData
-    updateIniciative({ id, active, validated, initiativeName, token: user.token, link, contacto }).then((response) => console.log(response)).catch((err) => console.log({ err }))
-  }
-
-  const isFormValid = () => {
-    // if (!formData.contacto || !formData.location) {
-    //   return false
-    // }
-    // if (formData.contacto && !validator.isEmail(formData.contacto)) {
-    //   return false
-    // }
-    return true
+    toast.promise(
+      updateIniciative({ id, active, validated, initiativeName, token: user.token, link, contacto }),
+      {
+        loading: 'actualizando iniciativa...',
+        success: <b>Iniciativa actualizada</b>,
+        error: (error) => {
+          console.log(error)
+          return (<b>No se pudo actualizar</b>)
+        }
+      }
+    )
   }
 
   return (
@@ -157,7 +173,6 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
           <div className='pararel-buttons'>
             <button
               className='submit-button'
-              disabled={!isFormValid()}
               type='button'
               onClick={() => {
                 handleUpdateIniciative()
@@ -168,7 +183,6 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
             </button>
             <button
               className='delete-button'
-              disabled={!isFormValid()}
               type='button'
               onClick={setConfirmDelete}
             >
@@ -185,11 +199,10 @@ function InitiativeForm ({ LocationData, setInitiativeAdded, setLocationData, up
               />}
           </div>)
         : (
-          <button className='submit-button' type='submit' disabled={!isFormValid()}>
+          <button className='submit-button' type='submit'>
             Publicar iniciativa
           </button>)}
     </form>
-
   )
 }
 export default InitiativeForm

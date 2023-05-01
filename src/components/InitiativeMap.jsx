@@ -43,7 +43,6 @@ function InitiativeMap () {
     active: false
   })
   const [formFlag, setformFlag] = useState(false)
-  const [initiativeAdded, setInitiativeAdded] = useState(false)
   useEffect(() => {
     getFilteredIniciatives({ filters }).then(response => {
       setInitiatives(response.data)
@@ -159,7 +158,6 @@ function InitiativeMap () {
             <InitiativeForm
               className='form'
               LocationData={LocationData}
-              setInitiativeAdded={setInitiativeAdded}
               setLocationData={setLocationData}
               updateFlag={updateFlag}
               setUpdateFlag={setUpdateFlag}
@@ -173,8 +171,6 @@ function InitiativeMap () {
             ? 'Volver a mapa completo'
             : 'Publica tu iniciativa'}
         </Link>}
-
-      {initiativeAdded && <h1>¡Iniciativa añadida!</h1>}
     </>
   )
 }

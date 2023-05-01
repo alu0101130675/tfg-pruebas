@@ -5,6 +5,7 @@ import { postFile, updateConfigFile } from '../services/data'
 import './css/AdminFiles.css'
 import { FilesManagment } from './FilesManagment'
 import { ConfigTable } from './ConfigTable'
+import { toast } from 'react-hot-toast'
 
 function AdminFiles () {
   const [config, setConfig] = useState()
@@ -12,39 +13,49 @@ function AdminFiles () {
   const [file, setFile] = useState()
   const [axes, setAxes] = useState({ axeX: [], axeY: [] })
   const { user } = useContext(UserContext)
-  const [showPostMessage, setShowPostMessage] = useState()
   const [updateFileId, setUpdatefileId] = useState()
   const handleOnClickSend = () => {
     if (file && config) {
-      postFile({ name: file.name, token: user.token, documentData: file.documentData, config, axes })
-        .then(() => setShowPostMessage('Fichero Añadido'))
-        .catch((err) => {
-          setShowPostMessage(err.response.data.message)
-        })
+      toast.promise(
+        postFile({ name: file.name, token: user.token, documentData: file.documentData, config, axes }),
+        {
+          loading: 'Subiendo fichero...',
+          success: <b>Fichero guardado</b>,
+          error: (error) => {
+            console.log(error)
+            return (<b>No se pudo guardar</b>)
+          }
+        }
+      )
     } else {
-      updateConfigFile({ id: updateFileId, body: { config, axes }, token: user.token })
-        .then(setShowPostMessage('Actualizado'))
-        .catch((e) => setShowPostMessage('Error al actualizar'))
+      toast.promise(
+        updateConfigFile({ id: updateFileId, body: { config, axes }, token: user.token }),
+        {
+          loading: 'Actualizando fichero...',
+          success: <b>Fichero actualizado</b>,
+          error: (error) => {
+            console.log(error)
+            return (<b>No se pudo actualizar</b>)
+          }
+        }
+      )
     }
     setFile()
     setUpdatefileId()
     setConfig()
     setAxesFlag(false)
     setAxes({ axeX: [], axeY: [] })
-    // setShowPostMessage()
   }
   const handleOnClickCancel = () => {
     setFile()
     setUpdatefileId()
     setConfig()
-    setShowPostMessage()
     setAxesFlag(false)
     setAxes({ axeX: [], axeY: [] })
   }
   return (
     <>
       <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />
-      {showPostMessage && <h1>{showPostMessage}</h1>}
       {config
         ? axesFlag && config &&
           <>

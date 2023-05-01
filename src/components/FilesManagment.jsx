@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { deleteFile, getConfigFile, getFilesNames, getOptions } from '../services/data'
 import './css/FilesManagment.css'
+import { toast } from 'react-hot-toast'
 import { ConfirmMessage } from './ConfirmMessage'
 export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, setAxesFlag }) {
   const [files, setFiles] = useState()
@@ -49,7 +50,18 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
                   showMessage={() => setFileToDelete()}
                   action={() => {
                     const { id, name } = fileToDelete
-                    deleteFile({ id, name, token })
+                    console.log(id, name)
+                    toast.promise(
+                      deleteFile({ id, name, token }),
+                      {
+                        loading: 'Eliminando fichero...',
+                        success: <b>Fichero eliminado</b>,
+                        error: (error) => {
+                          console.log(error)
+                          return (<b>No se pudo eliminar</b>)
+                        }
+                      }
+                    )
                   }}
                 />}
             </div>
