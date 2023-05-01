@@ -4,6 +4,7 @@ import './css/Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { useTrigger } from '../hooks/useTrigger'
+import { toast } from 'react-hot-toast'
 function Login () {
   const navigate = useNavigate()
   const [loginFlag, setLoginFlag] = useTrigger(true)
@@ -29,6 +30,7 @@ function Login () {
           window.sessionStorage.setItem('role', response.role)
         } setToken(response)
         navigate(fromPath)
+        toast.success('exito')
       }
     } catch (error) {
       const errorStatus = error?.response?.status
@@ -61,7 +63,6 @@ function Login () {
         </div>
       </form>
     </div>
-
   )
 }
 export default Login
