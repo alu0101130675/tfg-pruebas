@@ -7,6 +7,7 @@ import { UserContext } from '../context/UserContext'
 import { ConfirmMessage } from './ConfirmMessage'
 import { useTrigger } from '../hooks/useTrigger'
 import { deleteAccount } from '../services/login'
+import { toast } from 'react-hot-toast'
 export function Navbar ({ defaultFiles }) {
   const navigate = useNavigate()
   const { user, setToken } = useContext(UserContext)
@@ -26,6 +27,7 @@ export function Navbar ({ defaultFiles }) {
     setToken({ token: null })
     window.sessionStorage.removeItem('token')
     window.sessionStorage.removeItem('role')
+    toast.success('sesión cerrada')
     navigate('/login')
   }
 
