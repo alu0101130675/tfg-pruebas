@@ -34,7 +34,7 @@ function App () {
           <Route
             path='/' element={defaultFiles
               ? <Navigate to={defaultFiles[0].collectionName} replace />
-              : <h1>Ahora mismo no hay datos</h1>}
+              : <h1>Wait for the server to start</h1>}
           />
           <Route path='/postIniciative' element={<InitiativeMap />} />
           <Route
