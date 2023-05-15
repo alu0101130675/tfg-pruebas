@@ -10,8 +10,10 @@ import {
 
 } from 'recharts'
 import { COLORS } from '../consts'
+
 export function HorizontalBarChart ({ dataset, keyFields, stackFlag = undefined }) {
   const keys = Object.keys(keyFields)
+
   return (
     <ResponsiveContainer
       width='100%' aspect={window.outerWidth < 600 ? 1 / 1 : 2 / 1}
