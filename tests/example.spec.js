@@ -24,8 +24,10 @@ test('get initiative form', async ({ page }) => {
 test('got to login if user has not log in yet', async ({ page }) => {
   await page.goto('  https://women-info.netlify.app/InitiativeMap')
   await page.getByRole('link', { name: 'Publica tu iniciativa' }).click()
-  page.getByLabel('Email').fill('email@gmail.com')
-  page.getByLabel('Nombre de la iniciativa').fill('Iniciativa de prueba')
+  const email = await page.$('input[name="nameAttribute"]')
+  email?.fill('ecamle@gmail.com')
+  const initiativeName = await page.$('input[name="initiativeName"]')
+  initiativeName?.fill('Testing')
   await page.getByRole('button', { name: 'Publicar iniciativa' }).click()
   await expect(page).toHaveURL(/.*login/)
 })

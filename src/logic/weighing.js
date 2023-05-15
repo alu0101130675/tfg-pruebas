@@ -29,6 +29,5 @@ export function wheighing (data) {
         result += element.Sexo === 'Mujer' ? 615 / 48 : 1156 / 42
     }
   })
-  console.log('resultado', result)
   return result
 }
