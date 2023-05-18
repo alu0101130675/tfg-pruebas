@@ -47,12 +47,12 @@ export function Navbar ({ defaultFiles }) {
     <>
       <nav className='navbar'>
         <div className='navbar-items-logo'>
-          <div className='logo'>
+          <Link to='/' className='logo'>
             <img
               src='https://www.women-inf.eu/wp-content/uploads/2022/05/cropped-identidad_grafica_WOMEN@INF-isologo.png'
               alt='logo de women@info'
             />
-          </div>
+          </Link>
           <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
             <DropDown dropDownItems={files} anchor={window.outerWidth < 600 ? '#' : '/'} dropDownName='Grafica' />
             {window.outerWidth < 600 && <DropDown
