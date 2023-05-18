@@ -6,19 +6,7 @@
   width: auto;
   margin: 5%;
   padding: 4%;
-  z-index: 2;
-}
-.selector-section
-{
-  position: absolute;
-  top: 5;
-  left: 0;
-  width: 500%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  margin-top: 7%;
-  z-index: 2;
+  z-index: 1;
 }
 .field{
 width: fit-content;

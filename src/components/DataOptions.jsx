@@ -24,15 +24,18 @@ export function Options () {
       <h1 className='page-title'>{pathname.substring(1, pathname.length)}</h1>
       <h2 className='title-chart'>{axes.xField} - {axes.yField} </h2>
       <GearButton setShowFieldSelector={setShowFieldSelector}>
-        {showFieldSelector && <FieldsSelector
-          setSelectedFields={setSelectedFields}
-          selectedFields={selectedFields}
-          chartSelected={chartSelected}
-          options={options}
-          axes={axes}
-          setAxes={setAxes}
-          data={data}
-                              />}
+        {showFieldSelector &&
+          <div className='selector-section' onMouseLeave={setShowFieldSelector}>
+            <FieldsSelector
+              setSelectedFields={setSelectedFields}
+              selectedFields={selectedFields}
+              chartSelected={chartSelected}
+              options={options}
+              axes={axes}
+              setAxes={setAxes}
+              data={data}
+            />
+          </div>}
       </GearButton>
       <div className='flex-horizontal'>
         {dataSet.length === 0
