@@ -99,7 +99,7 @@ function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateF
   return (
     <form onSubmit={handleFormSubmit} className='form'>
       <div className='form-field'>
-        <label htmlFor='contacto'>Email</label>
+        <label className='form-label' htmlFor='contacto'>Email</label>
         <input
           className='form-input'
           type='email'
@@ -111,7 +111,7 @@ function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateF
         />
       </div>
       <div className='form-field'>
-        <label htmlFor='initiative-name'>Nombre de la iniciativa</label>
+        <label className='form-label' htmlFor='initiative-name'>Nombre de la iniciativa</label>
         <input
           className='form-input'
           type='text'
@@ -123,7 +123,7 @@ function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateF
         />
       </div>
       <div className='form-field'>
-        <label htmlFor='location'>Location</label>
+        <label className='form-label' htmlFor='location'>Location</label>
         <input
           className='form-input'
           type='text'
@@ -135,7 +135,7 @@ function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateF
         />
       </div>
       <div className='form-field'>
-        <label htmlFor='link'>Link</label>
+        <label className='form-label' htmlFor='link'>Link</label>
         <input
           className='form-input'
           type='url'
@@ -157,7 +157,7 @@ function InitiativeForm ({ LocationData, setLocationData, updateFlag, setUpdateF
             onChange={handleFormCheck}
             checked={LocationData.validated}
           />
-          <label htmlFor='active' className='intiative-labels'>Activa</label>
+          <label className='form-label' htmlFor='active' className='intiative-labels'>Activa</label>
           <input
             required
             className='form-input'
