@@ -78,7 +78,9 @@ function InitiativeMap () {
   return (
     <>
       <div className='filters'>
-        <MapFilter options={COMUNIDADES_AUTONOMAS} setFilter={setFilters} />
+        <div>
+          <MapFilter options={COMUNIDADES_AUTONOMAS} setFilter={setFilters} />
+        </div>
         <ToogleCheck toogleLabel='Iniciativas activas' setFilter={setFilters} check={filters.active} filter='active' />
         {user.role === 'admin' &&
           <ToogleCheck toogleLabel='Iniciativas validadas' setFilter={setFilters} check={filters.validated} filter='validated' />}

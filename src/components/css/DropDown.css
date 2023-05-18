@@ -22,6 +22,7 @@
 .dropdown.right{
   left: auto;
   right: 0; 
+  z-index: 999999999;
 }
 .dropdown-item{
   position: relative;

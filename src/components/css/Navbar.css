@@ -62,6 +62,13 @@ img{
 }
 .navbar-items.show-links{
   display: flex;
+  position: absolute;
+  top:100%;
+  z-index: 2;
+  background-color: white;
+  padding: 5%;
+  border:1px solid black;
+  border-radius: 5px;
 }
 .navbar a {
   text-transform: uppercase;
@@ -85,5 +92,6 @@ img{
   }
   .navbar{
     align-items: flex-start;
+    margin-bottom: 10px;
   }
 }

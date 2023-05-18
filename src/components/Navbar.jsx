@@ -55,11 +55,12 @@ export function Navbar ({ defaultFiles }) {
           </Link>
           <div className={`navbar-items ${toogleBar ? 'show-links' : ''}`}>
             <DropDown dropDownItems={files} anchor={window.outerWidth < 600 ? '#' : '/'} dropDownName='Grafica' />
-            {window.outerWidth < 600 && <DropDown
-              dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
-              anchor={user.token != null ? '#' : '/login'}
-              dropDownName='Mi cuenta'
-                                        />}
+            {window.outerWidth < 600 &&
+              <DropDown
+                dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
+                anchor={user.token != null ? '#' : '/login'}
+                dropDownName='Mi cuenta'
+              />}
             <div>
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>
@@ -70,12 +71,13 @@ export function Navbar ({ defaultFiles }) {
           </div>
         </div>
         <HamburgerButton setToogleBar={setToogleBar} className='hamburger-icon' />
-        {window.outerWidth > 600 && <DropDown
-          dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
-          anchor='/login'
-          dropDownName='Mi cuenta'
-          side='right'
-                                    />}
+        {window.outerWidth > 600 &&
+          <DropDown
+            dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
+            anchor='/login'
+            dropDownName='Mi cuenta'
+            side='right'
+          />}
       </nav>
       {showDeleteMessage &&
         <ConfirmMessage
