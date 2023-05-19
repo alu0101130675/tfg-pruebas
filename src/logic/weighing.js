@@ -14,9 +14,7 @@ const WEIGHHINGIN = {
 }
 export function wheighing (data, weight) {
   let result = 0
-  console.log(weight)
   data.forEach(element => {
-    console.log(element.Etapa)
     result += Number(weight[element.Etapa][element.Sexo])
   }
   )
