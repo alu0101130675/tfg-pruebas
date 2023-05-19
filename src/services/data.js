@@ -48,3 +48,35 @@ export async function updateConfigFile ({ id, body, token }) {
   const { data } = await axios.put(`https://women-info-backend.onrender.com/data/configFiles/${id}`, body, authentication)
   return data
 }
+
+export async function updateWeighing ({ weighing, token }) {
+  const body = { weighing }
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.put('https://women-info-backend.onrender.com/data/weighing', body, authentication)
+  return data
+}
+
+export async function getWeighing ({ token }) {
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.get('https://women-info-backend.onrender.com/data/weighing', authentication)
+  return data
+}
+
+export async function postWeighing ({ weighing, token }) {
+  const body = { weighing }
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const { data } = await axios.post('https://women-info-backend.onrender.com/data/weighing/data', body, authentication)
+  return data
+}
