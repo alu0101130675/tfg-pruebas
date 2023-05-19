@@ -1,7 +1,17 @@
 import './css/FieldsSelector.css'
 import { AxesSelector } from './AxesSelector'
 import { getAxes } from '../logic/getAxes'
-export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelected, data, setAxes, axes, options }) {
+export function FieldsSelector (
+  {
+    selectedFields,
+    setSelectedFields,
+    chartSelected,
+    data,
+    setAxes,
+    axes,
+    setIsInsideChildren,
+    options
+  }) {
   const handleChange = (e) => {
     const axe = e.target.name
     const field = e.target.value
@@ -55,7 +65,7 @@ export function FieldsSelector ({ selectedFields, setSelectedFields, chartSelect
   }
 
   return (
-    <div className='selector-section'>
+    <div className='selector-section' onMouseEnter={setIsInsideChildren()} onMouseLeave={setIsInsideChildren()}>
       {selectedFields.map((field, i) => {
         const axe = Object.keys(field)[0]
         const stringKeys = Object.keys(field[axe])
