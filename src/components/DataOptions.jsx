@@ -12,13 +12,13 @@ import { useTrigger } from '../hooks/useTrigger'
 
 export function Options () {
   const { pathname } = useLocation()
-  const { data, options, selectedFields, setSelectedFields, setAxes, axes } = useDataSet({ pathname })
+  const { data, options, selectedFields, setSelectedFields, setAxes, axes, weight } = useDataSet({ pathname })
   const { chartSelected, setChartSelected } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
   const [showFieldSelector, setShowFieldSelector] = useTrigger(false)
   const [isInsideChildren, setIsInsideChildren] = useTrigger(false)
   if (!data) return <Loader />
   const fields = axeFields({ axes, filter: selectedFields })
-  const { dataSet } = chartDate({ data, axes, gender: 'both', fields })
+  const { dataSet } = chartDate({ data, axes, gender: 'both', fields, weight })
 
   return (
     <>

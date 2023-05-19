@@ -1,7 +1,7 @@
 import { setDataStructure } from './setDataStructure'
 import { mergeObjects } from './mergeObjects'
 import { wheighing } from './weighing'
-export function chartDate ({ data, axes, gender, fields }) {
+export function chartDate ({ data, axes, gender, fields, weight }) {
   const { xField, yField } = axes
   const [x, y] = fields
   const objectX = setDataStructure({ xField, yField, gender, x, y })
@@ -12,7 +12,7 @@ export function chartDate ({ data, axes, gender, fields }) {
     const length = result.length
     if (length !== 0) {
       const yKey = result[0][yField]
-      const altura = Math.trunc(wheighing(result))
+      const altura = Math.trunc(wheighing(result, weight))
 
       return { ...elemetX, [yKey]: altura, xField }
     }

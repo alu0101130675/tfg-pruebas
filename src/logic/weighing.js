@@ -12,10 +12,12 @@ const WEIGHHINGIN = {
     Mujer: 261 / 25
   }
 }
-export function wheighing (data) {
+export function wheighing (data, weight) {
   let result = 0
+  console.log(weight)
   data.forEach(element => {
-    result += WEIGHHINGIN['etapa A'][element.Sexo]
+    console.log(element.Etapa)
+    result += Number(weight[element.Etapa][element.Sexo])
   }
   )
   return result

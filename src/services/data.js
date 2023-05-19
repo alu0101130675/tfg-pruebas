@@ -60,13 +60,8 @@ export async function updateWeighing ({ weighing, token }) {
   return data
 }
 
-export async function getWeighing ({ token }) {
-  const authentication = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
-  const { data } = await axios.get('https://women-info-backend.onrender.com/data/weighing', authentication)
+export async function getWeighing () {
+  const { data } = await axios.get('https://women-info-backend.onrender.com/data/weighing')
   return data
 }
 

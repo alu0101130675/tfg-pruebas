@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getAxes } from '../logic/getAxes'
-import { getDataByFileName, getOptions } from '../services/data'
+import { getDataByFileName, getOptions, getWeighing } from '../services/data'
 export function useDataSet ({ pathname }) {
   const [data, setData] = useState()
   const [options, setOptions] = useState()
   const [axes, setAxes] = useState()
   const [selectedFields, setSelectedFields] = useState()
+  const [weight, setWeight] = useState()
   useEffect(() => {
     getDataByFileName({ fileName: pathname })
       .then(data => {
@@ -20,6 +21,8 @@ export function useDataSet ({ pathname }) {
           { yField: getAxes({ data, field: axeY[1] }) }])
         }).catch(e => console.log(e))
       }).catch(err => console.log(err))
+    getWeighing()
+      .then(weight => setWeight(weight.weighing))
   }, [pathname])
-  return { data, options, selectedFields, setSelectedFields, setAxes, axes }
+  return { data, options, selectedFields, setSelectedFields, setAxes, axes, weight }
 }

@@ -3,13 +3,12 @@ import './css/AdminWeighing.css'
 import { getWeighing, postWeighing, updateWeighing } from '../services/data'
 import { UserContext } from '../context/UserContext'
 import { toast } from 'react-hot-toast'
-const ETAPAS = ['etapa A', 'etapa B', 'etapa C', 'etapa D']
+const ETAPAS = ['Etapa A', 'Etapa B', 'Etapa C', 'Etapa D']
 export function AdminWeighing () {
   const { user } = useContext(UserContext)
   const [actualWeighing, setActualWeighing] = useState()
   useEffect(() => {
-    console.log(user.token)
-    getWeighing({ token: user.token })
+    getWeighing()
       .then(d => {
         d === 'empty' ? setActualWeighing(1) : setActualWeighing(d.weighing)
       })
