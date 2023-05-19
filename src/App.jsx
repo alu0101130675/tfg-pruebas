@@ -4,6 +4,7 @@ import { Options } from './components/DataOptions'
 import { Navbar } from './components/Navbar'
 import { useEffect, useState, lazy, Suspense } from 'react'
 import { getFileNameWithoutId } from './services/data'
+import { AdminWeighing } from './components/AdminWeighing'
 const AdminFiles = lazy(() => import('./components/AdminFiles'))
 const Login = lazy(() => import('./components/Login'))
 const InitiativeMap = lazy(() => import('./components/InitiativeMap'))
@@ -48,6 +49,13 @@ function App () {
             path='/administrador' element={
               <Suspense fallback={<div>Loading...</div>}>
                 <AdminFiles />
+              </Suspense>
+              }
+          />
+          <Route
+            path='/pondearacion' element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <AdminWeighing />
               </Suspense>
               }
           />

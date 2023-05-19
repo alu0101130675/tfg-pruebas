@@ -42,6 +42,15 @@ export function Navbar ({ defaultFiles }) {
       action: logOut,
       navigation: '#'
     }]
+  const ADMIN_OPTIONS = [
+    {
+      visual: 'Administar csvs',
+      navigation: '/Administrador'
+    },
+    {
+      visual: 'Ponderación',
+      navigation: '/Pondearacion'
+    }]
 
   return (
     <>
@@ -65,9 +74,7 @@ export function Navbar ({ defaultFiles }) {
               <Link to='/InitiativeMap' className='nav-link'>Iniciativas</Link>
             </div>
             {user.role === 'admin' &&
-              <div>
-                <Link to='/Administrador' className='nav-link'>Administrador</Link>
-              </div>}
+              <DropDown dropDownItems={ADMIN_OPTIONS} anchor={window.outerWidth < 600 ? '#' : '/Administrador'} dropDownName='Administrador' />}
           </div>
         </div>
         <HamburgerButton setToogleBar={setToogleBar} className='hamburger-icon' />

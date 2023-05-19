@@ -55,6 +55,7 @@ function AdminFiles () {
   }
   return (
     <>
+      <h1 className='page-title'>Administración de archivos csv</h1>
       <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />
       {config
         ? axesFlag && config &&

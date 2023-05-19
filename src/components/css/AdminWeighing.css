@@ -1,0 +1,36 @@
+.weighing-form{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.weighing-table{
+  width: 100%;
+}
+.weighing-table  input {
+  width: 80%;
+  text-align: center;
+}
+.weighing-table  input:focus {
+background-color: aliceblue ;
+}
+.weighing-table-head{
+  background-color: black;
+  color: white;
+}
+.submit-weighing{
+  background-color: black;
+  color:white;
+  border:1px solid black;
+  padding:10px 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 30%;
+}
+.submit-weighing:hover{
+  transform: translateY(5px);
+  background-color: blue;
+  border-color: blue;
+}
