@@ -12,18 +12,21 @@ import {
 import { COLORS } from '../consts'
 const CustomTick = (props) => {
   const { x, y, payload } = props
+  const dy = window.outerWidth < 700 ? 0 : 16
+  const rotate = window.outerWidth < 700 ? -60 : -35
 
   return (
     <g transform={`translate(${x},${y})`}>
       <text
         x={0}
         y={0}
-        dy={16}
+        dy={dy} // 0
         textAnchor='end'
         fill='#666'
-        transform='rotate(-35)'
+        transform={`rotate(${rotate})`}
+        style={{ fontSize: `${window.outerWidth < 700 ? '10px' : '1rem'}` }}
       >
-        {payload.value.length < 21 ? payload.value : payload.value.slice(0, 19) + '...'}
+        {payload.value.length < 21 ? payload.value : payload.value.slice(0, 21 - 2) + '...'}
       </text>
     </g>
   )
@@ -31,12 +34,15 @@ const CustomTick = (props) => {
 
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
   const keys = Object.keys(keyFields)
+  const responsiveMargin = window.outerWidth < 700
+    ? { top: 5, right: 0, bottom: 100, left: 0 }
+    : { top: 5, right: 30, bottom: 100, left: 20 }
   return (
     <ResponsiveContainer
-      width='100%' aspect={window.outerWidth < 600 ? 1 / 1 : 3 / 1}
+      width='100%' aspect={window.outerWidth < 700 ? 1 / 1 : 3 / 1}
     >
       <BarChart
-        margin={{ top: 5, right: 30, bottom: 100, left: 20 }}
+        margin={responsiveMargin}
         data={dataset}
       >
         <CartesianGrid strokeDasharray='3 3' />
