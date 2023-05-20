@@ -27,7 +27,6 @@ export function ChartSelector ({
   dataSet, selectedFields, setSelectedFields, setChartSelected, chartSelected
 }) {
   const sorted = sortArray(dataSet)
-
   return (
     <>
       {dataSet.length === 0 && <p>Seleciona como minimo un campo en cada eje</p>}

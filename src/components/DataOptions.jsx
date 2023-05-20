@@ -15,7 +15,6 @@ export function Options () {
   const { data, options, selectedFields, setSelectedFields, setAxes, axes, weight } = useDataSet({ pathname })
   const { chartSelected, setChartSelected } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
   const [showFieldSelector, setShowFieldSelector] = useTrigger(false)
-  const [isInsideChildren, setIsInsideChildren] = useTrigger(false)
   if (!data) return <Loader />
   const fields = axeFields({ axes, filter: selectedFields })
   const { dataSet } = chartDate({ data, axes, gender: 'both', fields, weight })
@@ -24,17 +23,10 @@ export function Options () {
     <>
       <h1 className='page-title'>{pathname.substring(1, pathname.length)}</h1>
       <h2 className='title-chart'>{axes.xField} - {axes.yField} </h2>
-      <GearButton setShowFieldSelector={setShowFieldSelector}>
+      <GearButton setShowFieldSelector={setShowFieldSelector} showFieldSelector={showFieldSelector}>
         {showFieldSelector &&
-          <div
-            className='selector-section' onMouseLeave={(event) => {
-              const el = event.currentTarget
-              console.log(el)
-              !isInsideChildren && setShowFieldSelector()
-            }}
-          >
+          <div className='selector-section'>
             <FieldsSelector
-              setIsInsideChildren={setIsInsideChildren}
               setSelectedFields={setSelectedFields}
               selectedFields={selectedFields}
               chartSelected={chartSelected}

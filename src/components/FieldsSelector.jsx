@@ -9,7 +9,6 @@ export function FieldsSelector (
     data,
     setAxes,
     axes,
-    setIsInsideChildren,
     options
   }) {
   const handleChange = (e) => {
@@ -65,7 +64,7 @@ export function FieldsSelector (
   }
 
   return (
-    <div className='selector-section' onMouseEnter={setIsInsideChildren()} onMouseLeave={setIsInsideChildren()}>
+    <div className='selector-section'>
       {selectedFields.map((field, i) => {
         const axe = Object.keys(field)[0]
         const stringKeys = Object.keys(field[axe])

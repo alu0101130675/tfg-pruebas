@@ -1,7 +1,20 @@
+import { useRef, useEffect } from 'react'
 import './css/GearButton.css'
-export function GearButton ({ children, setShowFieldSelector }) {
+export function GearButton ({ children, setShowFieldSelector, showFieldSelector }) {
+  const ref = useRef()
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (showFieldSelector && ref.current && !ref.current.contains(e.target)) {
+        setShowFieldSelector()
+      }
+    }
+    document.addEventListener('mousedown', checkIfClickedOutside)
+    return () => {
+      document.removeEventListener('mousedown', checkIfClickedOutside)
+    }
+  }, [showFieldSelector])
   return (
-    <label className='gear-button'>
+    <label ref={ref} className='gear-button'>
       <svg
         className='svg'
         width='100%'
