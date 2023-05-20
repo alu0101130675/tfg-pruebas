@@ -10,6 +10,7 @@ import {
 
 } from 'recharts'
 import { COLORS } from '../consts'
+import './css/Chart.css'
 const CustomTick = (props) => {
   const { x, y, payload } = props
   const dy = window.outerWidth < 700 ? 0 : 16
@@ -38,21 +39,23 @@ export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
     ? { top: 5, right: 0, bottom: 100, left: 0 }
     : { top: 5, right: 30, bottom: 100, left: 20 }
   return (
-    <ResponsiveContainer
-      width='100%' aspect={window.outerWidth < 700 ? 1 / 1 : 3 / 1}
-    >
-      <BarChart
-        margin={responsiveMargin}
-        data={dataset}
+    <div className='chart-container'>
+      <ResponsiveContainer
+        width='100%' height='100%'
       >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey={dataset[0].xField} tick={<CustomTick />} interval={0} />
-        <YAxis />
-        <Tooltip />
-        <Legend wrapperStyle={{ top: '90%', right: 0, textAlign: 'right' }} />
-        {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}
-      </BarChart>
-    </ResponsiveContainer>
+        <BarChart
+          margin={responsiveMargin}
+          data={dataset}
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey={dataset[0].xField} tick={<CustomTick />} interval={0} />
+          <YAxis />
+          <Tooltip />
+          <Legend wrapperStyle={{ top: '90%', right: 0, textAlign: 'right' }} />
+          {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
 
   )
 }

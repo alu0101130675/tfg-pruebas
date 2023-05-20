@@ -9,6 +9,7 @@ import {
   Legend
 
 } from 'recharts'
+import './css/HorizontalBarChart.css'
 import { COLORS } from '../consts'
 const CustomTick = (props) => {
   const { x, y, payload } = props
@@ -34,22 +35,25 @@ export function HorizontalBarChart ({ dataset, keyFields, stackFlag = undefined 
   const keys = Object.keys(keyFields)
 
   return (
-    <ResponsiveContainer
-      width='100%' aspect={window.outerWidth < 600 ? 2 / 3 : 2 / 1}
-    >
-      <BarChart
-        data={dataset}
-        layout='vertical'
-        margin={{ top: 2, right: -5, bottom: 0, left: window.outerWidth < 600 ? 30 : 120 }}
+    <div className='container-horizontal-chart'>
+      <ResponsiveContainer
+        width='100%' height='100%'
       >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis type='number' />
-        <YAxis type='category' dataKey={dataset[0].xField} tick={<CustomTick />} />
-        <Tooltip />
-        <Legend />
-        {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}
-      </BarChart>
-    </ResponsiveContainer>
+        <BarChart
+          data={dataset}
+          layout='vertical'
+          margin={{ top: 2, right: -5, bottom: 0, left: window.outerWidth < 600 ? 30 : 120 }}
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis type='number' />
+          <YAxis type='category' dataKey={dataset[0].xField} tick={<CustomTick />} interval={0} />
+          <Tooltip />
+          <Legend />
+          {keys.map((key, i) => <Bar key={key} stackId={stackFlag} dataKey={key} fill={COLORS[i]} />)}
+        </BarChart>
+      </ResponsiveContainer>
+
+    </div>
 
   )
 }
