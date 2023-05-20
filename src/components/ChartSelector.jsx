@@ -4,7 +4,19 @@ import { CircularChart } from './PieChart'
 import './css/ChartSelector.css'
 import { HorizontalBarChart } from './HorizontalBarChart'
 function sortArray (dataset) {
-  const sortFirstNumbersOfstring = dataset.sort((a, b) => Number(a[a.xField].split(' ', 1)[0]) - Number(b[b.xField].split(' ', 1)[0]))
+  const sortFirstNumbersOfstring = dataset.sort((a, b) => {
+    const numberA = Number(a[a.xField].split(' ', 1)[0])
+    const numberB = Number(b[b.xField].split(' ', 1)[0])
+    if (isNaN(numberA)) {
+      console.log('entara')
+      return -1
+    }
+    if (isNaN(numberB)) {
+      return 1
+    }
+
+    return numberA - numberB
+  })
   const menor = sortFirstNumbersOfstring.find(element => element[element.xField].toLowerCase().startsWith('menor'))
   const mayor = sortFirstNumbersOfstring.find(element => element[element.xField].toLowerCase().startsWith('mayor'))
   const auxArray = sortFirstNumbersOfstring.filter(element => element !== menor && element !== mayor)
