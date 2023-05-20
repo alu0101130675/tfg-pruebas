@@ -78,13 +78,14 @@ export function Navbar ({ defaultFiles }) {
           </div>
         </div>
         <HamburgerButton setToogleBar={setToogleBar} className='hamburger-icon' />
-        {window.outerWidth > 600 &&
+        <div className='account-div'>
           <DropDown
             dropDownItems={user.token != null ? LOGGED_OPTIONS : []}
             anchor='/login'
             dropDownName='Mi cuenta'
             side='right'
-          />}
+          />
+        </div>
       </nav>
       {showDeleteMessage &&
         <ConfirmMessage
