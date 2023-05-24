@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { url } from '../consts'
 export async function postFile ({ token, name, documentData, config, axes }) {
   const authentication = {
     headers: {
@@ -6,27 +7,27 @@ export async function postFile ({ token, name, documentData, config, axes }) {
     }
   }
   const { data } = await axios
-    .post(`https://women-info-backend.onrender.com/data/${name}`, { documentData, config, axes }, authentication)
+    .post(`${url}/data/${name}`, { documentData, config, axes }, authentication)
   return data
 }
 export async function getFileNameWithoutId () {
-  const { data } = await axios.get('https://women-info-backend.onrender.com/data/fileNames')
+  const { data } = await axios.get(`${url}/data/fileNames`)
   return data
 }
 export async function getConfigFile ({ fileName, idFlag }) {
-  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/configField/${fileName}/${idFlag}`)
+  const { data } = await axios.get(`${url}/data/configField/${fileName}/${idFlag}`)
   return data
 }
 export async function getOptions ({ fileName }) {
-  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/axes/${fileName}`)
+  const { data } = await axios.get(`${url}/data/axes/${fileName}`)
   return data.axes
 }
 export async function getDataByFileName ({ fileName }) {
-  const { data } = await axios.get(`https://women-info-backend.onrender.com/data/dataFile${fileName}`)
+  const { data } = await axios.get(`${url}/data/dataFile${fileName}`)
   return data
 }
 export async function getFilesNames () {
-  const { data } = await axios.get('https://women-info-backend.onrender.com/data/configFiles')
+  const { data } = await axios.get(`${url}/data/configFiles`)
   return data
 }
 export async function deleteFile ({ id, name, token }) {
@@ -36,7 +37,7 @@ export async function deleteFile ({ id, name, token }) {
       Authorization: `Bearer ${token}`
     }
   }
-  const { data } = await axios.delete(`https://women-info-backend.onrender.com/data/dataFile/${name}/${id}`, authentication)
+  const { data } = await axios.delete(`${url}/data/dataFile/${name}/${id}`, authentication)
   return data
 }
 export async function updateConfigFile ({ id, body, token }) {
@@ -45,7 +46,7 @@ export async function updateConfigFile ({ id, body, token }) {
       Authorization: `Bearer ${token}`
     }
   }
-  const { data } = await axios.put(`https://women-info-backend.onrender.com/data/configFiles/${id}`, body, authentication)
+  const { data } = await axios.put(`${url}/data/configFiles/${id}`, body, authentication)
   return data
 }
 
@@ -56,12 +57,12 @@ export async function updateWeighing ({ weighing, token }) {
       Authorization: `Bearer ${token}`
     }
   }
-  const { data } = await axios.put('https://women-info-backend.onrender.com/data/weighing', body, authentication)
+  const { data } = await axios.put(`${url}/data/weighing`, body, authentication)
   return data
 }
 
 export async function getWeighing () {
-  const { data } = await axios.get('https://women-info-backend.onrender.com/data/weighing')
+  const { data } = await axios.get(`${url}/data/weighing`)
   return data
 }
 
@@ -72,6 +73,6 @@ export async function postWeighing ({ weighing, token }) {
       Authorization: `Bearer ${token}`
     }
   }
-  const { data } = await axios.post('https://women-info-backend.onrender.com/data/weighing/data', body, authentication)
+  const { data } = await axios.post(`${url}/data/weighing/data`, body, authentication)
   return data
 }

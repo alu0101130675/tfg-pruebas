@@ -1,3 +1,4 @@
+const mode = import.meta.env.MODE
 export const COLORS = ['red', 'darkseagreen', 'blue', 'green', 'black',
   'orange', 'grey', 'darkgreen', 'darkblue',
   'greenyellow', 'blanchedalmond', 'blueviolet',
@@ -22,3 +23,5 @@ export const COMUNIDADES_AUTONOMAS = [
   'La Rioja',
   'País Vasco'
 ]
+
+export const url = mode === 'dev' ? 'http://localhost:3001' : 'https://women-info-backend.onrender.com'

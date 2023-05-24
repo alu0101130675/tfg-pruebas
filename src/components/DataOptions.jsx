@@ -48,7 +48,6 @@ export function Options () {
               chartSelected={chartSelected}
             />}
       </div>
-
     </>
   )
 }

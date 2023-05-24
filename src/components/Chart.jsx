@@ -21,7 +21,7 @@ const CustomTick = (props) => {
       <text
         x={0}
         y={0}
-        dy={dy} // 0
+        dy={dy}
         textAnchor='end'
         fill='#666'
         transform={`rotate(${rotate})`}
@@ -35,6 +35,7 @@ const CustomTick = (props) => {
 
 export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
   const keys = Object.keys(keyFields)
+  console.log(dataset)
   const responsiveMargin = window.outerWidth < 700
     ? { top: 5, right: 0, bottom: 100, left: 0 }
     : { top: 5, right: 30, bottom: 100, left: 20 }
@@ -56,6 +57,5 @@ export const Chart = ({ dataset, keyFields, stackFlag = undefined }) => {
         </BarChart>
       </ResponsiveContainer>
     </div>
-
   )
 }
