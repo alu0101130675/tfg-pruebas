@@ -31,6 +31,8 @@
   background-color: rgb(25, 78, 193);
   color:white;
   font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0px 5px;
   border: 5px rgb(25, 78, 193) solid;
   border-radius: 5px;
   cursor: pointer;

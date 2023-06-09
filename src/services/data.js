@@ -31,13 +31,23 @@ export async function getFilesNames () {
   return data
 }
 export async function deleteFile ({ id, name, token }) {
-  console.log('fucking id', id)
   const authentication = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
   const { data } = await axios.delete(`${url}/data/dataFile/${name}/${id}`, authentication)
+  return data
+}
+export async function updateCollectionName ({ oldName, token, newName, description, id }) {
+  const body = { description }
+  const authentication = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  // http://localhost:3001/data/collectionName/name/6482fd2ed879ade2c23c0b49/NuevoName/LaNuevaDescripcion
+  const { data } = await axios.put(`${url}/data/collectionName/${oldName}/${id}/${newName}`, body, authentication)
   return data
 }
 export async function updateConfigFile ({ id, body, token }) {
@@ -74,5 +84,10 @@ export async function postWeighing ({ weighing, token }) {
     }
   }
   const { data } = await axios.post(`${url}/data/weighing/data`, body, authentication)
+  return data
+}
+
+export async function getDescription ({ id }) {
+  const { data } = await axios.get(`${url}/data/description/${id}`)
   return data
 }

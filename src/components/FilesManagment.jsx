@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { deleteFile, getConfigFile, getFilesNames, getOptions } from '../services/data'
+import { deleteFile, getConfigFile, getDescription, getFilesNames, getOptions } from '../services/data'
 import './css/FilesManagment.css'
 import { toast } from 'react-hot-toast'
 import { ConfirmMessage } from './ConfirmMessage'
-export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, setAxesFlag }) {
+export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, setAxesFlag, setFile }) {
   const [files, setFiles] = useState()
   const [fileToDelete, setFileToDelete] = useState()
   useEffect(() => {
@@ -28,6 +28,14 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
       })
       .catch(e => console.log(e))
   }
+  const handleUpdateFilename = ({ _id, collectionName }) => {
+    const name = collectionName
+    getDescription({ id: _id })
+      .then(({ description }) => {
+        setUpdatefileId(_id)
+        setFile({ name, description })
+      })
+  }
   return (
     <div className='files-list'>
       {files?.map(({ collectionName, _id }) => {
@@ -36,6 +44,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
             <span>{collectionName}
             </span>
             <div className='config-buttons'>
+              <button className='update-button' onClick={() => handleUpdateFilename({ _id, collectionName })}>Actualizar nombre y descripción</button>
               <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: true })}>Actualizar gráficas</button>
               <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: false })}>Actualizar todo</button>
               <button

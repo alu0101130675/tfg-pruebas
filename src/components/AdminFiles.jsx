@@ -56,7 +56,7 @@ function AdminFiles () {
   return (
     <>
       <h1 className='page-title'>Administración de archivos csv</h1>
-      <AddFileForm setConfig={setConfig} setFile={setFile} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />
+      <AddFileForm setUpdatefileId={setUpdatefileId} token={user.token} setConfig={setConfig} file={file} setFile={setFile} updateFileId={updateFileId} setAxes={setAxes} axes={axes} config={config} setAxesFlag={setAxesFlag} axesFlag={axesFlag} />
       {config
         ? axesFlag && config &&
           <>
@@ -82,6 +82,7 @@ function AdminFiles () {
             token={user.token}
             setAxes={setAxes}
             setAxesFlag={setAxesFlag}
+            setFile={setFile}
           />}
     </>
   )
