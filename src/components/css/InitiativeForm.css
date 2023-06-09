@@ -19,9 +19,7 @@
   }
 .form-input:focus {
   background-color: aliceblue;
-
  }
-
 .form-field{
     width: 80%;
     display: flex;
@@ -36,8 +34,7 @@
 }
 .submit-button{
   width: 80%;
-  height: 50%;
-  height: fit-content;
+  padding: 4px 0;
   background-color: black;
   border: 4px solid black;
   color: white;
@@ -63,8 +60,8 @@
   gap:4px;
  }
  .pararel-buttons > button{
+  padding: 4px 0;
   width: 50%;
-  height: 100%;
   color: white;
   cursor: pointer;
   font-weight: bold;
