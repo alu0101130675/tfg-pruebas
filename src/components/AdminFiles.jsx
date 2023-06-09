@@ -17,7 +17,7 @@ function AdminFiles () {
   const handleOnClickSend = () => {
     if (file && config) {
       toast.promise(
-        postFile({ name: file.name, token: user.token, documentData: file.documentData, config, axes }),
+        postFile({ name: file.name, token: user.token, documentData: file.documentData, config, axes, description: file.description }),
         {
           loading: 'Subiendo fichero...',
           success: <b>Fichero guardado</b>,

@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { url } from '../consts'
-export async function postFile ({ token, name, documentData, config, axes }) {
+export async function postFile ({ token, name, documentData, config, axes, description }) {
   const authentication = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
   const { data } = await axios
-    .post(`${url}/data/${name}`, { documentData, config, axes }, authentication)
+    .post(`${url}/data/${name}`, { documentData, config, axes, description }, authentication)
   return data
 }
 export async function getFileNameWithoutId () {

@@ -9,6 +9,8 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
     e.preventDefault()
     const file = e.target.elements.fileInput.files[0]
     const name = e.target.elements.fileName.value
+    const description = e.target.elements.description.value
+
     reader.onload = () => {
       const contents = reader.result
       const rows = contents.split('\n')
@@ -23,7 +25,7 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
           return obj
         }, {})
       })
-      setFile({ name, documentData })
+      setFile({ name, documentData, description })
     }
     reader.readAsText(file)
   }
@@ -31,17 +33,26 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
   return (
     <>
       <form className='post-form' onSubmit={handleSubmit}>
+        <div className='form-fields'>
+          <input
+            className='form-input'
+            type='text'
+            placeholder='Nombre del documento en base de datos'
+            name='fileName'
+            required
+          />
+          <input
+            type='file'
+            accept='.csv'
+            name='fileInput'
+            required
+          />
+        </div>
         <input
           className='form-input'
           type='text'
-          placeholder='Nombre del documento en base de datos'
-          name='fileName'
-          required
-        />
-        <input
-          type='file'
-          accept='.csv'
-          name='fileInput'
+          placeholder='Descripcion sobre el conjunto de datos'
+          name='description'
           required
         />
         <button type='submit'>Generar fichero de configuración</button>
