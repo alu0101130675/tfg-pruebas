@@ -13,7 +13,7 @@ import { useTrigger } from '../hooks/useTrigger'
 export function Options () {
   const { pathname } = useLocation()
   const { data, options, selectedFields, setSelectedFields, setAxes, axes, weight } = useDataSet({ pathname })
-  const { chartSelected, setChartSelected, chartDescription } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
+  const { chartSelected, setChartSelected, dataDescription, chartDescription } = useChart({ pathname, selectedFields: [axes?.xField, axes?.yField], axes })
   const [showFieldSelector, setShowFieldSelector] = useTrigger(false)
   if (!data) return <Loader />
   const fields = axeFields({ axes, filter: selectedFields })
@@ -22,8 +22,8 @@ export function Options () {
   return (
     <>
       <h1 className='page-title'>{pathname.substring(1, pathname.length)}</h1>
-      {chartDescription && <p>{chartDescription}</p>}
-      <h2 className='title-chart'>{axes.xField} - {axes.yField} </h2>
+      {dataDescription && <p>{dataDescription}</p>}
+      <h2 className='title-chart'>{chartDescription || `${axes.xField} - ${axes.yField}`} </h2>
       <GearButton setShowFieldSelector={setShowFieldSelector} showFieldSelector={showFieldSelector}>
         {showFieldSelector &&
           <div className='selector-section'>

@@ -46,7 +46,6 @@ export async function updateCollectionName ({ oldName, token, newName, descripti
       Authorization: `Bearer ${token}`
     }
   }
-  // http://localhost:3001/data/collectionName/name/6482fd2ed879ade2c23c0b49/NuevoName/LaNuevaDescripcion
   const { data } = await axios.put(`${url}/data/collectionName/${oldName}/${id}/${newName}`, body, authentication)
   return data
 }
