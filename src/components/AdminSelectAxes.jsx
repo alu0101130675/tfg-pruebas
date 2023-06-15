@@ -1,10 +1,8 @@
 import './css/AdminSelectAxes.css'
 export function AdminSelectAxes ({ axes, setAxes }) {
-  // const [selection, setSelection] = useState({ axeX: [], axeY: [] })
   const handleOnChange = ({ target }) => {
     const { selectedOptions } = target
     const y = Array.from(selectedOptions, option => option.value)
-    // const y = axes.axeX.filter(value => !x.includes(value))
     setAxes((prevState) => ({ ...prevState, axeY: y }))
   }
   return (

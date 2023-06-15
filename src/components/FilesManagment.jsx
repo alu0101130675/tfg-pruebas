@@ -12,6 +12,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
     })
   }, [])
   const handleUpdate = ({ collectionName, chartsOnly }) => {
+    setFile(null)
     getConfigFile({ fileName: collectionName, idFlag: true })
       .then(({ config, _id }) => {
         setUpdatefileId(_id)
@@ -41,8 +42,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
       {files?.map(({ collectionName, _id }) => {
         return (
           <div className='file-list' key={_id}>
-            <span>{collectionName}
-            </span>
+            <span>{collectionName}</span>
             <div className='config-buttons'>
               <button className='update-button' onClick={() => handleUpdateFilename({ _id, collectionName })}>Actualizar nombre y descripción</button>
               <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: true })}>Actualizar gráficas</button>

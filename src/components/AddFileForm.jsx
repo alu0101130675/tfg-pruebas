@@ -55,7 +55,7 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
 
   return (
     <>
-      <form className='post-form' onSubmit={handleSubmit}>
+      {((updateFileId && file) || !updateFileId) && <form className='post-form' onSubmit={handleSubmit}>
         <div className='form-fields'>
           <input
             className='form-input'
@@ -82,7 +82,7 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
         />
         <button type='submit'>{updateFileId ? 'Actualizar Nombre y Descripcion' : 'Generar fichero de configuración'}</button>
         {updateFileId && <button style={{ backgroundColor: 'gray', borderColor: 'gray', marginTop: '2px' }} onClick={() => { setFile(null); setUpdatefileId(null) }} type='reset'>Cancelar</button>}
-      </form>
+      </form>}
       {config && !axesFlag &&
         <>
           <AdminSelectAxes axes={axes} setAxes={setAxes} />
