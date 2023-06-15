@@ -70,7 +70,6 @@ export function FieldsSelector (
         const stringKeys = Object.keys(field[axe])
         return (
           <div key={i} className='divider-margin'>
-
             <AxesSelector
               key={axe}
               axes={axes}

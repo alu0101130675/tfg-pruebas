@@ -55,38 +55,39 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
 
   return (
     <>
-      {((updateFileId && file) || !updateFileId) && <form className='post-form' onSubmit={handleSubmit}>
-        <div className='form-fields'>
+      {((updateFileId && file) || !updateFileId) &&
+        <form className='post-form' onSubmit={handleSubmit}>
+          <div className='form-fields'>
+            <input
+              className='form-input'
+              type='text'
+              placeholder='Nombre del documento en base de datos'
+              name='fileName'
+              required
+              defaultValue={file?.name ?? ''}
+            />
+            {!updateFileId && <input
+              type='file'
+              accept='.csv'
+              name='fileInput'
+              required
+                              />}
+          </div>
           <input
             className='form-input'
             type='text'
-            placeholder='Nombre del documento en base de datos'
-            name='fileName'
+            placeholder='Descripcion sobre el conjunto de datos'
+            name='description'
             required
-            defaultValue={file?.name ?? ''}
+            defaultValue={file?.description ?? ''}
           />
-          {!updateFileId && <input
-            type='file'
-            accept='.csv'
-            name='fileInput'
-            required
-                            />}
-        </div>
-        <input
-          className='form-input'
-          type='text'
-          placeholder='Descripcion sobre el conjunto de datos'
-          name='description'
-          required
-          defaultValue={file?.description ?? ''}
-        />
-        <button type='submit'>{updateFileId ? 'Actualizar Nombre y Descripcion' : 'Generar fichero de configuración'}</button>
-        {updateFileId && <button style={{ backgroundColor: 'gray', borderColor: 'gray', marginTop: '2px' }} onClick={() => { setFile(null); setUpdatefileId(null) }} type='reset'>Cancelar</button>}
-      </form>}
+          <button type='submit'>{updateFileId ? 'Actualizar Nombre y Descripcion' : 'Generar fichero de configuración'}</button>
+          {updateFileId && <button style={{ backgroundColor: 'gray', borderColor: 'gray', marginTop: '2px' }} onClick={() => { setFile(null); setUpdatefileId(null) }} type='reset'>Cancelar</button>}
+        </form>}
       {config && !axesFlag &&
         <>
           <AdminSelectAxes axes={axes} setAxes={setAxes} />
-          <div className='pararel-buttons'>
+          <div className='pararel'>
             <button
               className='update-button'
               type='button'
@@ -103,6 +104,7 @@ export function AddFileForm ({ setConfig, setFile, axes, setAxes, config, setAxe
               type='button'
               onClick={() => {
                 setConfig()
+                setUpdatefileId(null)
                 setAxes({ axeX: [], axeY: [] })
               }}
               className='delete-button'

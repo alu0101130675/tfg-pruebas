@@ -61,7 +61,7 @@ function AdminFiles () {
         ? axesFlag && config &&
           <>
             <ConfigTable config={config} setConfig={setConfig} />
-            <div className='pararel-buttons'>
+            <div className='pararel'>
               <button
                 className='update-button'
                 type='button'

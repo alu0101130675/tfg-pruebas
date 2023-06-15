@@ -12,13 +12,17 @@
   height: 30px;
   text-align: center;
  }
- .pararel-buttons{
+ .pararel{
   display: flex;
   justify-content: center;
   align-self: center;
   height: 100%;
   width: 80%;
+  margin-top: 10px;
   gap:4px;
+ }
+ .pararel > button{
+  flex:1
  }
  tr:nth-of-type(even),tr:nth-of-type(even) > th > select {
   background-color: rgb(231, 230, 230);

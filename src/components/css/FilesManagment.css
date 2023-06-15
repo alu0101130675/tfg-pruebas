@@ -1,5 +1,6 @@
 .file-list{
   display: flex;
+  align-items: center;
   justify-content: space-between;
   text-decoration: none;
   margin-top: .3%;
@@ -9,6 +10,14 @@
 .config-buttons{
   display: flex;
   gap:5%;
+}
+.config-buttons > button{
+font-size: 0.85rem;
+}
+.files-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .files-list div:nth-of-type(even) {
   background-color: aliceblue;
@@ -42,6 +51,13 @@
   transition: .2s;
   background-color: rgb(49, 140, 176);
   border-color: rgb(49, 140, 176);
+}
 
-
+@media only screen and (max-width:650px){
+  .config-buttons
+  {
+    flex-direction: column;
+    gap: 2px;
+  }
+  
 }
