@@ -46,7 +46,7 @@ export function FilesManagment ({ setConfig, setUpdatefileId, token, setAxes, se
             <div className='config-buttons'>
               <button className='update-button' onClick={() => handleUpdateFilename({ _id, collectionName })}>Actualizar nombre y descripción</button>
               <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: true })}>Actualizar gráficas</button>
-              <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: false })}>Actualizar todo</button>
+              <button className='update-button' onClick={() => handleUpdate({ collectionName, chartsOnly: false })}>Actualizar ejes</button>
               <button
                 className='delete-button' onClick={() => {
                   setFileToDelete({ id: _id, name: collectionName })
